@@ -9,9 +9,26 @@
 <body>
   <h1> Welcome to Angular </h1>
   <h5>Day 1 examples</h5>
-  <app-badge></app-badge>
-  <app-badge></app-badge>
-  <app-badge></app-badge>
-  
+
+  <!-- This is a selector present in badge.component.ts file 
+  When we want to modify the contents , then it needs to be property binded with []
+  and don't forget to use "" within '', It must be a string -->
+
+  <app-badge [interpolation] = "'subscribe'" [count] = 45></app-badge>
+  <app-badge [bgcolor] = "'green'"></app-badge>
+  <app-badge [interpolation] = "'Unsubscribe'" [count] = "0" [bgcolor] = '"black"'></app-badge>
+
+  <br/>
+<div>div tag</div>
+<br/>
+
+<img src="https://i.pinimg.com/originals/c8/fc/f0/c8fcf001771794d225dda67d71a200ef.jpg" />
+<br/>
+<a href="https://en.wikipedia.org/wiki/Charminar">Visit Char minar</a>
+
+<h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto harum culpa laudantium modi, veritatis placeat distinctio dolores obcaecati quaerat eligendi sequi, cum quibusdam cumque quo sint aliquam veniam omnis id!</h4>
+
+<h5>Day 2 examples</h5>
+
 </body>
 </html>

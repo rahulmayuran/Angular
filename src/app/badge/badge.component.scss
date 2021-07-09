@@ -1,17 +1,18 @@
 button{
     padding: 1em;
+    border: 5px outset black;
     border-radius: 3px;
     text-align: center;
     font-weight: bold;
     color: white;
-    background-color: rgba(255, 0, 0, 0.76);
+    background-color: rgb(115, 255, 0)
 }
 
 span{
     border-radius: 50px;
-    border: 2px solid blue;
+    border: 5px outset yellow;
     font-size: smaller;
     color: white;
-    background-color: darkblue;
+    background-color: blueviolet;
     padding: 4px;
 }

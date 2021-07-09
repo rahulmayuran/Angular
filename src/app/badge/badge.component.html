@@ -1,2 +1,18 @@
-<p>badge works!</p>
-<button>Use Code <span>Xfdf324</span></button>
+
+<!-- [ngStyle property overrides the scss color]
+Left element should be valid css property and right element should be property we declared 
+as input in ts file and It must be decorated with @Input("") BGcolor : "" -->
+
+<!-- If you want the click of a mouse to increase the value of the counter
+then what we have done here is event binding with () -->
+<button 
+[ngStyle]="{'background-color': BGcolor }" 
+(click)='increase()'> 
+
+    <!-- {{}} is angular expression , also done with <ng-bind> -->
+    {{interpolation}} 
+
+    <!-- Now, I want to double the value when clicked on that badge, define a funtion in 
+    ts file that does (value*2)-1, If you click outside it increments. -->
+    <span #xyz (click)= "double(xyz)"> {{count}} </span>  
+</button>
