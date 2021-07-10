@@ -1,0 +1,14 @@
+<button (click) = "toggleFlag()">Toggle</button>
+    <br/>
+
+<div *ngIf="flag">
+    Learn (using *ngFor):
+
+<!-- ng for needs the name of the field that you used in ts file 
+and it needs to be traversed by n and it needs to be interpolated as {{n}}
+
+For index, you use i and it will have numbers -->
+
+    <p *ngFor="let n of names,let i = index">{{  (i+1)  +"."+  n}}</p>
+</div>
+
