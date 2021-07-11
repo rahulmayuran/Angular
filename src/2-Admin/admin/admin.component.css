@@ -23,6 +23,7 @@ form{
     background-color: lightgreen;
     padding: 1em;
     margin-top: 2em;
+    width: 100%;
 }
 .input-group{
     margin-bottom: 1em;

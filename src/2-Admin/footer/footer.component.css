@@ -1,0 +1,8 @@
+footer{
+    border-top: 2px solid black;
+    width: 99%;
+    position: fixed;
+    bottom: 0%;
+    color: white;
+    background-color: brown;
+}
