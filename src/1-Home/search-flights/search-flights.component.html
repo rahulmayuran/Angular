@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <form >
+
+            <div class="input-group">
+                <input type="radio" name="Trip" id="one-way" />One-Way
+                <input type="radio" name="Trip" id="round-trip" />Round-Trip
+            </div>
+        
+            <div class="input-group">
+                <div><label for="address">Discount Code</label></div>
+                <select name="Cities" id="cities" autocomplete="">
+                    <optgroup label="--Discount--">
+                        <option value="%" selected></option>
+                        <option value="Paytm" >H302403324sa</option>
+                        <option value="Visa">Hud3430csf333z32</option>
+                        <option value="Citi">20% off by paying through HDFC credit card</option>
+                        <option value="Mobikwik">Use InterMiles for 40% Discount in the next booking</option>
+                    </optgroup>
+                </select>
+                <button style="display: inline;">Apply</button>
+            </div>
+        
+            <div class="input-group">
+                <label for="cities">From</label>
+                <select name="Cities" id="cities" autocomplete="">
+                    <optgroup label="--India--">
+                        <option selected disabled></option>
+                        <option value="Mumbai">BOM - Mumbai</option>
+                        <option value="Chennai">MAA - Chennai</option>
+                        <option value="Kolkata">CCU - Kolkata</option>
+                        <option value="Delhi">DEL - New Delhi</option>
+                        <option value="Alaska">COK - Cochin</option>
+                        <option value="Florida">CJB - Coimbatore</option>
+                        <option value="NYC">IDR - Indore</option>
+                        <option value="Washington">PUN - Pune</option>
+                    </optgroup>
+                </select>
+        
+                <label for="cities">To</label>
+                <select name="Cities" id="cities" autocomplete="">
+                    <optgroup label="--India--">
+                        <option selected disabled></option>
+                        <option value="Mumbai">BOM - Mumbai</option>
+                        <option value="Chennai">MAA - Chennai</option>
+                        <option value="Kolkata">CCU - Kolkata</option>
+                        <option value="Delhi">DEL - New Delhi</option>
+                        <option value="Alaska">COK - Cochin</option>
+                        <option value="Florida">CJB - Coimbatore</option>
+                        <option value="NYC">IDR - Indore</option>
+                        <option value="Washington">PUN - Pune</option>
+                    </optgroup>
+                </select>
+            </div>
+        
+            <div class="input-group">
+                <label for="journey">Journey Date</label>
+                    <div><input type="datetime" name="journey" id="journey"></div>
+                <label for="return">Return Date</label>
+                    <div><input type="datetime" name="return" id="return"></div>
+            </div>
+        
+            <div class="input-group">
+                <label for="Meal">Meal-Preference</label>
+                <select name="Meal" id="meal" autocomplete="true">
+                    <optgroup label="--Meal Type--">
+                        <option selected>- Not Required -</option>
+                        <option >Veg</option>
+                        <option >Non-Veg</option>
+                    </optgroup>
+                </select>
+            </div>
+        
+                <div class="input-group">
+                    <label for="adults">Adults</label>
+                    <select name="adults" id="adults" autocomplete="">
+                            <option value="Select One"selected >0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                    </select>
+        
+                    <label for="child">Children</label>
+                    <select name="child" id="child" autocomplete="">
+                        <option value="Select One"selected >0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                    </select>
+                </div>
+        
+            <input type="reset" value="Reset">
+            <input type="submit" value="Submit">
+        
+           </form>
+    </body>
+</html>
+

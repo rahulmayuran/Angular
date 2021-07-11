@@ -1,0 +1,9 @@
+header{
+    margin-bottom: 2em;
+    border-bottom: 2px solid black;
+    width: 90%;
+    position: fixed;
+    top: 0%;
+    color: white;
+    background-color: brown;
+}
