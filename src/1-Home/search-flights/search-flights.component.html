@@ -4,7 +4,6 @@
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
         <form >
@@ -12,20 +11,6 @@
             <div class="input-group">
                 <input type="radio" name="Trip" id="one-way" />One-Way
                 <input type="radio" name="Trip" id="round-trip" />Round-Trip
-            </div>
-        
-            <div class="input-group">
-                <div><label for="address">Discount Code</label></div>
-                <select name="Cities" id="cities" autocomplete="">
-                    <optgroup label="--Discount--">
-                        <option value="%" selected></option>
-                        <option value="Paytm" >H302403324sa</option>
-                        <option value="Visa">Hud3430csf333z32</option>
-                        <option value="Citi">20% off by paying through HDFC credit card</option>
-                        <option value="Mobikwik">Use InterMiles for 40% Discount in the next booking</option>
-                    </optgroup>
-                </select>
-                <button style="display: inline;">Apply</button>
             </div>
         
             <div class="input-group">
@@ -104,6 +89,20 @@
                         <option>7</option>
                         <option>8</option>
                     </select>
+                </div>
+
+                <div class="input-group">
+                    <div><label for="address">Discount Code</label></div>
+                    <select name="Cities" id="cities" autocomplete="">
+                        <optgroup label="--Discount--">
+                            <option value="%" selected></option>
+                            <option value="Paytm" >H302403324sa</option>
+                            <option value="Visa">Hud3430csf333z32</option>
+                            <option value="Citi">20% off by paying through HDFC credit card</option>
+                            <option value="Mobikwik">Use InterMiles for 40% Discount in the next booking</option>
+                        </optgroup>
+                    </select>
+                    <button style="display: inline;">Apply</button>
                 </div>
         
             <input type="reset" value="Reset">
