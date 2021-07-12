@@ -1,7 +1,15 @@
 *{
     border: 0%;
     margin: 0%;
+    background-color: darkgray;
 }
+
+/* img{
+    background-image: url('/assets/flightImage.jpg');
+    background-repeat: no-repeat;
+    background-position:center;
+    display: table;
+} */
 
 html,body{
     margin-top: 1em;

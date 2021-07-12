@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Integration';
+  title = 'Flight App';
+  flightImg:string = "assets/flightImage.jpg"
 }

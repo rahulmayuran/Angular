@@ -1,5 +1,6 @@
 *{
     margin: 0;
+    
    
 }
 
@@ -7,6 +8,11 @@ html,body{
     height: 100%;
     
 }
+
+body{
+    background-color: darkgray;
+}
+
 
 form{
     margin: 5em 10em;
