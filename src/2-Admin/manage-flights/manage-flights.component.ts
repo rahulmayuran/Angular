@@ -5,7 +5,7 @@ import { Component} from '@angular/core';
   templateUrl: './manage-flights.component.html',
   styleUrls: ['./manage-flights.component.css']
 })
-export class ManageBookingsComponent {
+export class ManageFlightsComponent {
 
   constructor() { }
 

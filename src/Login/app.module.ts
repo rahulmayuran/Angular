@@ -9,28 +9,39 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 
 // Unique Components - With Search operation
-import { AdminComponent } from 'src/2-Admin/admin/admin.component';
-import { UserComponent } from 'src/1-User/User/user.component';
+import { AdminComponent } from 'src/2-Admin/admin.component';
+import { UserComponent } from 'src/1-User/user.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
-//Commonly shared amongst both admin and User.
-import { FlightListComponent } from 'src/1-User/flight-list/flight-list.component';
-import { HeaderComponent } from 'src/1-User/header/header.component';
-import { FooterComponent } from 'src/1-User/footer/footer.component';
-import { ManageBookingsComponent } from 'src/2-Admin/manage-flights/manage-flights.component';
+//Features of both admin and user
+import { FlightListComponent } from 'src/2-Admin/flight-list/flight-list.component';
+import { ManageFlightsComponent } from 'src/2-Admin/manage-flights/manage-flights.component';
+import { ScheduleFlightsComponent } from 'src/2-Admin/schedule-flights/schedule-flights.component';
+import { AddFlightComponent } from 'src/2-Admin/add-flight/add-flight.component';
+import { ManageBookingsComponent } from 'src/2-Admin/manage-bookings/manage-bookings.component';
+import { NgbModule, NgbDate, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 const routes:Routes = [
   {path:"", component:LoginComponent},
   {path:"admin", component:AdminComponent},
   {path:"user", component:UserComponent},
+
   {path:"flightList",component:FlightListComponent},
-  {path:"manage", component:ManageBookingsComponent}
+  {path:"manage", component:ManageBookingsComponent},
+
+  {path:"manageFlights", component:ManageFlightsComponent},
+  {path:"manageSchedule", component:ScheduleFlightsComponent},
+  {path:"addAirline", component:AddFlightComponent}
 ]
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, LoginComponent, 
-    UserComponent, AdminComponent, FlightListComponent, ManageBookingsComponent],
-  imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule, ReactiveFormsModule],
+  declarations: [AppComponent,  LoginComponent, 
+    UserComponent, AdminComponent, HeaderComponent, FooterComponent],
+  imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule, 
+    ReactiveFormsModule, NgbModule],
   providers: [],
   bootstrap: [AppComponent]
 })

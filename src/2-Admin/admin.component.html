@@ -4,12 +4,31 @@
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     </head>
     <body>
+        
+        <header>
+             <button  (click) = "searchFlights()">Search Flights</button>
+             <button (click) = "navigateToList()">Show Flight List</button>
+             <button (click) = "manageFlights()">Manage Flights</button>
+             <button (click) = "manageSchedule()">Scheduled Flights</button>
+             <button (click) = "addAirline()">Add Flight</button>
 
-        <form >
-            <h4 style="float: right;">User</h4>
+             <button style="float: right;" (click) = "logout()">Logout</button>
+        </header>
             
+       
+
+        <section>
+            <router-outlet></router-outlet>
+        </section>
+        
+        <form >
+            <h4 style="float: right;">Admin</h4>
+
             <div class="input-group">
                 <input type="radio" name="Trip" id="one-way" />One-Way
                 <input type="radio" name="Trip" id="round-trip" />Round-Trip
@@ -46,12 +65,24 @@
                     </optgroup>
                 </select>
             </div>
-        
+
             <div class="input-group">
-                <label for="journey">Journey Date</label>
-                    <div><input type="datetime" name="journey" id="journey"></div>
-                <label for="return">Return Date</label>
-                    <div><input type="datetime" name="return" id="return"></div>
+               
+                <div>
+                    <label for="journey">Journey Date</label>
+                        <input class="form-control" placeholder="yyyy-mm-dd"
+                    name="dj" [(ngModel)]="journey" ngbDatepicker #j="ngbDatepicker">
+                            <button class="btn btn-outline-secondary calendar fa fa-calendar"
+                            (click)="j.toggle()" type="button"></button>
+                </div>
+
+                <div>
+                    <label for="return">Return Date</label>      
+                    <input class="form-control" placeholder="yyyy-mm-dd"
+                    name="dp" [(ngModel)]="return" ngbDatepicker #d="ngbDatepicker">
+                            <button class="btn btn-outline-secondary calendar fa fa-calendar"
+                            (click)="d.toggle()" type="button"></button>
+                </div>
             </div>
         
             <div class="input-group">

@@ -2,8 +2,8 @@ import { Component} from '@angular/core';
 
 @Component({
   selector: 'app-manage-flights',
-  templateUrl: './manage-flights.component.html',
-  styleUrls: ['./manage-flights.component.css']
+  templateUrl: './manage-bookings.component.html',
+  styleUrls: ['./manage-bookings.component.css']
 })
 export class ManageBookingsComponent {
 

@@ -1,12 +1,18 @@
-import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-flight-list',
-  templateUrl: './flight-list.component.html',
-  styleUrls: ['./flight-list.component.css']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
-export class FlightListComponent  {
+export class UserComponent
+{
+
+  
+  journey: NgbDateStruct|undefined;
+  return: NgbDateStruct|undefined;
 
   constructor(private adminRouter:Router) { }
 
@@ -23,4 +29,5 @@ export class FlightListComponent  {
      this.adminRouter.navigateByUrl('');
    }
 
+ 
 }
