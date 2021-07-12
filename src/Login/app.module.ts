@@ -39,7 +39,7 @@ const routes:Routes = [
 
 @NgModule({
   declarations: [AppComponent,  LoginComponent, 
-    UserComponent, AdminComponent, HeaderComponent, FooterComponent],
+    UserComponent, AdminComponent, HeaderComponent, FooterComponent, FlightListComponent],
   imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule, 
     ReactiveFormsModule, NgbModule],
   providers: [],
