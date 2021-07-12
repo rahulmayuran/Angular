@@ -21,6 +21,15 @@ body{
         width: 90%;
      }
 }
+
+.head{
+    cursor: progress;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: lightcoral;
+    font-weight: bold;
+}
+
 header{
     background-color: lightgrey; 
     border-radius: 10px;
