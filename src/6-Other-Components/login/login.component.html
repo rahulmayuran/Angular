@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <form [formGroup] = "loginUserForm" >
+        
+            UserName : <input [(ngModel)]="user.name" id="inputs" type="text" formControlName ="username"/>
+            Password : <input [(ngModel)]="user.password" id="inputs" type="password" formControlName ="password"/>
+            
+            <br/>
+        
+            <button (click) ="validateCred()">Login</button>
+
+            <br/>
+            {{message}} 
+
+            <a *ngIf="loginUserForm.controls['username'].touched
+            && loginUserForm.controls['password'].touched" 
+                [routerLink]="[ '/register' ]" routerLinkActive="active">
+                <br/>
+                {{navToRegister}} here
+            </a>
+         
+        </form>
+</body>
+</html>
+
+    

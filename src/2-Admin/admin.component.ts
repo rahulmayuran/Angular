@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-admin',
+  // selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
@@ -22,6 +22,12 @@ export class AdminComponent
    }
    searchFlights(){
     this.adminRouter.navigateByUrl('search');
+   }
+   manageBookings(){
+    this.adminRouter.navigateByUrl('manage');
+   }
+   manageDiscounts(){
+    this.adminRouter.navigateByUrl('manageDiscounts');
    }
    manageFlights(){
     this.adminRouter.navigateByUrl('manageFlights');

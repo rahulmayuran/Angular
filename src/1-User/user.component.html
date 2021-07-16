@@ -16,13 +16,9 @@
             <button class="head" (click) = "navigateToList()">NavigateToFlights</button>
             <button class="head" (click) = "manageBookings()">Manage Bookings</button>
         
-            <button style="float: right;" (click) = "logout()">Logout</button>
+            <button class="head" style="float: right;" (click) = "logout()">Logout</button>
         </header>
-
-       <section>
-        <router-outlet></router-outlet>
-    </section>
-    
+        
         <form >
             <h4 style="float: right;">User</h4>
             
@@ -65,7 +61,7 @@
             
             <div class="input-group">
                
-                <div>
+                <!-- <div>
                     <label for="journey">Journey Date</label>
                         <input class="form-control" placeholder="yyyy-mm-dd"
                     name="dj" [(ngModel)]="journey" ngbDatepicker #j="ngbDatepicker">
@@ -79,7 +75,7 @@
                     name="dp" [(ngModel)]="return" ngbDatepicker #d="ngbDatepicker">
                             <button class="btn btn-outline-secondary calendar fa fa-calendar"
                             (click)="d.toggle()" type="button"></button>
-                </div>
+                </div> -->
 
             </div>
         

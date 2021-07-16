@@ -1,29 +1,24 @@
-
-/* html,body{
-    height: 100%;
-    
-} */
-
+/* 
 body{
-    background-color: darkgray;
     background-image: url('/assets/flightImage.jpg');
     background-position:left;
     background-size: 100%;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
+} */
 
-
+/* 
 form{
     margin: 5em 5em;
     text-align: center;
-    background-color: lightgray;
     margin-right: 50%;
+    height: 40em;
+    margin-top: 0%;
 }
 
 #inputs
 {    padding: 10px;
     margin: 2em;
-    border : outset 4px blue;
+    border : ridge 4px blue;
     border-radius: 4px;
     width: 150 px;
 }
@@ -37,21 +32,6 @@ form{
     padding: 10px;
     margin: 0 15em;
     width: 500px;
-}
-
-body{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-   
-}
-
-header{
-    display: block;
-    position: fixed;
-    top: 0;
-    left :0; 
-    padding: 10px;
-    background-color: darkmagenta;
-    width: 100%;
 }
 
 nav a:visited,
@@ -71,9 +51,6 @@ nav>ul>li{
     margin : 0 5px;
 }
 
-.bordered{
-    border: 10px outset gray;
-}
 
 button
 {
@@ -83,15 +60,17 @@ button
     border-radius: 3px;
     padding: 10px;
     margin-bottom: 2em;
-}
-/* Laptop view */
+} */
+
+
+/* //Laptop view 
 @media only screen and (min-width: 768px){
     main{
         display: flex;
     }
 }
 
-/* Mobile view */
-@media only screen and (max-width : 768px){
+ //Mobile view 
+ @media only screen and (max-width : 768px){
        
-}
+} */

@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Flight App';
-  flightImg:string = "assets/flightImage.jpg"
+
+  // flightImg:string = "assets/flightImage.jpg"
+
+  constructor()
+  {}
+
+  
 }

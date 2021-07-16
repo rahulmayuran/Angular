@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form [formGroup] = "registerForm">
+        
+        UserName : <input [(ngModel)]="user.name" id="user" type="text" 
+                formControlName ="username"/>
+        Password : <input  [(ngModel)]="user.password" id="pass" type="password" 
+                formControlName ="password"/>
+        
+        <br/>
+    
+        <button (click) ="Register()">Register</button>
+
+        <br/>
+        {{message}}
+        <!-- <div *ngFor="let u of user">{{u.UserName}}</div> -->
+     
+    </form>
+</body>
+</html>
+

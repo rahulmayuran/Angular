@@ -1,1 +1,47 @@
-<p>manage-flights works!</p>
+<div class="container">
+
+    <button (click) = "FetchAllUsers()">Get UserList</button>
+    <button (click) = "FetchSingleUser()">Load user with id</button>
+
+    <h1>Find your bookings here</h1>
+  
+    <!-- The below command plainly prints the json -->
+    <output>{{result|json}}</output>
+
+    <table class="table table-striped">
+  
+      <thead>
+  
+          <tr>
+  
+            <th>ID</th>
+  
+            <th>Name</th>
+  
+            <th>UserName</th>
+  
+            <th>Email</th>
+  
+          </tr>
+  
+      </thead>
+  
+      <tbody>
+  
+        <tr *ngFor="let r of result">
+  
+          <td>{{ r.id }}</td>
+  
+          <td>{{ r.name }}</td>
+  
+          <td>{{ r.username }}</td>
+  
+          <td>{{ r.email }}</td>
+  
+        </tr>
+  
+      </tbody>
+  
+    </table>
+  
+  </div>

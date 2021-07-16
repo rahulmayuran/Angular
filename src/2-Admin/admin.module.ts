@@ -10,19 +10,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScheduleFlightsComponent } from './schedule-flights/schedule-flights.component';
 import { AddFlightComponent } from './add-flight/add-flight.component';
 import { ManageBookingsComponent } from './manage-bookings/manage-bookings.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbDatepicker, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ManageDiscountsComponent } from './manage-discounts/manage-discounts.component';
 
 
 const adminRoutes:Routes  = [
   {path:"flightList",component:FlightListComponent},
-  {path:"manage", component:ManageBookingsComponent}
+  {path:"manage", component:ManageBookingsComponent},
+
+  // {path: "/admin/:name", loadChildren ()=>{} canActivate:[LoginGuard] }
 ]
 
 @NgModule({
   declarations: [
-    FlightListComponent, ManageBookingsComponent, AdminComponent, ScheduleFlightsComponent, AddFlightComponent],
-  imports: [CommonModule,BrowserModule,AdminModule, RouterModule.forRoot(adminRoutes),
-    FormsModule, ReactiveFormsModule, NgbModule],
+    FlightListComponent, ManageBookingsComponent, AdminComponent, ScheduleFlightsComponent, AddFlightComponent, ManageDiscountsComponent],
+  
+    imports: [CommonModule,BrowserModule,AdminModule, RouterModule.forChild(adminRoutes),
+    FormsModule, ReactiveFormsModule, NgbModule,NgbDate, NgbDatepicker],
   providers: [],
   bootstrap: [AdminComponent],
   exports : [AdminComponent]
