@@ -1,0 +1,20 @@
+$ npm init -y
+$ npm i json-server
+
+create db.json
+	{
+		"users": [],
+		"items": []
+	}
+	
+package.json
+	script
+		"start" : "json-server --watch db.json"
+		
+		
+$ npm run start
+
+
+Endpoint: localhost:3000
+	http://localhost:3000/users
+	
