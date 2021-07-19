@@ -1,32 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from 'src/3-Services/user.service';
+import { LoginComponent } from 'src/6-Other-Components/login/login.component';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.css'], 
 })
 export class UserComponent
 {
-
-  
+  User:string='User';
   journey: NgbDateStruct|undefined;
   return: NgbDateStruct|undefined;
 
-  constructor(private adminRouter:Router) { }
-
+  constructor(private router:Router,service:UserService) {
+    service.getUsers();
+   }
+   
   navigateToList(){
-    this.adminRouter.navigateByUrl('flightList');
+    this.router.navigateByUrl('flightList');
    }
    searchFlights(){
-    this.adminRouter.navigateByUrl('search');
+    this.router.navigateByUrl('search');
    }
    manageBookings(){
-    this.adminRouter.navigateByUrl('manage');
+    this.router.navigateByUrl('manage');
    }
    logout(){
-     this.adminRouter.navigateByUrl('');
+     this.router.navigateByUrl('logout');
    }
 
  

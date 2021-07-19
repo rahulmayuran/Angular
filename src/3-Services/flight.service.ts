@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class FlightService {
 
-  flightUrl:string = "http://localhost:3000/flights";
-  flight:any = [];
+  flightUrl:string = "http://localhost:3000";
   
   constructor(private httpClient:HttpClient) {
 
@@ -17,6 +16,12 @@ export class FlightService {
     saveFlight(flight:any){
       console.log("Saved the flight ->"+this.flight);
       return this.httpClient.post(this.flightUrl, flight);
+
+   }
+
+    getFlightByName(name:string){
+      console.log("Saved the flight name->"+name);
+      return this.httpClient.get<>(this.flightUrl+'flights?name'+name);
 
    }
 

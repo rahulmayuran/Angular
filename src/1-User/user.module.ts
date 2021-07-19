@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { FlightListComponent } from './flight-list/flight-list.component';
 import { ManageBookingsComponent } from './manage-bookings/manage-bookings.component';
+import { LoginComponent } from 'src/6-Other-Components/login/login.component';
 
 
 const userRoutes:Routes  = [
@@ -13,9 +14,9 @@ const userRoutes:Routes  = [
 
 
 @NgModule({
-  declarations: [],
+  declarations: [LoginComponent],
   imports: [
-    CommonModule
+    CommonModule, RouterModule.forChild(userRoutes)
   ]
 })
 export class UserModule { }

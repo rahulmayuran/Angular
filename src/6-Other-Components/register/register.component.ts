@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
                                     console.log("Names/passwords matched with form data")
                                     this.message = "Already existing user. Please Login";
                                     break;
-                                    this.route.navigateByUrl("/login");
+                                
                                     }
                                     else if (data[i].name != this.registerForm.value.userName
                                       && data[i].password != this.registerForm.value.password)
@@ -80,7 +80,7 @@ export class RegisterComponent implements OnInit {
           }
           else
           {
-            this.route.navigateByUrl('/logout');
+            this.route.navigateByUrl('/register');
           }
     });
   }

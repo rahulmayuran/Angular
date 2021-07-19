@@ -9,7 +9,7 @@ import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AdminComponent
 {
-
+  User:string='Admin';
   journey: NgbDateStruct|undefined;
   return: NgbDateStruct|undefined;
 

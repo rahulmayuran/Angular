@@ -9,12 +9,13 @@
 </head>
 <body>
  
-  <form >
+  <form [formGroup] = flightForm>
 
     <div class="input-group">
-        <label for="addAir">Add Airline</label>
-        <select name="Meal" id="meal" autocomplete="true">
-            <optgroup label="--Airline--">
+        <label for="AirlineName">Add Airline</label>
+        <select [(ngModel)]="flight.AirlineName" name="AirlineName" id="AirlineName" 
+        formControlName ="AirlineName" autocomplete="true">
+            <optgroup label="--Choose Airline--">
                 <option selected>- Not Required -</option>
                 <option >SpiceJet</option>
                 <option >Air India</option>
@@ -25,18 +26,24 @@
     </div>
 
     <div class="input-group">
-        <label for="upload">Upload Logo</label>
-        <input type="file" name="upload" id="">
+        <label for="logo">Upload Logo</label>
+        <input [(ngModel)]="flight.logo" formControlName ="logo" type="file" name="logo" id="logo" required>
     </div>
 
     <div class="input-group">
-        <label for="addAir">Update Address</label>
-        <textarea rows="5" cols="50"></textarea>
+        <label for="model">Model</label>
+        <input [(ngModel)]="flight.model" formControlName ="model" type="text" name="model" id="model">
+    </div>
+
+    <div class="input-group">
+        <label for="address">Update Address</label>
+        <textarea [(ngModel)]="flight.address" formControlName ="address" rows="5" cols="50" name="address" required></textarea>
     </div>
     
     <div class="input-group">
         <label for="contact">Contact number</label>
-            <input type="number" name="contact" id="">
+            <input [(ngModel)]="flight.contact" formControlName ="contact" 
+            type="number" min="1" max="9000090009" name="contact" id="contact" required>
         </div>
 
     <input type="reset" value="Reset">

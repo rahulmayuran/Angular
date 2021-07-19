@@ -10,20 +10,20 @@
     </head>
     <body>
         
-        <header>
-             <button  class="head" (click) = "searchFlights()">Search Flights</button>
-             <button class="head" (click) = "navigateToList()">Show Flight List</button>
-             <button class="head" (click) = "manageBookings()">Manage Bookings</button>
-             <button class="head" (click) = "manageFlights()">Manage Flights</button>
-             <button class="head" (click) = "manageDiscounts()">Manage Discounts</button>
-             <button class="head" (click) = "manageSchedule()">Scheduled Flights</button>
-             <button class="head" (click) = "addAirline()">Add Flight</button>
-
-             <button class="head" style="float: right;" (click) = "logout()">Logout</button>
-        </header>
+    <header>
+        <button  class="btn btn-outline-dark btn-sm" (click) = "searchFlights()">Search Flights</button>
+        <button  class="btn btn-outline-dark btn-sm"  (click) = "navigateToList()">Show Flight List</button>
+        <button  class="btn btn-outline-dark btn-sm"  (click) = "manageBookings()">Manage Bookings</button>
+        <button  class="btn btn-outline-dark btn-sm"  (click) = "manageFlights()">Manage Flights</button>
+        <button  class="btn btn-outline-dark btn-sm"  (click) = "manageDiscounts()">Manage Discounts</button>
+        <button  class="btn btn-outline-dark btn-sm"  (click) = "manageSchedule()">Scheduled Flights</button>
+        <button  class="btn btn-outline-dark btn-sm"  (click) = "addAirline()">Add Flight</button>
+    </header>
         
         <form >
-            <h4 style="float: right;">Admin</h4>
+            <button style="float: right;" class="btn btn-outline-primary">
+                Welcome <span class="badge badge-success">{{User}}</span>
+           </button>
 
             <div class="input-group">
                 <input type="radio" name="Trip" id="one-way" />One-Way
