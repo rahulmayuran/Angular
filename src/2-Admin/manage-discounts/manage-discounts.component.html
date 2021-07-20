@@ -1,1 +1,41 @@
-<p>manage-discounts works!</p>
+<div class="container-fluid">
+    <h3>Discount Codes :</h3>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th>Code</th>
+              <th>Value</th>
+              <th>Status</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <tr *ngFor="let discount of discounts">
+
+                <td> <input type="text" [(ngModel)]="discount.code"><span class="badge badge-success">{{discount.code}}</span></td>
+                <td> <input type="text" [(ngModel)]="discount.value"><span class="badge badge-success">{{discount.value}} %</span></td>
+                <td> 
+                    <select>
+                        <option value="Active">Active</option><span class="badge badge-success">{{discount.status}}</span>
+                        <option value="Inactive">Inactive</option><span class="badge badge-success">{{discount.status}}</span>
+                    </select>
+                    
+            </td>
+               
+                <td> <button class="btn btn-outline-dark" (click)="saveDiscount(discount)" type="submit">Save Discount</button> </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-outline-primary" (click)="addDiscount()" type="submit">Add Discount</button> 
+    <button class="btn btn-outline-danger" (click)="popDiscount()" type="submit">Remove Discount</button> 
+    <hr/>
+
+    <h5>Already saved discounts : </h5>
+    <div *ngFor="let r of resultant">
+        <p>1. <span class="badge badge-success">{{r.code}}</span> </p>
+        
+    </div>
+
+</div>

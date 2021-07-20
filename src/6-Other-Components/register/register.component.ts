@@ -52,29 +52,22 @@ export class RegisterComponent implements OnInit {
           }
           else if(this.registerForm.value.username == this.userService
                   .getUserByName(this.user.name)
-                       .subscribe(  (data)=> {
-                              for (let i = 0; i < data.length; i++) 
-                                {
-                                  if (data[i].name.match(this.registerForm.value.userName)) 
-                                    {
-                                    console.log("Names/passwords matched with form data")
-                                    this.message = "Already existing user. Please Login";
-                                    break;
-                                
-                                    }
-                                    else if (data[i].name != this.registerForm.value.userName
-                                      && data[i].password != this.registerForm.value.password)
-                                      {
-                                      // this.user.role="USER";
-                                      // No need to subscribe as it is already done in service layer
-                                      this.userService.saveUser(this.user);
-                                      console.log("Try to login with registered credentials")
-                                      this.message = "SuccessFully registered"
-                                    }
-                                } //End of For loop
-                              }) //End of Subscription         
-                               ) //End of ElseIf condition
-           {
+                  .subscribe(  
+                    (data)=> {
+                            let stringData = JSON.stringify(data)
+                            console.log("Name in JSON -> "+stringData[1])
+                      
+                              if( stringData[1] != this.registerForm.value.username 
+                                && stringData[2] !=this.registerForm.value.password
+                                && stringData[3] == 'USER')
+                              {
+                                console.log("Hope it is a new user")
+                                this.userService.saveUser(this.user);
+                              }
+                           
+                           }) //End of Subscription 
+                           )//End of ElseIf condition
+          {
             this.userService.saveUser(this.user);
             console.log("The user is already registered");
             this.message = "The user is already registered"

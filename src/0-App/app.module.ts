@@ -66,7 +66,8 @@ const routes:Routes = [
     UserComponent, AdminComponent, HeaderComponent, FooterComponent, FlightListComponent,
   ManageBookingsComponent,
   RegisterComponent,
-  HomeComponent, AddFlightComponent],
+  HomeComponent, AddFlightComponent, 
+  ManageDiscountsComponent],
 
   //All modules must be inclueded here
   imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule, 

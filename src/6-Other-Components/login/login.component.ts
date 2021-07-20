@@ -51,26 +51,17 @@ export class LoginComponent{
             .getUserByName(this.user.name)
             .subscribe(  
               (data)=> {
-                      console.log("User array length "+data.length)
-                      // To iterate through the user array
-                      for (let i = 0; i < data.length; i++) 
-                      {
-                        let names = data[i].name ;
-                        let passkeys = data[i].password ;
-
-                        //Data persisted in json server
-                        console.log("Names/password in the DB are "+names+"/"+passkeys);
-                        //Form Data
-                        console.log("Form userName "+this.loginUserForm.value.username);
-                        console.log("Form password "+this.loginUserForm.value.password);
-
-                        if(data[i].name == this.loginUserForm.value.userName
-                          || data[i].password == this.loginUserForm.value.password)
+                      //data is in MySQl
+                      let stringData = JSON.stringify(data)
+                      console.log("Name in JSON "+stringData[1])
+                
+                        if( stringData[1] == this.loginUserForm.value.username
+                          && stringData[2] == this.loginUserForm.value.password)
                         {
                           console.log("Names/passwords matched with form data")
                           this.router.navigateByUrl('user')
                         }
-                      } //End of For loop
+                     
                      }) //End of Subscription
                       && this.user.role=='USER')//End of ElseIf condition
     {

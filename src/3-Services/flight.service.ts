@@ -16,6 +16,7 @@ export class FlightService {
 
     }
 
+    
     getFlights()
     { 
       console.log("getting all the flights")
@@ -34,6 +35,11 @@ export class FlightService {
 
    }
 
+   PersistDiscount(discount:any){
+    console.log('Saving...'+JSON.stringify(discount));
+    return this.httpClient.post(this.flightUrl+'discounts',discount);
+   }
+
    saveDiscount(discount:any){
     console.log('Saving...'+discount);
     if(discount.id<1)
@@ -50,5 +56,12 @@ export class FlightService {
   getDiscounts(query:string): Observable<any>{
     return  this.httpClient.get(this.flightUrl+'discounts'+query);
    }
+
+   deleteFlight(flight:any){
+    this.httpClient.delete(this.flightUrl+'flights/'+flight).
+    subscribe(data => {
+      console.log(data);
+  });
+  }
 
 }
