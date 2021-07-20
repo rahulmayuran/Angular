@@ -11,7 +11,7 @@ import { FlightService } from 'src/3-Services/flight.service';
 
 export class AddFlightComponent{
 
-  flight:any = {};
+  flight:any = [];
   message:string=''
   flightForm:FormGroup;
 
@@ -20,17 +20,19 @@ export class AddFlightComponent{
     this.flightForm = new FormGroup({
       AirlineName : new FormControl("",Validators.required),
       model : new FormControl("",Validators.required),
-      contact : new FormControl("",Validators.required)
+      contact : new FormControl("",Validators.required),
+      logo : new FormControl("", Validators.required),
+      address : new FormControl("", Validators.required)
     })
   }
 
   
-  addFlight()
+  AddAirline()
   {
     if(this.checkFlight())
     return;
     this.fservice.getFlightByName(this.flight.name).subscribe((data)=>{
-      if(data[0]!=null){
+      if(data.length=0){
       }else{
         this.fservice.saveFlight(this.flight);
         this.flightRouter.navigateByUrl('/manageFlights');

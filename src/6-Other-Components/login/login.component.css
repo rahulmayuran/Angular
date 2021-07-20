@@ -1,20 +1,18 @@
-/* 
-body{
-    background-image: url('/assets/flightImage.jpg');
-    background-position:left;
-    background-size: 100%;
+
+/* body{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 } */
 
-/* 
-form{
+ 
+/* form{
     margin: 5em 5em;
     text-align: center;
     margin-right: 50%;
     height: 40em;
     margin-top: 0%;
-}
+} */
 
+/*
 #inputs
 {    padding: 10px;
     margin: 2em;
@@ -74,3 +72,7 @@ button
  @media only screen and (max-width : 768px){
        
 } */
+
+label{
+    font-weight: 500;
+}

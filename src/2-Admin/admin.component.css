@@ -1,6 +1,3 @@
-body{
-    background-color: darkgray;
-}
 
 /* Mobile view */
 @media only screen and (max-width: 768px)
@@ -24,7 +21,6 @@ body{
 
 
 header{
-    background-color: lightgrey; 
     border-radius: 10px;
     border: solid 2px black;
     text-align: center;

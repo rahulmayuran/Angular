@@ -9,17 +9,18 @@ import { User } from 'src/5-Entity/user';
 })
 export class UserService {
 
-  userUrl:string = "http://localhost:3000/";
+  //userUrl:string = "http://localhost:3000/";
+   userUrl:string = "http://localhost:9052/api/v1.0/user";
   public user:any = [];
 
   constructor(private httpConnect:HttpClient) { 
-    this.user={id:0, userId:'', name:'', password:'', role:''}
+    this.user={id:0, name:'', password:'', role:''}
   }
 
     getUsers()
     { 
       console.log("getting all the users")
-       return this.httpConnect.get(this.userUrl)
+       return this.httpConnect.get(this.userUrl+'/getUsers')
     }
 
     getUserById(id:number){
@@ -29,7 +30,7 @@ export class UserService {
     
     getUserByName(name:string){
       console.log("getting user with name "+ name);
-      return this.httpConnect.get<User[]>(this.userUrl+'users?name'+name);
+      return this.httpConnect.get<User[]>(this.userUrl+'/'+name);
     }
 
 
@@ -37,7 +38,7 @@ export class UserService {
     saveUser(user:any)
     {
       console.log("Saved the user ->"+user);
-      this.httpConnect.post(this.userUrl+"users", user).subscribe(data => {
+      this.httpConnect.post(this.userUrl+"/login", user).subscribe(data => {
         console.log(data);
       });
     }

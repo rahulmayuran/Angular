@@ -26,7 +26,7 @@
     </div>
 
     <div class="input-group">
-        <label for="logo">Upload Logo</label>
+        <label for="logo">Upload logo</label>
         <input [(ngModel)]="flight.logo" formControlName ="logo" type="file" name="logo" id="logo" required>
     </div>
 
@@ -37,18 +37,26 @@
 
     <div class="input-group">
         <label for="address">Update Address</label>
-        <textarea [(ngModel)]="flight.address" formControlName ="address" rows="5" cols="50" name="address" required></textarea>
+        <textarea [(ngModel)]="flight.address" 
+        formControlName ="address" rows="5" cols="30" name="address" required></textarea>
     </div>
     
     <div class="input-group">
         <label for="contact">Contact number</label>
             <input [(ngModel)]="flight.contact" formControlName ="contact" 
-            type="number" min="1" max="9000090009" name="contact" id="contact" required>
+            type="number" min="1" max="9999999999" name="contact" id="contact" required>
         </div>
 
-    <input type="reset" value="Reset">
-    <input style="margin-left: 3em;" type="submit" value="Add Airline">
+    <button class="btn btn-success" (click)="AddAirline()">Add Airline</button>
+    <button type="reset" value="reset" class="btn btn-danger">Reset</button>
 
+    <p>{{ flight.contact }}!</p>
+    <p>{{ flight.address }}!</p>
+    <p>{{ flight.model }}!</p>
+    <p>{{ flight.logo }}!</p>
+    <p>{{ flight.AirlineName }}!</p>
+    <div *ngIf= "checkFlight()">{{ message }}!</div>
+   
    </form>
 
 </body>

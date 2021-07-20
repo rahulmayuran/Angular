@@ -49,7 +49,8 @@ export class LoginComponent{
     }
     else if(this.loginUserForm.value.username == this.userService
             .getUserByName(this.user.name)
-            .subscribe(  (data)=> {
+            .subscribe(  
+              (data)=> {
                       console.log("User array length "+data.length)
                       // To iterate through the user array
                       for (let i = 0; i < data.length; i++) 

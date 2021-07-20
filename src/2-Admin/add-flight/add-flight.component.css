@@ -1,6 +1,4 @@
 form{
-    border: 5px ridge darkblue;
-    background-color: white;
     padding: 1em;
     bottom: 0%;
     font-size: smaller;
@@ -8,18 +6,8 @@ form{
     margin-top: 3em;
     margin-right: 2em;
 }
-.input-group{
-    margin-bottom: 1em;
-}
 
-.input-group select,
-.input-group textarea{
-    padding: 10px;
-    border : outset 4px blue;
-    border-radius: 4px;
-    width: 200px;
-}
-
-label{
+label
+{
     font-weight: 500;
 }

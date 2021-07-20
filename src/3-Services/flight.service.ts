@@ -1,16 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Flight } from 'src/5-Entity/flight';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlightService {
 
-  flightUrl:string = "http://localhost:3000";
+  // flightUrl:string = "http://localhost:3000/";
+  flightUrl:string = "http://localhost:9051/api/v1.0/flight";
+  flight:any
   
   constructor(private httpClient:HttpClient) {
 
+    }
+
+    getFlights()
+    { 
+      console.log("getting all the flights")
+       return this.httpClient.get(this.flightUrl+'/flights')
     }
 
     saveFlight(flight:any){
@@ -20,8 +29,8 @@ export class FlightService {
    }
 
     getFlightByName(name:string){
-      console.log("Saved the flight name->"+name);
-      return this.httpClient.get<>(this.flightUrl+'flights?name'+name);
+      console.log("got the flight name->"+name);
+      return this.httpClient.get<Flight[]>(this.flightUrl+'flights?name'+name);
 
    }
 

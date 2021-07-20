@@ -65,7 +65,7 @@ export class RegisterComponent implements OnInit {
                                     else if (data[i].name != this.registerForm.value.userName
                                       && data[i].password != this.registerForm.value.password)
                                       {
-                                      this.user.role="USER";
+                                      // this.user.role="USER";
                                       // No need to subscribe as it is already done in service layer
                                       this.userService.saveUser(this.user);
                                       console.log("Try to login with registered credentials")
@@ -73,8 +73,9 @@ export class RegisterComponent implements OnInit {
                                     }
                                 } //End of For loop
                               }) //End of Subscription         
-           ) //End of ElseIf condition
+                               ) //End of ElseIf condition
            {
+            this.userService.saveUser(this.user);
             console.log("The user is already registered");
             this.message = "The user is already registered"
           }
