@@ -30,10 +30,15 @@
             
             <br/>
         
-            <button class="btn btn-outline-success btn-lg " (click) ="Register()">Register</button>
+            <button class="btn btn-outline-success btn-lg " (onSubmit) ="Register()">Register</button>
 
             <br/>
-            {{message}}
+
+            <button *ngIf="checkUserForNull() && registerForm.controls['username'].touched
+            && registerForm.controls['repassword'].touched"
+             class="btn btn-danger">{{message}}</button>
+
+             <button class="btn btn-success">{{successMsg}}</button> 
             <!-- <div *ngFor="let u of user">{{u.UserName}}</div> -->
     </form>
 </div>

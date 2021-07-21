@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   user:any = [];
   registerForm:FormGroup;
   message:string = '';
+  successMsg:string = '';
 
 
   constructor(private userService:UserService, private route:Router) 
@@ -41,52 +42,67 @@ export class RegisterComponent implements OnInit {
 
   Register()
   {
-      this.userService.getUserByName(this.user.name)
-       .subscribe( (data)=>
-       { 
-          if(this.registerForm.value.username == ''
-                 && this.registerForm.value.password == '')
-            {
-            console.log("No details provided")
-            this.message = "Kindly fill all details"
-            }
-            else if(this.registerForm.value.password != this.registerForm.value.password){
-              console.log("No details provided")
-              this.message = "Password mismatch"
-            }
-          else if(this.registerForm.value.username == 'admin'
-                     && this.registerForm.value.password == 'admin')
-            {
-              this.message = "Already registered as admin."
-            }
-          else if(this.registerForm.value.username == this.userService
-                  .getUserByName(this.user.name)
-                  .subscribe(  
-                    (data)=> {
-                      //data is in MySQl
-                      let stringData = JSON.stringify(data)
-                      console.log("JSON "+stringData)
-          
-                        if( this.registerForm.value.username
-                          && this.registerForm.value.password)
-                        {
-                          console.log("Names/passwords matched with form data")
-                          this.route.navigateByUrl('user')
-                        }
-                     }) //End of Subscription
-                           )//End of ElseIf condition
+  if( this.checkUserForNull() )
+  return; 
+
+    if(this.registerForm.value.username == 'admin'
+                && this.registerForm.value.password == 'admin'
+                   && this.registerForm.value.repassword == 'admin')
+      {
+        this.message = "Already registered as admin."
+      }
+    else if(this.registerForm.value.username == this.userService
+        .getUserByName(this.user.name)
+        .subscribe(  
+              (data)=> {
+                //data is in MySQl
+                let stringData = JSON.stringify(data)
+                console.log("JSON "+stringData)
+
+                  if(data[1] != this.registerForm.value.username
+                    && data[2] != this.registerForm.value.password
+                    && data[2] != this.registerForm.value.repassword)
+                  {
+                    this.message = "New User SuccessFully Registered"
+                  }
+                }) //End of Subscription
+                  )//End of ElseIf condition
           {
             this.userService.saveUser(this.user);
             console.log("The user is already registered");
             this.message = "The user is already registered"
-          }
-          else
-          {
-            this.route.navigateByUrl('/register');
-          }
-    });
+      }
+      else
+      {
+        this.route.navigateByUrl('/register');
+      }
   }
 
+  checkUserForNull():boolean
+  {
+    if(this.user.name=='')
+    {
+      console.log('Name is not provided');
+      this.message = "UserName not provided"
+      return true;
+    }
+    else if(this.user.password=='')
+    {
+     console.log("password is not provided");
+     this.message = "Password not provided"
+     return true;
+    }
+    else if(this.user.password != this.user.repassword)
+    {
+      console.log("password mismatch!");
+      this.message = "Retype password again!"
+      return true;
+    }
+    else{
+      return false;
+    }
+    
+  }
  
 
 }
