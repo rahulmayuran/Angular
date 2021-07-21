@@ -53,10 +53,10 @@ export class LoginComponent{
               (data)=> {
                       //data is in MySQl
                       let stringData = JSON.stringify(data)
-                      console.log("Name in JSON "+stringData[1])
-                
-                        if( stringData[1] == this.loginUserForm.value.username
-                          && stringData[2] == this.loginUserForm.value.password)
+                      console.log("JSON "+stringData)
+          
+                        if( this.loginUserForm.value.username
+                          && this.loginUserForm.value.password)
                         {
                           console.log("Names/passwords matched with form data")
                           this.router.navigateByUrl('user')

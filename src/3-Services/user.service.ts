@@ -10,7 +10,8 @@ import { User } from 'src/5-Entity/user';
 export class UserService {
 
   //userUrl:string = "http://localhost:3000/";
-   userUrl:string = "http://localhost:9052/api/v1.0/user";
+  //  userUrl:string = "http://localhost:9052/api/v1.0/user";
+  userUrl:string = "http://localhost:9051/user/api/v1.0/user";
   public user:any = [];
 
   constructor(private httpConnect:HttpClient) { 

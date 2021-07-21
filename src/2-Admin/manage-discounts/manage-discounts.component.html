@@ -14,7 +14,7 @@
             <tr *ngFor="let discount of discounts">
 
                 <td> <input type="text" [(ngModel)]="discount.code"><span class="badge badge-success">{{discount.code}}</span></td>
-                <td> <input type="text" [(ngModel)]="discount.value"><span class="badge badge-success">{{discount.value}} %</span></td>
+                <td> <input type="number" [(ngModel)]="discount.value"><span class="badge badge-success">{{discount.value}} %</span></td>
                 <td> 
                     <select>
                         <option value="Active">Active</option><span class="badge badge-success">{{discount.status}}</span>

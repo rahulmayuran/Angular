@@ -9,7 +9,8 @@ import { Flight } from 'src/5-Entity/flight';
 export class FlightService {
 
   // flightUrl:string = "http://localhost:3000/";
-  flightUrl:string = "http://localhost:9051/api/v1.0/flight";
+  // flightUrl:string = "http://localhost:9053/api/v1.0/flight";
+  flightUrl:string = "http://localhost:9051/flight/api/v1.0/flight";
   flight:any
   
   constructor(private httpClient:HttpClient) {

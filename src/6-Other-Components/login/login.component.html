@@ -30,7 +30,8 @@
             <button class="btn btn-outline-warning btn-lg" (click) ="validateCred()">Login</button>
 
             <br/>
-            {{message}} 
+            <button *ngIf="checkUserForNull() && loginUserForm.controls['username'].touched"
+                 class="btn btn-danger">{{message}}</button>
 
             <a *ngIf="loginUserForm.controls['username'].touched
             && loginUserForm.controls['password'].touched" 

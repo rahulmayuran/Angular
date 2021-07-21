@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class DiscountService {
 
-  url:string = "http://localhost:3000/discounts";
+  url:string = "http://localhost:9051/admin/api/v1.0/admin"
   discount:any = [];
 
   constructor(private httpClient:HttpClient) 
