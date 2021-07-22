@@ -27,7 +27,7 @@ export class AddFlightComponent{
   }
 
   
-  AddAirline()
+  PersistAirline()
   {
     if(this.checkFlight())
     return;
@@ -40,6 +40,13 @@ export class AddFlightComponent{
    
   });
 }
+    addAirline(){
+      this.flight.push({Airline:'',model:'',contact:'',logo:'',address:''});
+    }
+
+    popAirline(){
+      this.flight.pop({Airline:'',model:'',contact:'',logo:'',address:''});
+    }
 
   checkFlight():boolean
   {

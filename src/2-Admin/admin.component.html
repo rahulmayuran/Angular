@@ -9,16 +9,17 @@
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     </head>
     <body>
-        
-    <header>
-        <button  class="btn btn-outline-dark btn-sm" (click) = "searchFlights()">Search Flights</button>
-        <button  class="btn btn-outline-dark btn-sm"  (click) = "navigateToList()">Show Flight List</button>
-        <button  class="btn btn-outline-dark btn-sm"  (click) = "manageBookings()">Manage Bookings</button>
-        <button  class="btn btn-outline-dark btn-sm"  (click) = "manageFlights()">Manage Flights</button>
-        <button  class="btn btn-outline-dark btn-sm"  (click) = "manageDiscounts()">Manage Discounts</button>
-        <button  class="btn btn-outline-dark btn-sm"  (click) = "manageSchedule()">Scheduled Flights</button>
-        <button  class="btn btn-outline-dark btn-sm"  (click) = "addAirline()">Add Flight</button>
+
+    <header class="container-fluid">
+        <button  class="btn btn-outline-dark " (click) = "searchFlights()">Search Flights</button>
+        <button  class="btn btn-outline-dark "  (click) = "navigateToList()">Show Flight List</button>
+        <button  class="btn btn-outline-dark "  (click) = "manageBookings()">Manage Bookings</button>
+        <button  class="btn btn-outline-primary"  (click) = "manageFlights()">Manage Airline</button>
+        <button  class="btn btn-outline-primary"  (click) = "manageDiscounts()">Manage Discounts</button>
+        <button  class="btn btn-outline-primary"  (click) = "manageSchedule()">Scheduled Flights</button>
+        <button  class="btn btn-outline-primary"  (click) = "addAirline()">Add Airline</button>
     </header>
+  
         
         <form >
             <button style="float: right;" class="btn btn-outline-primary">

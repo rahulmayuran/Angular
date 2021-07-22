@@ -11,16 +11,16 @@
 }
 
 /* Laptop view */
-@media only screen and (min-width: 768px)
+/* @media only screen and (min-width: 768px)
 {
      body
      {
         width: 90%;
      }
-}
+} */
 
 
-header{
+/* header{
     border-radius: 10px;
     border: solid 2px black;
     text-align: center;
@@ -28,7 +28,7 @@ header{
     font-size: smaller;
     padding: 10px;
     width: 100%;
-}
+} */
 
 form{
     border: 5px ridge darkblue;
@@ -37,10 +37,12 @@ form{
     bottom: 0%;
     font-size: smaller;
     margin-left: 1em;
+    text-align: center;
+    width: 90%;
 }
 .input-group{
     margin-bottom: 1em;
-}
+} 
 
 .input-group select,
 .input-group textarea{
@@ -48,7 +50,7 @@ form{
     border : outset 4px blue;
     border-radius: 4px;
     width: 200px;
-}
+} */
 
 label{
     font-weight: 500;

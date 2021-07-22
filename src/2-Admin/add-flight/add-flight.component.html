@@ -11,50 +11,47 @@
  
   <form [formGroup] = flightForm>
 
-    <div class="input-group">
-        <label for="AirlineName">Add Airline</label>
-        <select [(ngModel)]="flight.AirlineName" name="AirlineName" id="AirlineName" 
-        formControlName ="AirlineName" autocomplete="true">
-            <optgroup label="--Choose Airline--">
-                <option selected>- Not Required -</option>
-                <option >SpiceJet</option>
-                <option >Air India</option>
-                <option >Indigo</option>
-                <option >Go-Air</option>
-            </optgroup>
-        </select>
-    </div>
-
-    <div class="input-group">
-        <label for="logo">Upload logo</label>
-        <input [(ngModel)]="flight.logo" formControlName ="logo" type="file" name="logo" id="logo" required>
-    </div>
-
-    <div class="input-group">
-        <label for="model">Model</label>
-        <input [(ngModel)]="flight.model" formControlName ="model" type="text" name="model" id="model">
-    </div>
-
-    <div class="input-group">
-        <label for="address">Update Address</label>
-        <textarea [(ngModel)]="flight.address" 
-        formControlName ="address" rows="5" cols="30" name="address" required></textarea>
-    </div>
+    <div class="container-fluid">
+        <h3>Add Airlines </h3>
     
-    <div class="input-group">
-        <label for="contact">Contact number</label>
-            <input [(ngModel)]="flight.contact" formControlName ="contact" 
-            type="number" min="1" max="9999999999" name="contact" id="contact" required>
-        </div>
-
-    <button class="btn btn-success" (click)="AddAirline()">Add Airline</button>
-    <button type="reset" value="reset" class="btn btn-danger">Reset</button>
-
-    <p>{{ flight.contact }}!</p>
-    <p>{{ flight.address }}!</p>
-    <p>{{ flight.model }}!</p>
-    <p>{{ flight.logo }}!</p>
-    <p>{{ flight.AirlineName }}!</p>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                  <th>Airline Name</th>
+                  <th>Airline Type</th>
+                  <th>Model</th>
+                  <th>Address</th>
+                  <th>Contact Number</th>
+                </tr>
+            </thead>
+        
+            <tbody>
+                <tr *ngFor="let f of flight">
+    
+                    <td> <input type="text" [(ngModel)]="f.AirlineName" formControlName ="AirlineName" ></td>
+                    <td> 
+                        <select [(ngModel)]="f.logo" formControlName ="logo">
+                            <option >SpiceJet</option>
+                            <option >Air India</option>
+                            <option >Indigo</option>
+                            <option >Go-Air</option>
+                        </select>   
+                    </td>
+                    <td> <input type="text" [(ngModel)]="f.model" formControlName ="model"></td>
+                    <td> <input type="text" [(ngModel)]="f.address" formControlName ="address"></td>
+                    <td> <input type="number" [(ngModel)]="f.contact" formControlName ="contact"></td>
+                     <td> 
+                         <button class="btn btn-outline-success" (click)="PersistAirline()" type="submit">Save Airline</button> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    
+        <button class="btn btn-outline-primary" (click)="addAirline()" type="submit">Add Airline</button> 
+        <button class="btn btn-outline-danger" (click)="popAirline()" type="submit">Remove Airline</button> 
+        <!-- <button class="btn btn-outline-danger" type="reset" value="reset" >Reset</button> -->
+    
+    </div>
     <div *ngIf= "checkFlight()">{{ message }}!</div>
    
    </form>

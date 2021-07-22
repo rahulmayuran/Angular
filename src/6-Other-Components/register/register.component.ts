@@ -63,14 +63,14 @@ export class RegisterComponent implements OnInit {
                     && data[2] != this.registerForm.value.password
                     && data[2] != this.registerForm.value.repassword)
                   {
-                    this.message = "New User SuccessFully Registered"
+                    this.successMsg = "New User SuccessFully Registered"
+                    this.userService.saveUser(this.user);
                   }
                 }) //End of Subscription
                   )//End of ElseIf condition
-          {
-            this.userService.saveUser(this.user);
+          {     
             console.log("The user is already registered");
-            this.message = "The user is already registered"
+            this.message = "Already Existing User"
       }
       else
       {

@@ -10,7 +10,6 @@ import { FlightService } from 'src/3-Services/flight.service';
 export class ManageDiscountsComponent implements OnInit {
 
   discounts:any=[];
-  resultant:any;
 
   constructor(private discountRouter:Router, public discountService:FlightService) {
 
@@ -28,12 +27,7 @@ export class ManageDiscountsComponent implements OnInit {
   }
 
   saveDiscount(discount:any){
-    this.discountService.PersistDiscount(discount)
-      .subscribe((res) => {
-        console.log("Res is "+res);
-        console.log("Resultant is"+this.resultant);
-        res = this.resultant
-      });
+    this.discountService.saveDiscount(discount);
   }
 
 }

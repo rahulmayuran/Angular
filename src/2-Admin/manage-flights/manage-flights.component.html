@@ -3,6 +3,7 @@
 <table class="table table-striped">
         <thead>
             <tr>
+                <th scope="col">Choose Airline</th>
                 <th scope="col">Logo</th>
                 <th scope="col">Price</th>
                 <th scope="col">Depature</th>
@@ -15,7 +16,12 @@
     <ng-template>
         <tbody>
             <tr *ngFor="let flight of flights">
-                <td><img [src]="flight.logo" [alt]="flight.name" width="30" height="30"/></td>
+                <td>
+                    <select>
+                        <option value="airlineNames">{{flight.airline}}</option>
+                    </select>
+                </td>
+                <td>{{flight.logo}}</td>
                 <td>{{flight.price}}</td> 
                 <td>{{flight.departure}}</td> 
                 <td>{{flight.schedule}}</td>

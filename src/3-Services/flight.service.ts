@@ -36,11 +36,6 @@ export class FlightService {
 
    }
 
-   PersistDiscount(discount:any){
-    console.log('Saving...'+JSON.stringify(discount));
-    return this.httpClient.post(this.flightUrl+'discounts',discount);
-   }
-
    saveDiscount(discount:any){
     console.log('Saving...'+discount);
     if(discount.id<1)
