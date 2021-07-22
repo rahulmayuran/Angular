@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private userService:UserService, private route:Router) 
   {
-    this.user= {id:0 ,name:'',password:'',role:''};
+    this.user= {role:''};
 
     this.registerForm = new FormGroup({
       username : new FormControl("", [
@@ -42,8 +42,8 @@ export class RegisterComponent implements OnInit {
 
   Register()
   {
-  if( this.checkUserForNull() )
-  return; 
+     if( this.checkUserForNull() )
+      return; 
 
     if(this.registerForm.value.username == 'admin'
                 && this.registerForm.value.password == 'admin'
@@ -51,50 +51,48 @@ export class RegisterComponent implements OnInit {
       {
         this.message = "Already registered as admin."
       }
-    else if(this.registerForm.value.username == this.userService
-        .getUserByName(this.user.name)
-        .subscribe(  
-              (data)=> {
-                //data is in MySQl
-                let stringData = JSON.stringify(data)
-                console.log("JSON "+stringData)
-
-                  if(data[1] != this.registerForm.value.username
-                    && data[2] != this.registerForm.value.password
-                    && data[2] != this.registerForm.value.repassword)
+    else if(this.userService.getUserByName(this.user.username)
+            .subscribe(  (data:any)=> 
+                {
+                  if(data.username  != this.registerForm.value.username
+                    && data.password != this.registerForm.value.password)
                   {
-                    this.successMsg = "New User SuccessFully Registered"
+                    this.user.role = 'USER';
+                    console.log(JSON.stringify(data));
+                    console.log(JSON.stringify(this.user));
                     this.userService.saveUser(this.user);
+                    this.successMsg = "New User SuccessFully Registered";
+                  }
+                  else if(data.username  == this.registerForm.value.username
+                    && data.password == this.registerForm.value.password)
+                  {
+                    this.successMsg = "Already Existing User";
                   }
                 }) //End of Subscription
                   )//End of ElseIf condition
           {     
-            console.log("The user is already registered");
             this.message = "Already Existing User"
-      }
-      else
-      {
-        this.route.navigateByUrl('/register');
-      }
+          }
+          else
+          {
+            this.message = "Try Registering after sometime"
+          }
   }
 
   checkUserForNull():boolean
   {
     if(this.user.name=='')
     {
-      console.log('Name is not provided');
       this.message = "UserName not provided"
       return true;
     }
     else if(this.user.password=='')
     {
-     console.log("password is not provided");
      this.message = "Password not provided"
      return true;
     }
     else if(this.user.password != this.user.repassword)
     {
-      console.log("password mismatch!");
       this.message = "Retype password again!"
       return true;
     }

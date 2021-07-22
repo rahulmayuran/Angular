@@ -30,16 +30,16 @@ export class UserService {
     }
     
     getUserByName(name:string){
-      console.log("getting user with name "+ name);
-      return this.httpConnect.get<User[]>(this.userUrl+'/'+name);
+      console.log("getting user with name from service "+ name);
+      return this.httpConnect.get(this.userUrl+'/'+name);
     }
 
 
     // While saving user, subscription is done, don't need to return. 
     saveUser(user:any)
     {
-      console.log("Saved the user ->"+user);
-      this.httpConnect.post(this.userUrl+"/login", user).subscribe(data => {
+      console.log("Saved the user from service ->"+user);
+      this.httpConnect.post(this.userUrl+"/register", user).subscribe(data => {
         console.log(data);
       });
     }

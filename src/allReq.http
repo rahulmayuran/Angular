@@ -1,0 +1,12 @@
+
+GET http://localhost:9051/user/api/v1.0/user/getUsers
+
+GET http://localhost:9051/user/api/v1.0/user/rahul
+
+POST http://localhost:9051/user/api/v1.0/user/register
+content-type: application/json
+{
+    "username": "jeff",
+    "password": "jeff",
+    "role": "USER"
+}

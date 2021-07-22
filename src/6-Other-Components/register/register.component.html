@@ -8,11 +8,11 @@
 </head>
 <body>
     <div class="jumbotron">
-        <form [formGroup] = "registerForm" (onSubmit) ="Register()">
+        <form [formGroup] = "registerForm" >
             
             <div class="form-group">
                 <label for="name">UserName : </label> 
-                <input [(ngModel)]="user.name" id="user" type="text" 
+                <input [(ngModel)]="user.username" id="user" type="text" 
                         formControlName ="username" name="name"/>
             </div>
 
@@ -30,7 +30,8 @@
             
             <br/>
         
-            <button class="btn btn-outline-success btn-lg">Register</button>
+            <button (click) ="Register()"
+                 class="btn btn-outline-success btn-lg">Register</button>
 
             <br/>
 
@@ -38,7 +39,7 @@
             && registerForm.controls['repassword'].touched"
              class="btn btn-danger">{{message}}</button>
 
-             {{successMsg}}
+            <div style="color: green; font-size: bold;">{{successMsg}}</div> 
             <!-- <div *ngFor="let u of user">{{u.UserName}}</div> -->
     </form>
 </div>
