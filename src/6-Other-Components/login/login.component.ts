@@ -78,13 +78,11 @@ export class LoginComponent{
   {
     if(this.user.name=='')
     {
-      console.log('Name is not provided');
       this.message = "UserName not provided"
       return true;
     }
     else if(this.user.password=='')
     {
-     console.log("password is not provided");
      this.message = "Password not provided"
      return true;
     }

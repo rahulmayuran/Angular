@@ -11,7 +11,8 @@ export class FlightService {
   // flightUrl:string = "http://localhost:3000/";
   // flightUrl:string = "http://localhost:9053/api/v1.0/flight";
   flightUrl:string = "http://localhost:9051/flight/api/v1.0/flight";
-  flight:any
+  adminUrl:string = "http://localhost:9051/admin/api/v1.0/flight";
+  flight:any = [];
   
   constructor(private httpClient:HttpClient) {
 
@@ -32,7 +33,7 @@ export class FlightService {
 
     getFlightByName(name:string){
       console.log("got the flight name->"+name);
-      return this.httpClient.get<Flight[]>(this.flightUrl+'flights?name'+name);
+      return this.httpClient.get(this.flightUrl+'/'+name);
 
    }
 

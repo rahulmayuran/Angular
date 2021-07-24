@@ -4,20 +4,24 @@
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
-        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-
     </head>
     <body>
 
         <!-- Yet to be moved to user-header as a seperate component -->
-        <header>
+        <header class="container">
             <button class="btn btn-outline-dark" (click) = "searchFlights()">SearchFlights</button>
             <button class="btn btn-outline-dark" (click) = "navigateToList()">NavigateToFlights</button>
             <button class="btn btn-outline-dark" (click) = "manageBookings()">Manage Bookings</button>
         </header>
         
+        <!-- <p>
+            <ngb-alert type="success">
+              <strong>Welcome!</strong>Search for the
+               <span class="badge badge-outline-warning"> available flights </span>
+               and start bookin now.
+            </ngb-alert>
+          </p> -->
+
         <form >
             <button style="float: right;" class="btn btn-outline-success">
                  Welcome <span class="badge badge-primary">{{User}}</span>

@@ -1,5 +1,4 @@
 
-
 <table class="table table-striped">
         <thead>
             <tr>
@@ -12,8 +11,6 @@
                 <th scope="col">Action</th>     
             </tr>
         </thead>
-    
-    <ng-template>
         <tbody>
             <tr *ngFor="let flight of flights">
                 <td>
@@ -27,8 +24,8 @@
                 <td>{{flight.schedule}}</td>
                 <td>{{flight.contactNumber}}</td>  
                 <td>{{flight.model}}</td>  
-                <td> <button (click)="deleteAirline(flights)"></button></td>       
+                <td> <button (click)="deleteAirline(flights)">Delete Flight</button></td>       
             </tr> 
         </tbody>
-    </ng-template>
+    
 </table>

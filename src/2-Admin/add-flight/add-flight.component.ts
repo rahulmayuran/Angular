@@ -29,13 +29,19 @@ export class AddFlightComponent{
   
   PersistAirline()
   {
+    console.log("Flight Object contains -> "+ this.flight)
     if(this.checkFlight())
     return;
-    this.fservice.getFlightByName(this.flight.name).subscribe((data)=>{
-      if(data.length=0){
-      }else{
+    this.fservice.getFlightByName(this.flight.name).subscribe(
+      (data)=>{
+      if(data!=0)
+      {
+        console.log("Data fetched from Mysql DB -> "+ JSON.stringify(data));
+      }
+      else
+      {
         this.fservice.saveFlight(this.flight);
-        this.flightRouter.navigateByUrl('/manageFlights');
+        //this.flightRouter.navigateByUrl('/manageFlights');
       }
    
   });

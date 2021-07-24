@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 // This import must be manually done to make get(), post() and delete() to work
 import {HttpClient} from '@angular/common/http';
-import { User } from 'src/5-Entity/user';
 
 @Injectable({
   providedIn: 'root'

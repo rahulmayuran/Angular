@@ -1,6 +1,6 @@
 import { DecimalPipe } from '@angular/common';
 import { Component, PipeTransform} from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FlightService } from 'src/3-Services/flight.service';
@@ -13,9 +13,13 @@ import { FlightService } from 'src/3-Services/flight.service';
 export class ManageFlightsComponent {
 
   flights:any=[];
+  manageFlightsForm:FormGroup
 
   constructor(private flightRouter :Router,public service : FlightService) {
 
+    this.manageFlightsForm = new FormGroup({
+
+    })
    }
 
    getFlights()
@@ -35,5 +39,16 @@ export class ManageFlightsComponent {
     console.log('deleting '+flight.id);
      this.service.deleteFlight(flight.id);
   }
+
+
+// showBasicDialog2()
+//  {​​​​​
+//   this.displayBasic2 = true;
+// }​​​​​
+    
+
+// // displayBasic2 : boolean
+    
+
 
 }

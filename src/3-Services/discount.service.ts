@@ -31,5 +31,9 @@ export class DiscountService {
   getDiscounts(query:string): Observable<any>{
     return  this.httpClient.get(this.adminUrl+'discounts'+query);
    }
+
+   deleteDiscount(discount:any){
+      return this.httpClient.delete(this.adminUrl+'/delete/discount',discount);
+   }
    
 }
