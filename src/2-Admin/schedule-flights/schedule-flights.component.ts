@@ -10,27 +10,36 @@ import { FlightService } from 'src/3-Services/flight.service';
 export class ScheduleFlightsComponent  {
 
   flights:any=[];
+  resultScheduledFlight:any = [];
+  message:string = ''
 
-  constructor(private flightRouter :Router,public service : FlightService) {
+  constructor(private scheduledRouter :Router,public scheduleService : FlightService) {
 
    }
 
-   getFlights()
-   {
-    this.service.getFlights().subscribe(data=>
-      {
-      this.flights=data;
-      console.log(this.flights);
-      });
+   back(){
+     this.scheduledRouter.navigateByUrl("/admin")
+   }
+   
+   fetchFlights(){
+    console.log("Fetching All Flights")
+    this.scheduleService.getFlights().subscribe(
+      (data:any)=>{
+        console.log("Fetched Flights from MySQL ->"+ JSON.stringify(data))
+        this.resultScheduledFlight = data;
+      }, (err:any)=>{
+        this.message = "Failed to Fetch data"
+      }
+    )
   }
 
   addAirline(){
-    this.flightRouter.navigateByUrl("/addAirline");
+    this.scheduledRouter.navigateByUrl("/addAirline");
   }
 
   deleteAirline(flight:any){
     console.log('deleting '+flight.id);
-     this.service.deleteFlight(flight.id);
+     this.scheduleService.deleteFlight(flight.id);
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FlightService } from 'src/3-Services/flight.service';
@@ -9,55 +9,95 @@ import { FlightService } from 'src/3-Services/flight.service';
   styleUrls:['./add-flight.component.css']
 })
 
-export class AddFlightComponent{
+export class AddFlightComponent implements OnInit{
 
-  flight:any = [];
+  ngOnInit(){
+
+  }
+  
+  airline:any = [];
   message:string=''
+  airlineForm:FormGroup;
+  resultAirline:any = [];
+
+  flight:any=[];
+  resultFlight:any = [];
   flightForm:FormGroup;
 
   constructor(private flightRouter:Router, private fservice:FlightService) 
   { 
+    this.airlineForm = new FormGroup(
+      {
+      airlineId : new FormControl("", Validators.required),
+      airlineName : new FormControl("",Validators.required),
+      airlineModel : new FormControl("",Validators.required),
+      airlineLogo : new FormControl("",Validators.required),
+      contactNumber : new FormControl("", Validators.required)
+    })
+
     this.flightForm = new FormGroup({
-      AirlineName : new FormControl("",Validators.required),
-      model : new FormControl("",Validators.required),
-      contact : new FormControl("",Validators.required),
-      logo : new FormControl("", Validators.required),
-      address : new FormControl("", Validators.required)
+      noOfSeats: new FormControl("",Validators.required),
+      price: new FormControl("",Validators.required),
+      journey: new FormControl("",Validators.required),
+      destination : new FormControl("",Validators.required)
     })
   }
 
-  
-  PersistAirline()
+  back(){
+    this.flightRouter.navigateByUrl("/admin")
+  }
+
+  //Airline Operations 
+  PersistAirline(airline:any)
   {
-    console.log("Flight Object contains -> "+ this.flight)
-    if(this.checkFlight())
-    return;
-    this.fservice.getFlightByName(this.flight.name).subscribe(
-      (data)=>{
-      if(data!=0)
-      {
-        console.log("Data fetched from Mysql DB -> "+ JSON.stringify(data));
+    console.log("Airline this.Object contains -> "+ JSON.stringify(this.airline))
+    console.log("Airline Object contains -> "+ JSON.stringify(airline))
+
+    if( this.checkAirline() ){
+      return;
+    }
+    else
+    {
+      this.fservice.saveAirline(airline)
+        .subscribe(  (data:any)=>
+        {
+          data = this.airline;
+          console.log("Successfully saved Airline ->"+ JSON.stringify(data))
+        })
       }
-      else
-      {
-        this.fservice.saveFlight(this.flight);
-        //this.flightRouter.navigateByUrl('/manageFlights');
+    }
+
+  fetchAirlines(){
+    console.log("Fetching All Airlines")
+    this.fservice.getAirlines().subscribe(
+      (data:any)=>{
+        console.log("Fetched Airlines from MySQL ->"+ JSON.stringify(data))
+        this.resultAirline = data;
+      }, (err:any)=>{
+        this.message = "Failed to Fetch data"
       }
-   
-  });
-}
-    addAirline(){
-      this.flight.push({Airline:'',model:'',contact:'',logo:'',address:''});
+    )
+  }
+
+  deleteAirline(airlineId:number)
+  {
+    console.log("delete the Airline with id "+airlineId);
+    this.fservice.deleteAirlineWithId(airlineId);
+  }
+
+    addAirline()
+    {
+      this.airline.push({airlineName:'',airlineModel:'',airlineLogo:'',contactNumber:''});
     }
 
     popAirline(){
-      this.flight.pop({Airline:'',model:'',contact:'',logo:'',address:''});
+      this.airline.pop({airlineName:'',airlineModel:'',airlineLogo:'',contactNumber:''});
     }
 
-  checkFlight():boolean
+  checkAirline():boolean
   {
-    if(this.flight.addAirline =='' || this.flight.contact==''
-        || this.flight.model=='')
+    if(this.airline.airlineName =='' || this.airline.airlineModel==''
+        || this.airline.contactNumber=='')
         {
      this.message = "Kindly fill all the details"
       return true;
@@ -65,5 +105,62 @@ export class AddFlightComponent{
     return false;
   }
 
+  //Flight Operations 
+  addFlight(airline:any)
+  {
+    this.flight.push({noOfSeats:'',price:'',journey:'',destination:'',airline:airline});
+  }
+
+  popFlight(){
+    this.flight.pop({noOfSeats:'',price:'',journey:'',destination:'',airline:""});
+  }
+
+  PersistFlight(flight:any)
+  {
+    console.log("Flight this.Object contains -> "+ JSON.stringify(this.flight))
+    console.log("Flight Object contains -> "+ JSON.stringify(flight))
+
+    if( this.checkFlight() ){
+      return;
+    }
+    else
+    {
+      this.fservice.saveFlight(flight)
+        .subscribe(  (data:any)=>
+        {
+          data = this.flight;
+          console.log("Successfully saved flight with model ->"+ JSON.stringify(data))
+        })
+      }
+    }
+
+    fetchFlights(){
+      console.log("Fetching All Flights")
+      this.fservice.getFlights().subscribe(
+        (data:any)=>{
+          console.log("Fetched Flights from MySQL ->"+ JSON.stringify(data))
+          this.resultFlight = data;
+        }, (err:any)=>{
+          this.message = "Failed to Fetch data"
+        }
+      )
+    }
+
+  deleteFlight(flightId:number)
+    {
+      console.log("delete the Airline with id "+flightId);
+      this.fservice.deleteFlight(flightId);
+    }
+
+    checkFlight():boolean
+  {
+    if(this.flight.price =='' || this.flight.noOfSeats==''
+        || this.flight.journey=='' || this.flight.destination)
+        {
+     this.message = "Kindly fill all the details"
+      return true;
+    }
+    return false;
+  }
 }
   

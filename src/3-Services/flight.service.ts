@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Flight } from 'src/5-Entity/flight';
 
 @Injectable({
   providedIn: 'root'
@@ -10,55 +9,104 @@ export class FlightService {
 
   // flightUrl:string = "http://localhost:3000/";
   // flightUrl:string = "http://localhost:9053/api/v1.0/flight";
-  flightUrl:string = "http://localhost:9051/flight/api/v1.0/flight";
-  adminUrl:string = "http://localhost:9051/admin/api/v1.0/flight";
+  //flightUrl:string = "http://localhost:9051/flight/api/v1.0/flight";
+  adminUrl:string = "http://localhost:9051/admin/api/v1.0/admin";
   flight:any = [];
+  airline:any = [];
+  discount:any = [];
   
   constructor(private httpClient:HttpClient) {
 
     }
 
+ //Airline Operations 
+    saveAirline(airline:any)
+    {
+      console.log("Saved the airline "+ JSON.stringify(airline))
+      return this.httpClient.post(this.adminUrl+'/airline/register',airline);
+      
+    }
+
+    getAirlines()
+    {
+      console.log("Fetched all airlines ")
+      return this.httpClient.get(this.adminUrl+'/airline');
+      
+    }
     
+    deleteAirlineWithId(id:number):any
+    {
+      return this.httpClient.delete(this.adminUrl+"/airline/delete/"+id)
+      .subscribe(data => {
+          console.log("Angular Service -> "+data);
+          console.log("Angular Service stringified-> "+ JSON.stringify(data));
+    });
+    }
+
+//Flight Operations
     getFlights()
     { 
       console.log("getting all the flights")
-       return this.httpClient.get(this.flightUrl+'/flights')
+       return this.httpClient.get(this.adminUrl+'/flight/search')
     }
 
     saveFlight(flight:any){
       console.log("Saved the flight ->"+this.flight);
-      return this.httpClient.post(this.flightUrl, flight);
+      return this.httpClient.post(this.adminUrl+"/flight/register",flight);
 
    }
+  
+   deleteFlight(id:number):any{
+    this.httpClient.delete(this.adminUrl+'/flight/delete/'+id).
+    subscribe(data => {
+      console.log(data);
+    });
+  }
 
     getFlightByName(name:string){
       console.log("got the flight name->"+name);
-      return this.httpClient.get(this.flightUrl+'/'+name);
+      return this.httpClient.get(this.adminUrl+'/'+name);
 
    }
 
-   saveDiscount(discount:any){
-    console.log('Saving...'+discount);
-    if(discount.id<1)
-      this.httpClient.post(this.flightUrl+'discounts',discount).subscribe(disc => {
-      console.log(disc);
-      });
-      else{
-        this.httpClient.put(this.flightUrl+'discounts/'+discount.id,discount).subscribe(disc => {
-          console.log(disc);
-      });
+   //Discount Operations 
+   
+   getDiscounts(){
+    console.log("getting all the discounts from service")
+     return this.httpClient.get(this.adminUrl+"/discount/getDiscounts")
+   }
+   
+   saveDiscount(discount:any)
+   {
+    console.log("Saved the Discount ->"+this.discount);
+    return this.httpClient.post(this.adminUrl+"/discount/register",discount);
+    // console.log('Persisted to Table -> ..'+discount);
+    // if(discount.id<1)
+    //   this.httpClient.post(this.adminUrl+'/discount/register',discount)
+    //     .subscribe(disc => 
+    //       {
+    //          console.log(disc);
+    //       });
+    //   else
+    //   {
+    //     this.httpClient.put(this.adminUrl+'/discounts/'+discount.id,discount)
+    //     .subscribe(disc => 
+    //       {
+    //       console.log(disc);
+    //       });
+    //    }
     }
-  }
 
-  getDiscounts(query:string): Observable<any>{
-    return  this.httpClient.get(this.flightUrl+'discounts'+query);
+  getDiscountsByQuery(query:string): Observable<any>{
+    return  this.httpClient.get(this.adminUrl+'/discounts'+query);
    }
 
-   deleteFlight(flight:any){
-    this.httpClient.delete(this.flightUrl+'flights/'+flight).
+
+   deleteDiscount(id:number):any{
+    this.httpClient.delete(this.adminUrl+'/discount/deleteDiscount/'+id).
     subscribe(data => {
       console.log(data);
-  });
+    });
   }
 
 }

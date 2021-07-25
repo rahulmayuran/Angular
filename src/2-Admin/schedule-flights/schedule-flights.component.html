@@ -1,28 +1,36 @@
 
+ <div class="container-fluid">
+        
+    <h3 class="navbar bg-warning clearfix">Schedule Flights
+        <button class="btn btn-danger pull-right" (click)="back()"> <-AdminHome</button>
+    </h3>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Logo</th>
-            <th scope="col">Price</th>
-            <th scope="col">Depature</th>
-            <th scope="col">Contact</th>
-            <th scope="col">Model</th> 
-            <th scope="col">Action</th>     
-        </tr>
-    </thead>
-
-<ng-template>
-    <tbody>
-        <tr *ngFor="let flight of flights">
-            <td>{{flight.logo}}</td>
-            <td>{{flight.price}}</td> 
-            <td>{{flight.departure}}</td> 
-            <td>{{flight.schedule}}</td>
-            <td>{{flight.contactNumber}}</td>  
-            <td>{{flight.model}}</td>  
-            <td> <button (click)="deleteAirline(flights)"></button></td>       
-        </tr> 
-    </tbody>
-</ng-template>
-</table>
+        <button class="btn btn-primary" (click)="fetchFlights()" type="submit">Load Flights</button>
+   
+            <table class="table table-info table-responsive table-hover">
+                <thead class="table table-secondary">
+                    <tr>
+                        <th scope="col">Airline Name</th>
+                        <th scope="col">Airline Model</th>
+                        <th scope="col">Airline Logo</th>
+                        <th scope="col">Flight Seats</th>
+                        <th scope="col">Flight Cost</th> 
+                        <th scope="col">(From)Journey</th> 
+                        <th scope="col">(To)Destination</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let f of resultScheduledFlight">
+        
+                        <td> {{f.airline?.airlineName}}</td>
+                        <td> {{f.airline?.airlineModel}}</td>
+                        <td> {{f.airline?.airlineLogo}}</td>
+                        <td>{{f.noOfSeats}} seats</td> 
+                        <td>₹{{f.price}}</td> 
+                        <td>{{f.journey}}</td> 
+                        <td>{{f.destination}}</td> 
+                    </tr>
+                </tbody>
+                
+            </table>
+    </div>
