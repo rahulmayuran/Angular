@@ -19,17 +19,19 @@ import { FooterComponent } from '../6-Other-Components/footer/footer.component';
 
 //Features of both admin and user
 import { FlightListComponent } from 'src/2-Admin/flight-list/flight-list.component';
-import { ManageFlightsComponent } from 'src/2-Admin/manage-flights/manage-flights.component';
 import { ScheduleFlightsComponent } from 'src/2-Admin/schedule-flights/schedule-flights.component';
 import { AddFlightComponent } from 'src/2-Admin/add-flight/add-flight.component';
-import { ManageBookingsComponent } from 'src/2-Admin/manage-bookings/manage-bookings.component';
-import { NgbModule, NgbDate, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
-
-//When you want service layer to integrate with app, then import HttpClientModule
-import { UserService } from 'src/3-Services/user.service';
-import { HttpClientModule } from '@angular/common/http';
+import { ManageBookingsComponent } from 'src/1-User/manage-bookings/manage-bookings.component';
 import { ManageDiscountsComponent } from 'src/2-Admin/manage-discounts/manage-discounts.component';
 import { HomeComponent } from '../6-Other-Components/home/home.component';
+
+
+//service layer to integrate with spring import HttpClientModule
+//other Extra modules
+import { UserService } from 'src/3-Services/user.service';
+import { HttpClientModule } from '@angular/common/http';
+import { FlightService } from 'src/3-Services/flight.service';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -53,7 +55,6 @@ const routes:Routes = [
   {path:"manage", component:ManageBookingsComponent},
 
   //Admin features
-  {path:"manageFlights", component:ManageFlightsComponent},
   {path:"manageDiscounts", component:ManageDiscountsComponent},
   {path:"manageSchedule", component:ScheduleFlightsComponent},
   {path:"addAirline", component:AddFlightComponent}
@@ -74,7 +75,7 @@ const routes:Routes = [
     ReactiveFormsModule, NgbModule, HttpClientModule],
   
     //All services must be included here
-    providers: [UserService],
+    providers: [UserService,FlightService],
   
     //AppComponent is enough to be bootstrapped. 
     bootstrap: [AppComponent],

@@ -39,7 +39,9 @@ export class AddFlightComponent implements OnInit{
       noOfSeats: new FormControl("",Validators.required),
       price: new FormControl("",Validators.required),
       journey: new FormControl("",Validators.required),
-      destination : new FormControl("",Validators.required)
+      destination : new FormControl("",Validators.required),
+      startDate : new FormControl("",Validators.required),
+      endDate : new FormControl("",Validators.required)
     })
   }
 
@@ -108,11 +110,11 @@ export class AddFlightComponent implements OnInit{
   //Flight Operations 
   addFlight(airline:any)
   {
-    this.flight.push({noOfSeats:'',price:'',journey:'',destination:'',airline:airline});
+    this.flight.push({noOfSeats:'',price:'',journey:'',destination:'',startDate:'',endDate:'',airline:airline});
   }
 
   popFlight(){
-    this.flight.pop({noOfSeats:'',price:'',journey:'',destination:'',airline:""});
+    this.flight.pop({noOfSeats:'',price:'',journey:'',destination:'',startDate:'',endDate:'',airline:""});
   }
 
   PersistFlight(flight:any)

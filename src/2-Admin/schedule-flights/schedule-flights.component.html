@@ -1,5 +1,5 @@
 
- <div class="container-fluid">
+ <div class="jumbotron">
         
     <h3 class="navbar bg-warning clearfix">Schedule Flights
         <button class="btn btn-danger pull-right" (click)="back()"> <-AdminHome</button>
@@ -17,6 +17,9 @@
                         <th scope="col">Flight Cost</th> 
                         <th scope="col">(From)Journey</th> 
                         <th scope="col">(To)Destination</th> 
+                        <th scope="col">Schedule every</th> 
+                        <th scope="col">Start Time</th> 
+                        <th scope="col">End Time</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -29,8 +32,32 @@
                         <td>₹{{f.price}}</td> 
                         <td>{{f.journey}}</td> 
                         <td>{{f.destination}}</td> 
+                        <td>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected disabled>--Select Day--</option>
+                                <option value="1">Monday</option>
+                                <option value="2">Tuesday</option>
+                                <option value="3">Wednesday</option>
+                                <option value="3">Thursday</option>
+                                <option value="3">Friday</option>
+                                <option value="3">Saturday</option>
+                                <option value="3">Sunday</option>
+                              </select>
+                        </td> 
+                        <td>
+                            <input type="time" name="start" id="start">
+                        </td> 
+                        <td>
+                            <input type="time" name="end" id="end">
+                        </td> 
+                        <td>
+                            <button class="btn btn-success"  type="submit">Schedule This Flight</button>
+                        </td>
                     </tr>
                 </tbody>
                 
             </table>
+
+            <hr/>
+            <button class="btn btn-warning" (click)="fetchSchFlights()" type="submit">Already Scheduled Flights</button>
     </div>

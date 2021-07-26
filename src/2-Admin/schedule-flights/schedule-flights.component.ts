@@ -33,13 +33,8 @@ export class ScheduleFlightsComponent  {
     )
   }
 
-  addAirline(){
-    this.scheduledRouter.navigateByUrl("/addAirline");
-  }
-
-  deleteAirline(flight:any){
-    console.log('deleting '+flight.id);
-     this.scheduleService.deleteFlight(flight.id);
+  fetchSchFlights(){
+    console.log("Fetching All Scheduled Flights")
   }
 
 }

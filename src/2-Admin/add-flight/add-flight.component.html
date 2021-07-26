@@ -96,6 +96,8 @@
               <th>Price</th>
               <th>From</th>
               <th>To</th>
+              <th>Start Date</th>
+              <th>End Date</th>
             </tr>
         </thead>
     
@@ -107,9 +109,12 @@
                 <td> <input type="number" [(ngModel)]="f.price" name=price placeholder="₹ Enter as Rupees" formControlName ="price"></td>
                 <td> <input type="text" [(ngModel)]="f.journey" name=journey formControlName ="journey"></td>
                 <td> <input type="text" [(ngModel)]="f.destination" name=destination formControlName ="destination"></td>
+                <td> <input type="date" [(ngModel)]="f.startDate" name=startDate formControlName ="startDate"></td>
+                <td> <input type="date" [(ngModel)]="f.endDate" name=endDate formControlName ="endDate"></td>
 
                  <td> 
                     <button class="btn btn-outline-success btn-sm" (click)="PersistFlight(f)" type="submit">Save Flight</button> 
+                    <button class="btn btn-outline-danger btn-sm" (click)="popFlight()" type="submit">Remove Flight</button> 
                 </td>
             </tr>
         </tbody>
@@ -134,6 +139,8 @@
             <td>₹{{f.price}}</td> 
             <td>{{f.journey}}</td> 
             <td>{{f.destination}}</td> 
+            <td>{{f.startDate| date:'fullDate'}}</td> 
+            <td>{{f.endDate| date:'fullDate'}}</td> 
          <button class="btn btn-danger btn-sm" (click)="deleteFlight(f.flightId)" type="submit">Delete Flight</button>
         </tr>   
     </tbody>

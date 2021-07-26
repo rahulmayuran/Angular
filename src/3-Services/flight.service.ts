@@ -11,6 +11,7 @@ export class FlightService {
   // flightUrl:string = "http://localhost:9053/api/v1.0/flight";
   //flightUrl:string = "http://localhost:9051/flight/api/v1.0/flight";
   adminUrl:string = "http://localhost:9051/admin/api/v1.0/admin";
+  
   flight:any = [];
   airline:any = [];
   discount:any = [];
@@ -48,6 +49,12 @@ export class FlightService {
     { 
       console.log("getting all the flights")
        return this.httpClient.get(this.adminUrl+'/flight/search')
+    }
+    
+    getFilteredFlights(j:string, d:string)
+    { 
+      console.log("getting flights from "+j+" to" + d);
+       return this.httpClient.get(this.adminUrl+'/flight/search/'+j+"/"+d);
     }
 
     saveFlight(flight:any){

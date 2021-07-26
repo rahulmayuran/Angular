@@ -18,7 +18,7 @@
         <tbody>
             <tr *ngFor="let discount of discounts">
 
-                <td>{{discount.discountId}}</td>
+                <td>{{discount?.discountId}}</td>
                 <td> <input type="text" [(ngModel)]="discount.discountName" name="discountName" formControlName ="discountName"><span class="badge badge-success">{{discount.discountName}}</span></td>
                 <td> <input type="number" [(ngModel)]="discount.discountValue" name="discountValue" formControlName ="discountValue"><span class="badge badge-success">{{discount.discountValue}} %</span></td>
                 <td> 

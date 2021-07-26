@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { FlightListComponent } from './flight-list/flight-list.component';
 import { ManageBookingsComponent } from './manage-bookings/manage-bookings.component';
 import { LoginComponent } from 'src/6-Other-Components/login/login.component';
+import { FlightService } from 'src/3-Services/flight.service';
+import { UserComponent } from './user.component';
 
 
 const userRoutes:Routes  = [
@@ -14,9 +16,10 @@ const userRoutes:Routes  = [
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent,UserComponent],
   imports: [
-    CommonModule, RouterModule.forChild(userRoutes)
-  ]
+    CommonModule, RouterModule.forChild(userRoutes), UserModule
+  ],
+  providers: [FlightService]
 })
 export class UserModule { }
