@@ -7,13 +7,14 @@
     </head>
     <body>
     
-    <h3 class="navbar bg-primary">User Home
+    <h3 class="navbar text-light bg-dark">User Home
         <div class="btn btn-group">
             <button class="btn btn-light" (click) = "searchFlights()">Search & Book</button>
             <button class="btn btn-light" (click) = "manageBookings()">Manage Bookings</button>
         </div>
     </h3>
 
+    <!-- Search Flights form -->
     <form [formGroup] = searchForm>
             
         <div class="jumbotron">
@@ -46,13 +47,13 @@
                     <td>
                         <select [(ngModel)]="resultFlight.journey" formControlName ="journey" class="form-select" aria-label="Default select example">
                             <option selected disabled>-CHOOSE JOURNEY-</option>
-                            <option *ngFor="let r of resultFlight" >{{r.journey}}</option> 
+                            <option *ngFor="let r of resultFlightForDropDown" >{{r.journey}}</option> 
                           </select>
                     </td> 
                     <td>
-                        <select [(ngModel)]="flightsToSearch.destination" formControlName ="destination" class="form-select" aria-label="Default select example">
+                        <select [(ngModel)]="resultFlight.destination" formControlName ="destination" class="form-select" aria-label="Default select example">
                             <option selected disabled>-CHOOSE DESTINATION-</option>
-                            <option *ngFor="let r of resultFlight" > {{r.destination}} </option> 
+                            <option *ngFor="let r of resultFlightForDropDown" > {{r.destination}} </option> 
                         </select>
                     </td>
                     <td>
@@ -62,7 +63,7 @@
                         <input type="date" value="end">
                     </td>
                     <td >
-                            <button class="btn btn-success"  type="submit" (click)="SearchFlightsByPlace(flightsToSearch.journey,flightsToSearch.destination)">Search Flight</button>
+                            <button class="btn btn-success"  type="submit" (click)="SearchFlightsByPlace(resultFlight.journey,resultFlight.destination)">Search Flight</button>
                     </td>
                 </tr>
             </tbody>
@@ -77,34 +78,91 @@
 <table class="table table-primary table-responsive table-hover">
     <thead>
         <tr>
-            <th>Provider<th> 
-            <th>Flight Price <th> 
+            <th>Provider<th>
             <th>Seats available<th> 
-            <th>Start Time<th> 
-            <th>End Time<th> 
+            <th>From<th>
+            <th>To<th>
+            <th>Price<th>
+            <th><th>
         </tr>
     </thead>
-    <tbody>
+    <tbody >
         <tr *ngFor = "let f of resultFlightBasedOnSearch">
             <td>{{f.airline?.airlineLogo}}</td>
             <td>{{f.noOfSeats}} seats</td> 
-            <td>₹{{f.price}}</td> 
-            <td>{{f.journey}}</td> 
-            <td>{{f.destination}}</td> 
+            <td>{{f.journey}}</td>
+            <td>{{f.destination}}</td>
+            <td>₹{{f.price}}</td>
             <td>
-                <button class="btn btn-success"  type="submit" (click)="bookFlightAddPassengers()">Start Booking</button>
-            </td> 
+                 <button class="btn btn-success"  type="submit" (click) = "addPassengers()">Start Booking</button>
+            </td>
         </tr>   
      </tbody>
     </table>
 
     </div>
 
-</form>
+    </form>
 
+    <!-- Booking Form -->
     <form [formGroup] = bookForm >
         <div class="jumbotron">
             <h5 class="navbar bg-warning clearfix">Book Flights</h5> 
+
+            <table *ngIf="passenger.length!=0" class="table table-success table-stripped">
+                <thead>
+                    <tr>
+                         <th>Booking Details</th>
+                         <th><button class="btn btn-outline-success"  type="submit" (click)="addPassengers()">Add passenger</button></th>
+                          <th><button class="btn btn-outline-danger" (click)="popPassengers()" type="submit">Remove Passenger</button></th>
+                          <th>
+                              <!-- Discount ng-bootstrap -->
+                              <div class="row">
+                                <div class="col">
+                                  <div ngbDropdown class="d-inline-block">
+                                    <button class="btn btn-outline-warning" id="dropdownBasic1" ngbDropdownToggle>Choose Discount</button>
+                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                      <button ngbDropdownItem>Action - 1</button>
+                                      <button ngbDropdownItem>Another Action</button>
+                                      <button ngbDropdownItem>Something else is here</button>
+                                    </div>
+                                  </div>
+                                </div>
+                                </div>
+                          </th>
+                    </tr>
+                </thead>
+            
+                <tbody>
+                    <tr *ngFor="let p of passenger">
+
+                        <td> <input type="text" [(ngModel)]="p.passengerName" placeholder="Enter name" name=passengerName formControlName ="passengerName"></td>
+                        <td> <input type="email" [(ngModel)]="p.passengerEmail" placeholder="Enter Email" name=passengerEmail  formControlName ="passengerEmail"></td>
+                        <td> <input type="number" [(ngModel)]="p.passengerAge" placeholder="Enter Age" name=passengerAge formControlName ="passengerAge"></td>
+                        <td> <input type="number" [(ngModel)]="p.passengerContact" placeholder="Enter Contact" name=passengerContact formControlName ="passengerContact" maxlength="10"></td>
+                        <td> <input type="text" [(ngModel)]="p.passengerPreferences" placeholder="Enter Preference" name=passengerPreferences formControlName ="passengerPreferences"></td>
+        
+                         <td> 
+                            <button class="btn btn-outline-success btn-sm" (click)="SavePassenger(p)" type="submit">Save Passenger</button> 
+                        </td>
+                    </tr>
+                    <tr>
+                        No of passengers added : {{passenger.length}}
+                    </tr>
+                    <tr>
+                        Discount Applied : 
+                    </tr>
+                    <tr *ngFor="let f of resultFlightBasedOnSearch">
+                        Final Price : ₹{{f.price * passenger.length}}
+                    </tr>
+                </tbody>
+                
+            </table>
+
+            
+            
+
+
         </div>
     </form>
 

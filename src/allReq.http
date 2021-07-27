@@ -2,6 +2,8 @@
 //GET http://localhost:9051/user/api/v1.0/user/getUsers
 
 //GET http://localhost:9051/user/api/v1.0/user/rahul
+GET http://localhost:9051/admin/api/v1.0/admin/flight/search/Pune/Chennai
+
 DELETE http://localhost:9051/admin/api/v1.0/admin/airline/delete/4
 
 POST http://localhost:9051/user/api/v1.0/user/register
