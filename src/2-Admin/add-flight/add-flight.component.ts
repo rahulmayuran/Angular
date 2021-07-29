@@ -84,6 +84,7 @@ export class AddFlightComponent implements OnInit{
   deleteAirline(airlineId:number)
   {
     console.log("delete the Airline with id "+airlineId);
+    confirm("Are you sure to delete this Airline?");
     this.fservice.deleteAirlineWithId(airlineId);
   }
 
@@ -127,6 +128,7 @@ export class AddFlightComponent implements OnInit{
     }
     else
     {
+      alert('Flight Saved')
       this.fservice.saveFlight(flight)
         .subscribe(  (data:any)=>
         {
@@ -151,6 +153,7 @@ export class AddFlightComponent implements OnInit{
   deleteFlight(flightId:number)
     {
       console.log("delete the Airline with id "+flightId);
+      confirm("Are you sure , you want to delete this Flight?");
       this.fservice.deleteFlight(flightId);
     }
 

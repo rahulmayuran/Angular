@@ -52,6 +52,7 @@ export class ManageDiscountsComponent implements OnInit {
     }
     else
     {
+      alert('Discount Saved')
       this.discountService.saveDiscount(discounts).subscribe( 
          (data:any)=>
        {
@@ -77,6 +78,7 @@ export class ManageDiscountsComponent implements OnInit {
   deleteDiscount(discountId:number)
   {
     console.log("delete the Discount with id "+discountId);
+    confirm("Are you sure , you want to delete this Discount?");
     this.discountService.deleteDiscount(discountId);
   }
 

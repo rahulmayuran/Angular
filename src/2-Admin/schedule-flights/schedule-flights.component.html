@@ -17,7 +17,6 @@
                         <th scope="col">Flight Cost</th> 
                         <th scope="col">(From)Journey</th> 
                         <th scope="col">(To)Destination</th> 
-                        <th scope="col">Schedule every</th> 
                         <th scope="col">Start Time</th> 
                         <th scope="col">End Time</th> 
                     </tr>
@@ -31,27 +30,15 @@
                         <td>{{f.noOfSeats}} seats</td> 
                         <td>₹{{f.price}}</td> 
                         <td>{{f.journey}}</td> 
-                        <td>{{f.destination}}</td> 
+                        <td>{{f.destination}}</td>  
                         <td>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected disabled>--Select Day--</option>
-                                <option value="1">Monday</option>
-                                <option value="2">Tuesday</option>
-                                <option value="3">Wednesday</option>
-                                <option value="3">Thursday</option>
-                                <option value="3">Friday</option>
-                                <option value="3">Saturday</option>
-                                <option value="3">Sunday</option>
-                              </select>
+                            <input [(ngModel)] ="f.starttime"  type="time" name="starttime" id="starttime">
                         </td> 
                         <td>
-                            <input type="time" name="start" id="start">
+                            <input [(ngModel)] ="f.endtime" type="time" name="endtime" id="endtime">
                         </td> 
                         <td>
-                            <input type="time" name="end" id="end">
-                        </td> 
-                        <td>
-                            <button class="btn btn-success"  type="submit">Schedule This Flight</button>
+                            <button class="btn btn-success"  type="submit" (click)="saveSch(f)">Schedule This Flight</button>
                         </td>
                     </tr>
                 </tbody>
@@ -59,5 +46,7 @@
             </table>
 
             <hr/>
-            <button class="btn btn-warning" (click)="fetchSchFlights()" type="submit">Already Scheduled Flights</button>
+            <div *ngIf="flag">
+               The Flight from {{schflight.journey}} to {{schflight.destination}} is scheduled between {{schflight.starttime}} to {{schflight.endtime}}
+            </div>
     </div>

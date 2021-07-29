@@ -9,19 +9,24 @@ import { FlightService } from 'src/3-Services/flight.service';
 })
 export class ScheduleFlightsComponent  {
 
-  flights:any=[];
+  schflight:any;
   resultScheduledFlight:any = [];
+  time:any = {starttime:'',endtime:''};
   message:string = ''
+  flag:boolean = false;
 
-  constructor(private scheduledRouter :Router,public scheduleService : FlightService) {
+  constructor(private scheduledRouter :Router,public scheduleService : FlightService)
+   {
 
    }
 
-   back(){
+   back()
+   {
      this.scheduledRouter.navigateByUrl("/admin")
    }
    
-   fetchFlights(){
+   fetchFlights()
+   {
     console.log("Fetching All Flights")
     this.scheduleService.getFlights().subscribe(
       (data:any)=>{
@@ -33,8 +38,13 @@ export class ScheduleFlightsComponent  {
     )
   }
 
-  fetchSchFlights(){
-    console.log("Fetching All Scheduled Flights")
+  saveSch(t:any){
+    console.log("Value of t" + JSON.stringify(t));
+    alert('Flight Scheduled')
+    this.schflight = t;
+    this.scheduleService.scheduledResultFlight = this.schflight
+    this.flag=true;
   }
+
 
 }

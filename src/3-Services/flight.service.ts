@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -15,9 +16,11 @@ export class FlightService {
   flight:any = [];
   airline:any = [];
   discount:any = [];
+
+  scheduledResultFlight:any ;
   
   constructor(private httpClient:HttpClient) {
-
+      
     }
 
  //Airline Operations 
@@ -74,6 +77,11 @@ export class FlightService {
       console.log("got the flight name->"+name);
       return this.httpClient.get(this.adminUrl+'/'+name);
 
+   }
+
+   scheduleAFlight(t:Time){
+     console.log("Schedule this flight for "+t);
+     return this.httpClient.post(this.adminUrl+'/flight/schedule',t);
    }
 
    //Discount Operations 

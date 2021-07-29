@@ -27,7 +27,7 @@
         <label class="form-check-label" for="inlineRadio1">One-Way</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input"  type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+        <input  class="form-check-input"  type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
         <label class="form-check-label" for="inlineRadio2">Round-Trip</label>
       </div>
 
@@ -46,21 +46,23 @@
                 <tr >
                     <td>
                         <select [(ngModel)]="resultFlight.journey" formControlName ="journey" class="form-select" aria-label="Default select example">
-                            <option selected disabled>-CHOOSE JOURNEY-</option>
-                            <option *ngFor="let r of resultFlightForDropDown" >{{r.journey}}</option> 
+                            <optgroup  label="JOURNEY">
+                                <option *ngFor="let r of resultFlightForDropDown" >{{r.journey}}</option> 
+                            </optgroup>
                           </select>
                     </td> 
                     <td>
                         <select [(ngModel)]="resultFlight.destination" formControlName ="destination" class="form-select" aria-label="Default select example">
-                            <option selected disabled>-CHOOSE DESTINATION-</option>
-                            <option *ngFor="let r of resultFlightForDropDown" > {{r.destination}} </option> 
+                            <optgroup  label="DESTINATION">
+                                <option *ngFor="let r of resultFlightForDropDown" > {{r.destination}} </option> 
+                            </optgroup>
                         </select>
                     </td>
                     <td>
-                        <input type="date" value="start">
+                        <input [(ngModel)]="resultFlight.startDate" formControlName ="startDate"  type="date" value="start">
                     </td>
                     <td>
-                        <input type="date" value="end">
+                        <input [(ngModel)]="resultFlight.endDate" formControlName ="endDate"  type="date" value="end">
                     </td>
                     <td >
                             <button class="btn btn-success"  type="submit" (click)="SearchFlightsByPlace(resultFlight.journey,resultFlight.destination)">Search Flight</button>
@@ -70,35 +72,42 @@
 
     </table>
 <br/>
-
 <hr/>
 
 <h5 class="navbar bg-warning clearfix">Flight Search Results</h5>
 
-<table class="table table-primary table-responsive table-hover">
-    <thead>
+<table class="table table-primary table-responsive">
+    <thead class="table table-secondary">
         <tr>
-            <th>Provider<th>
-            <th>Seats available<th> 
-            <th>From<th>
-            <th>To<th>
-            <th>Price<th>
-            <th><th>
+            <th scope="col">Provider<th>
+            <th scope="col">Seats available<th> 
+            <th scope="col">From<th>
+            <th scope="col">To<th>
+            <th scope="col">Journey Date<th>
+            <!-- <th scope="col">Start Time<th>
+            <th scope="col">End Time<th> -->
+            <th scope="col">Price<th>
+            <th scope="col">-<th>
         </tr>
     </thead>
-    <tbody >
-        <tr *ngFor = "let f of resultFlightBasedOnSearch">
-            <td>{{f.airline?.airlineLogo}}</td>
-            <td>{{f.noOfSeats}} seats</td> 
-            <td>{{f.journey}}</td>
-            <td>{{f.destination}}</td>
-            <td>₹{{f.price}}</td>
-            <td>
-                 <button class="btn btn-success"  type="submit" (click) = "addPassengers()">Start Booking</button>
-            </td>
+    <tbody *ngFor = "let f of resultFlightBasedOnSearch">
+        <tr >
+            <td scope="col">{{f.airline?.airlineLogo}}</td>
+            <td scope="col">{{f.noOfSeats}} seats</td> 
+            <td scope="col">{{f.journey}}</td>
+            <td scope="col">{{f.destination}}</td>
+            <td scope="col">{{f.startDate}}</td>
+            <!-- <td scope="col">{{f.startTime}}</td>
+            <td scope="col">{{f.endTime}}</td> -->
+            <td scope="col">₹{{f.price}}</td>
+        </tr>
+        <tr>
+            <button class="btn btn-success pull-right"  type="submit" (click) = "renderBooking(f)">Start Booking</button>
         </tr>   
+
      </tbody>
     </table>
+
 
     </div>
 
@@ -116,19 +125,15 @@
                          <th><button class="btn btn-outline-success"  type="submit" (click)="addPassengers()">Add passenger</button></th>
                           <th><button class="btn btn-outline-danger" (click)="popPassengers()" type="submit">Remove Passenger</button></th>
                           <th>
-                              <!-- Discount ng-bootstrap -->
-                              <div class="row">
-                                <div class="col">
-                                  <div ngbDropdown class="d-inline-block">
-                                    <button class="btn btn-outline-warning" id="dropdownBasic1" ngbDropdownToggle>Choose Discount</button>
-                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                      <button ngbDropdownItem>Action - 1</button>
-                                      <button ngbDropdownItem>Another Action</button>
-                                      <button ngbDropdownItem>Something else is here</button>
-                                    </div>
-                                  </div>
-                                </div>
-                                </div>
+                            Apply coupon
+                             <select [(ngModel)]="discountStr" formControlName ="discountStr" class="form-select" aria-label="Default select example">
+                                <optgroup  label="DISCOUNTS">
+                                    <option *ngFor="let disc of resultDiscounts" value="{{disc.discountValue}}">{{disc.discountName}}</option> 
+                                </optgroup>
+                             </select>
+
+                            <button class="btn btn-outline-dark btn-sm" (click)="calculateDiscount()">Apply</button>
+    
                           </th>
                     </tr>
                 </thead>
@@ -147,24 +152,29 @@
                         </td>
                     </tr>
                     <tr>
+                        <!-- <input type="number" name="" id="" value="{{passenger.length}}" disabled> -->
                         No of passengers added : {{passenger.length}}
                     </tr>
-                    <tr>
-                        Discount Applied : 
+                    <tr >
+                        Discount Value : <span class="badge badge-success">{{discountStr}}</span>%
                     </tr>
-                    <tr *ngFor="let f of resultFlightBasedOnSearch">
-                        Final Price : ₹{{f.price * passenger.length}}
+                    <tr >
+                        Price:{{priceStr}}
+                    </tr>
+                    <tr >
+                        <!-- <input [(ngModel)]="booking.totalprice" type="number" name="totalprice" id="totalprice" value="{{discountedpriceStr}}" disabled> -->
+                        Final Price (Discounted):{{discountedpriceStr}}
+                    </tr>
+                    <tr>
+                        <button class="btn btn-outline-primary btn-lg"  type="submit" (click)="finishandSave()">Finish Booking</button> 
                     </tr>
                 </tbody>
                 
             </table>
-
-            
-            
-
-
         </div>
     </form>
+
+    {{ticketGen}}
 
 </body>
 </html>

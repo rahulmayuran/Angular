@@ -13,6 +13,8 @@ export class UserService {
   userUrl:string = "http://localhost:9051/user/api/v1.0/user";
   public user:any = [];
 
+  serviceuname:any ;
+
   constructor(private httpConnect:HttpClient) { 
     this.user={id:0, name:'', password:'', role:''}
   }

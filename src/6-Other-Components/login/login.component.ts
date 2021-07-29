@@ -52,26 +52,35 @@ export class LoginComponent{
             .subscribe(  
               (data:any)=> {
                       //data is in MySQl
-                      console.log("name/password in json "+data.username + data.password)
+                      console.log("name/password in json "+JSON.stringify(data.role))
           
                         if(data.username  == this.loginUserForm.value.username
-                          && data.password == this.loginUserForm.value.password)
+                          && data.password == this.loginUserForm.value.password
+                          && data.role == "USER")
                         {
-                          console.log("Names/passwords matched with form data")
+                          this.userService.serviceuname = this.loginUserForm.value.username;
+                          console.log("Names/passwords matched with form data - USER")
                           this.router.navigateByUrl('user')
                         }
+                        else if(data.username  == this.loginUserForm.value.username
+                          && data.password == this.loginUserForm.value.password
+                          && data.role == "ADMIN")
+                          {
+                            console.log("Names/passwords matched with form data - ADMIN")
+                            this.router.navigateByUrl('admin')
+                          }
                      
                      }) //End of Subscription
-                      && this.user.role=='USER')//End of ElseIf condition
+                    )//End of ElseIf condition
     {
-      console.log("Names/passwords matched with form data")
-      this.router.navigateByUrl('user')
+      console.log("Name check done")
+      this.router.navigateByUrl('admin')
     }
-    else
-    {
-      this.message= "Unable to find User";
-      console.log("Invalid Credentials");
-    }
+    // else
+    // {
+    //   this.message= "Unable to find User";
+    //   console.log("Invalid Credentials");
+    // }
   }
 
   checkUserForNull():boolean
