@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class BookingService {
 
-  flightUrl:string = "http://localhost:9051/flight/api/v1.0/flight";
+  flightUrl:string = "http://ec2-3-22-99-145.us-east-2.compute.amazonaws.com:9051/flight/api/v1.0/flight";
 
   passenger:any = [];
   booking:any=[];

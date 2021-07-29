@@ -1,7 +1,8 @@
 
 //GET http://localhost:9051/user/api/v1.0/user/getUsers
 
-//GET http://localhost:9051/user/api/v1.0/user/rahul
+GET http://ec2-3-22-99-145.us-east-2.compute.amazonaws.com:9051/user/api/v1.0/user/rahul
+
 GET http://localhost:9051/admin/api/v1.0/admin/flight/search/Pune/Chennai
 
 DELETE http://localhost:9051/admin/api/v1.0/admin/airline/delete/4

@@ -80,7 +80,8 @@ export class ManageBookingsComponent {
     ticketpdf.save("FlightTicket.pdf");
   }
  
-   CancelTicket(id:number){
+   CancelTicket(id:number)
+   {
      confirm("You just now booked! Are you sure to cancel it?")
      console.log("Deleting Ticket");
      this.bookService.deleteTicketWithId(id);

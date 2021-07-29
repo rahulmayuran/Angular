@@ -11,7 +11,7 @@ export class FlightService {
   // flightUrl:string = "http://localhost:3000/";
   // flightUrl:string = "http://localhost:9053/api/v1.0/flight";
   //flightUrl:string = "http://localhost:9051/flight/api/v1.0/flight";
-  adminUrl:string = "http://localhost:9051/admin/api/v1.0/admin";
+  adminUrl:string = "http://ec2-3-22-99-145.us-east-2.compute.amazonaws.com:9051/admin/api/v1.0/admin";
   
   flight:any = [];
   airline:any = [];
