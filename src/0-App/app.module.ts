@@ -32,6 +32,8 @@ import { UserService } from 'src/3-Services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FlightService } from 'src/3-Services/flight.service';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ReportsComponent } from 'src/2-Admin/reports/reports.component';
+import { BookingService } from 'src/3-Services/booking.service';
 
 
 
@@ -57,7 +59,8 @@ const routes:Routes = [
   //Admin features
   {path:"manageDiscounts", component:ManageDiscountsComponent},
   {path:"manageSchedule", component:ScheduleFlightsComponent},
-  {path:"addAirline", component:AddFlightComponent}
+  {path:"addAirline", component:AddFlightComponent},
+  {path:"report", component:ReportsComponent}
 ]
 
 @NgModule({
@@ -68,14 +71,14 @@ const routes:Routes = [
   ManageBookingsComponent,
   RegisterComponent,
   HomeComponent, AddFlightComponent, 
-  ManageDiscountsComponent, ScheduleFlightsComponent],
+  ManageDiscountsComponent, ScheduleFlightsComponent, ReportsComponent],
 
   //All modules must be inclueded here
   imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule, 
     ReactiveFormsModule, NgbModule, HttpClientModule],
   
     //All services must be included here
-    providers: [UserService,FlightService],
+    providers: [UserService,FlightService, BookingService],
   
     //AppComponent is enough to be bootstrapped. 
     bootstrap: [AppComponent],

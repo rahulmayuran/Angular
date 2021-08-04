@@ -10,7 +10,8 @@ export class UserService {
 
   //userUrl:string = "http://localhost:3000/";
   //  userUrl:string = "http://localhost:9052/api/v1.0/user";
-  userUrl:string = "http://ec2-3-22-99-145.us-east-2.compute.amazonaws.com:9051/user/api/v1.0/user";
+  //userUrl:string = "http://ec2-3-22-99-145.us-east-2.compute.amazonaws.com:9051/user/api/v1.0/user";
+  userUrl:string = "http://localhost:9051/user/api/v1.0/user";
   public user:any = [];
 
   serviceuname:any ;

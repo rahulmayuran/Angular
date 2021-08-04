@@ -12,6 +12,7 @@ import { AddFlightComponent } from './add-flight/add-flight.component';
 import { ManageBookingsComponent } from './manage-bookings/manage-bookings.component';
 import { NgbDate, NgbDatepicker, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ManageDiscountsComponent } from './manage-discounts/manage-discounts.component';
+import { ReportsComponent } from './reports/reports.component';
 
 
 const adminRoutes:Routes  = [
@@ -23,7 +24,7 @@ const adminRoutes:Routes  = [
 
 @NgModule({
   declarations: [
-    FlightListComponent, ManageBookingsComponent, AdminComponent, ScheduleFlightsComponent, AddFlightComponent, ManageDiscountsComponent],
+    FlightListComponent, ManageBookingsComponent, AdminComponent, ScheduleFlightsComponent, AddFlightComponent, ManageDiscountsComponent, ReportsComponent],
   
     imports: [CommonModule,BrowserModule,AdminModule, RouterModule.forChild(adminRoutes),
     FormsModule, ReactiveFormsModule, NgbModule,NgbDate, NgbDatepicker],

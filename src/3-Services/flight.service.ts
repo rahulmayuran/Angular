@@ -10,8 +10,8 @@ export class FlightService {
 
   // flightUrl:string = "http://localhost:3000/";
   // flightUrl:string = "http://localhost:9053/api/v1.0/flight";
-  //flightUrl:string = "http://localhost:9051/flight/api/v1.0/flight";
-  adminUrl:string = "http://ec2-3-22-99-145.us-east-2.compute.amazonaws.com:9051/admin/api/v1.0/admin";
+  // adminUrl:string = "http://ec2-3-22-99-145.us-east-2.compute.amazonaws.com:9051/admin/api/v1.0/admin";
+  adminUrl:string = "http://localhost:9051/admin/api/v1.0/admin";
   
   flight:any = [];
   airline:any = [];
@@ -95,21 +95,6 @@ export class FlightService {
    {
     console.log("Saved the Discount ->"+this.discount);
     return this.httpClient.post(this.adminUrl+"/discount/register",discount);
-    // console.log('Persisted to Table -> ..'+discount);
-    // if(discount.id<1)
-    //   this.httpClient.post(this.adminUrl+'/discount/register',discount)
-    //     .subscribe(disc => 
-    //       {
-    //          console.log(disc);
-    //       });
-    //   else
-    //   {
-    //     this.httpClient.put(this.adminUrl+'/discounts/'+discount.id,discount)
-    //     .subscribe(disc => 
-    //       {
-    //       console.log(disc);
-    //       });
-    //    }
     }
 
   getDiscountsByQuery(query:string): Observable<any>{
@@ -124,4 +109,11 @@ export class FlightService {
     });
   }
 
+  //Kafka operations
+  getLatestTicket()
+  {
+    console.log("Generating Kafka reports ->");
+    return this.httpClient.get(this.adminUrl+"/kafka/reports");
+    
+  }
 }

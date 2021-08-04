@@ -38,6 +38,9 @@ export class AdminComponent
     addAirline(){
       this.adminRouter.navigateByUrl('addAirline');
     }
+    reports(){
+      this.adminRouter.navigateByUrl('report');
+    }
 
     logout(){
       this.adminRouter.navigateByUrl('');
