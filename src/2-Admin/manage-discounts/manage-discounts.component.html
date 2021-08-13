@@ -1,8 +1,8 @@
 <form [formGroup] = discountForm>
     <div class="container-fluid">
         
-        <h3 class="navbar bg-warning clearfix">Discount Management
-            <button class="btn btn-danger pull-right" (click)="back()"> <-AdminHome</button>
+        <h3 class="navbar bg-warning ">Discount Management
+            <button class="btn btn-danger " (click)="back()"> <-AdminHome</button>
         </h3>
 
     <table class="table table-primary table-striped table-hover">
@@ -17,8 +17,8 @@
     
         <tbody>
             <tr *ngFor="let discount of discounts">
-
-                <td>{{discount?.discountId}}</td>
+                   
+                <!-- <td *ngFor="let rd of resultDiscount" >{{rd.discountId}}</td> -->
                 <td> <input type="text" [(ngModel)]="discount.discountName" name="discountName" formControlName ="discountName"><span class="badge badge-success">{{discount.discountName}}</span></td>
                 <td> <input type="number" [(ngModel)]="discount.discountValue" name="discountValue" formControlName ="discountValue"><span class="badge badge-success">{{discount.discountValue}} %</span></td>
                 <td> 
@@ -28,17 +28,22 @@
                     </select>
                     
             </td>
+                <td> <button class="btn btn-success" (click)="PersistDiscount(discount)" type="submit">Save/Update</button> </td>
                
-                <td> <button class="btn btn-outline-success" (click)="PersistDiscount(discount)" type="submit">Save Discount</button> </td>
+
             </tr>
         </tbody>
     </table>
+
+    <div> <span *ngIf="discountForm.controls['discountName'].dirty && checkDiscount()" class="badge badge-danger">{{message}}</span></div>
+    <div> <span *ngIf="discountForm.controls['status'].dirty && !checkDiscount()" class="badge badge-success">{{message}}</span></div>
+    <br/>
 
     <button class="btn btn-outline-primary" (click)="addDiscount()" type="submit">Add Discount</button> 
     <button class="btn btn-outline-danger" (click)="popDiscount()" type="submit">Remove Discount</button> 
     <hr/>
 
-    <button class="btn btn-warning" (click)="fetchDiscounts()" type="submit">Load Discounts</button>
+    <button class="btn btn-warning" (click)="fetchDiscounts()" type="submit">Refresh</button>
    
     <table class="table table-success table-responsive table-hover">
         <thead>
@@ -51,6 +56,8 @@
                <span class="badge badge-success"><td>{{discount.discountName}} </td></span> 
                <td>{{discount.discountValue}} %</td>
                <td>{{discount.status}} </td>
+
+               <td><button class="btn btn-warning" (click)="updateDiscount(discount.discountId)" type="submit">Update Discount</button> </td>
                 <td><button class="btn btn-danger" (click)="deleteDiscount(discount.discountId)" type="submit">Delete Discount</button> </td>
             </tr>   
         </tbody>

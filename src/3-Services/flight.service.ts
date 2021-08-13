@@ -90,6 +90,19 @@ export class FlightService {
     console.log("getting all the discounts from service")
      return this.httpClient.get(this.adminUrl+"/discount/getDiscounts")
    }
+
+   getDiscountById(id:number){
+     console.log("Fetching the discount with id "+ id);
+     return this.httpClient.get(this.adminUrl+"/discount/getDiscounts?"+id);
+    //  .subscribe(
+    //   (data:any)=>{
+    //     console.log("Fetching discount from data "+ data);
+    //     data.forEach( (element:any) => {
+    //       console.log("Fetched discount with id "+element.discountId);
+    //     });
+    //   }
+    // );
+   }
    
    saveDiscount(discount:any)
    {
@@ -97,10 +110,13 @@ export class FlightService {
     return this.httpClient.post(this.adminUrl+"/discount/register",discount);
     }
 
-  getDiscountsByQuery(query:string): Observable<any>{
-    return  this.httpClient.get(this.adminUrl+'/discounts'+query);
-   }
-
+    updateDiscount(id:number, discount:any){
+      this.httpClient.put(this.adminUrl+'/discount/update/'+id, discount).
+      subscribe(data => {
+        console.log(data);
+      });
+    }
+    
 
    deleteDiscount(id:number):any{
     this.httpClient.delete(this.adminUrl+'/discount/deleteDiscount/'+id).

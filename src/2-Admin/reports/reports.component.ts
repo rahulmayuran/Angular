@@ -9,7 +9,8 @@ import { FlightService } from 'src/3-Services/flight.service';
 })
 export class ReportsComponent implements OnInit {
 
-  message:any;
+  message:any =[];
+  PNR:any;
   constructor(private reportService:FlightService) { }
 
   ngOnInit(): void {
@@ -21,7 +22,9 @@ export class ReportsComponent implements OnInit {
     this.reportService.getLatestTicket().subscribe(
       (data:any) => {
         this.message = data;
-        console.log("Kafka Reports "+ JSON.stringify(data));
+
+        console.log("Kafka Reports "+ data);
+        console.log("PNR number "+ data[0] + data[0].journey + data[0].startDate);
       }
     )
   }

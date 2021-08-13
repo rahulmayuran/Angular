@@ -75,6 +75,7 @@ export class UserComponent implements OnInit
 
         let flights = data;
         console.log(JSON.stringify(data));
+
         flights.forEach((s:any)=>{
             console.log(s.startDate)
             console.log(this.resultFlight.startDate)
@@ -179,6 +180,12 @@ renderBooking(f:any){
     const FinalPrice = this.priceStr - (this.discountStr/100 * this.priceStr);
     console.log(FinalPrice)
     this.discountedpriceStr = FinalPrice;
+
+    //If no discount is applied
+    if(this.discountedpriceStr == 0 || this.discountedpriceStr == '')
+    {
+      this.discountedpriceStr = this.priceStr;
+    }
     console.log(this.discountStr)
   }
 

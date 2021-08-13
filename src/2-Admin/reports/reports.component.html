@@ -3,22 +3,26 @@
     <span class="badge badge-success">Powered by Kafka</span>
 </h3>
 
-<div class="jumbotron">
-    <div class="bg-dark text-light">{{message[0]}}</div>
-</div>
+<!-- <div class="jumbotron">
+    <div class="bg-dark text-light">{{message}}</div>
+</div> -->
 
 <div class="jumbotron">
-        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
-            <div class="card-header bg-transparent border-success">Header</div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        
+        <div class="card border-primary mb-3" style="max-width: 18rem;" *ngFor="let m of message">
+            <div class="card-header bg-transparent border-primary" >
+                PNR Number : {{PNR}}</div>
             <div class="card-body text-success">
-              <h5 class="card-title">Success card title</h5>
-              <p class="card-text" *ngFor="let m of message,let i = index">
-                {{  (i+1)  +"."+  m}}
-                <!-- <div *ngFor="let m of message,let i = index">{{  (i+1)  +"."+  m}}</div> -->
+              <h5 class="card-title">Booking Date {{m.bookingDate|date:'short'}}</h5>
+              <p class="card-text" >
+                {{message}}
                 </p>
             </div>
-            <div class="card-footer bg-transparent border-success">Footer</div>
+            <div class="card-footer bg-transparent border-success">Flight Booking &copy; Reserved</div>
         </div>
+    </div>
 </div>
 
         
