@@ -15,18 +15,20 @@
 
     <div class="container-fluid">
         
-        <h3 class="navbar bg-warning clearfix">Manage Airlines and Flights
+        <h3 class="navbar bg-warning clearfix">Manage Company and Stocks
             <button class="btn btn-danger pull-right" (click)="back()"> <-AdminHome</button>
         </h3>
     
         <table class="table table-striped table-hover">
             <thead>
                 <tr >
-                 <th>ID</th>
-                  <th>Airline Name</th>
-                  <th>Airline Type</th>
-                  <th>Model</th>
-                  <th>Contact Number</th>
+                 <th>Company id</th>
+                 <th>Company code</th>
+                  <th>Company Name</th>
+                  <th>CEO</th>
+                  <th>Official Website</th>
+                  <th>Annual Turnover</th>
+                  <th>Stock Exchange</th>
                 </tr>
             </thead>
         
@@ -34,37 +36,38 @@
                 <tr *ngFor="let a of airline">
     
                     <td> {{a.airlineId}}</td>
-                    <td> <input type="text" [(ngModel)]="a.airlineName" formControlName ="airlineName" ></td>
+                    <td> <input type="text" [(ngModel)]="a.airlineName" formControlName ="companyCode" ></td>
+                    <td> <input type="text" [(ngModel)]="a.airlineName" formControlName ="companyName" ></td>
+                    <td> <input type="text" [(ngModel)]="a.airlineName" formControlName ="companyCEO" ></td>
+                    <td> <input type="text" [(ngModel)]="a.airlineName" formControlName ="companyWebsite" ></td>
+                 
+                    <td> <input type="number" [(ngModel)]="a.airlineModel" formControlName ="companyTurnover" placeholder="In lakhs"></td>
                     <td> 
                         <select [(ngModel)]="a.airlineLogo" formControlName ="airlineLogo">
-                            <option >SpiceJet</option>
-                            <option >Air India</option>
-                            <option >Indigo</option>
-                            <option >Go-Air</option>
+                            <option >NSE</option>
+                            <option >BSE</option>
                         </select>   
                     </td>
-                    <td> <input type="text" [(ngModel)]="a.airlineModel" formControlName ="airlineModel"></td>
-                    <td> <input type="number" [(ngModel)]="a.contactNumber" formControlName ="contactNumber"></td>
                      <td> 
-                         <button class="btn btn-outline-success" (click)="PersistAirline(a)" type="submit">Save Airline</button> 
+                         <button class="btn btn-outline-success" (click)="PersistAirline(a)" type="submit">Save</button> 
                     </td>
                 </tr>
             </tbody>
         </table>
     
-        <button class="btn btn-outline-primary" (click)="addAirline()" type="submit">Add Airline</button> 
-        <button class="btn btn-outline-danger" (click)="popAirline()" type="submit">Remove Airline</button> 
+        <button class="btn btn-outline-primary" (click)="addAirline()" type="submit">Add Company</button> 
+        <button class="btn btn-outline-danger" (click)="popAirline()" type="submit">Remove Company</button> 
         <!-- <button class="btn btn-outline-danger" type="reset" value="reset" >Reset</button> -->
     
     </div>
 
 <br/>
 
-<button class="btn btn-warning btn-sm" (click)="fetchAirlines()" type="submit">Existing Airlines</button>
+<button class="btn btn-warning btn-sm" (click)="fetchAirlines()" type="submit">Existing Company Details</button>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>Airline Details<th> 
+                <th>Company Details<th> 
             </tr>
         </thead>
         <tbody *ngFor="let air of resultAirline">
