@@ -1,0 +1,14 @@
+
+form{
+    padding: 1em;
+    bottom: 0%;
+    font-size: smaller;
+    margin-left: 1em;
+    margin-top: 3em;
+    margin-right: 2em;
+}
+
+label
+{
+    font-weight: 500;
+}

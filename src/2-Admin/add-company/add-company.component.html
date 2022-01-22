@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Airline</title>
+    
+</head>
+<body>
+ 
+ 
+
+   <form [formGroup] = airlineForm>
+
+    <div class="container-fluid">
+        
+        <h3 class="navbar bg-warning clearfix">Manage Company and Stocks
+            <button class="btn btn-danger pull-right" (click)="back()"> <-AdminHome</button>
+        </h3>
+    
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr >
+                 <th>Company id</th>
+                 <th>Company code</th>
+                  <th>Company Name</th>
+                  <th>CEO</th>
+                  <th>Official Website</th>
+                  <th>Annual Turnover</th>
+                  <th>Stock Exchange</th>
+                </tr>
+            </thead>
+        
+            <tbody>
+                <tr *ngFor="let a of airline">
+    
+                    <td> {{a.airlineId}}</td>
+                    <td> <input type="text" [(ngModel)]="a.airlineName" formControlName ="companyCode" ></td>
+                    <td> <input type="text" [(ngModel)]="a.airlineName" formControlName ="companyName" ></td>
+                    <td> <input type="text" [(ngModel)]="a.airlineName" formControlName ="companyCEO" ></td>
+                    <td> <input type="text" [(ngModel)]="a.airlineName" formControlName ="companyWebsite" ></td>
+                 
+                    <td> <input type="number" [(ngModel)]="a.airlineModel" formControlName ="companyTurnover" placeholder="In lakhs"></td>
+                    <td> 
+                        <select [(ngModel)]="a.airlineLogo" formControlName ="airlineLogo">
+                            <option >NSE</option>
+                            <option >BSE</option>
+                        </select>   
+                    </td>
+                     <td> 
+                         <button class="btn btn-outline-success" (click)="PersistAirline(a)" type="submit">Save</button> 
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    
+        <button class="btn btn-outline-primary" (click)="addAirline()" type="submit">Add Company</button> 
+        <button class="btn btn-outline-danger" (click)="popAirline()" type="submit">Remove Company</button> 
+        <!-- <button class="btn btn-outline-danger" type="reset" value="reset" >Reset</button> -->
+    
+    </div>
+
+<br/>
+
+<button class="btn btn-warning btn-sm" (click)="fetchAirlines()" type="submit">Existing Company Details</button>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Company Details<th> 
+            </tr>
+        </thead>
+        <tbody *ngFor="let air of resultAirline">
+            <tr >
+                <td>{{air.airlineName}} </td>
+                <td> {{air.airlineLogo}}</td> 
+                <td>{{air.airlineModel}}</td> 
+                <td>
+                    <button class="btn btn-outline-danger btn-sm" (click)="deleteAirline(air.airlineId)" type="submit">Delete Airline</button>
+                </td> 
+                <td>
+                    <button class="btn btn-outline-success btn-sm" (click)="addFlight(air)" type="submit">Add Flight</button>
+                </td>
+            </tr>   
+        </tbody>
+        
+    </table>
+   
+   </form>
+
+   <!-- Flight Form -->
+   <form [formGroup] = flightForm>
+
+    <table *ngIf="flight.length!=0" class="table table-success table-stripped">
+        <thead>
+            <tr>
+             <th>Airline Name</th>
+              <th>Available Seats</th>
+              <th>Price</th>
+              <th>From</th>
+              <th>To</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <tr *ngFor="let f of flight">
+
+                <td> {{f.airline?.airlineName}}</td>
+                <td> <input type="number" [(ngModel)]="f.noOfSeats" name=noOfSeats formControlName ="noOfSeats"></td>
+                <td> <input type="number" [(ngModel)]="f.price" name=price placeholder="₹ Enter as Rupees" formControlName ="price"></td>
+                <td> <input type="text" [(ngModel)]="f.journey" name=journey formControlName ="journey"></td>
+                <td> <input type="text" [(ngModel)]="f.destination" name=destination formControlName ="destination"></td>
+                <td> <input type="date" [(ngModel)]="f.startDate" name=startDate formControlName ="startDate"></td>
+                <td> <input type="date" [(ngModel)]="f.endDate" name=endDate formControlName ="endDate"></td>
+
+                 <td> 
+                    <button class="btn btn-outline-success btn-sm" (click)="PersistFlight(f)" type="submit">Save Flight</button> 
+                    <button class="btn btn-outline-danger btn-sm" (click)="popFlight()" type="submit">Remove Flight</button> 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+     
+    <!-- <button class="btn btn-outline-danger" type="reset" value="reset" >Reset</button> -->
+
+<br/>
+
+<!-- Fetch Flight Details -->
+<table *ngIf="flight.length!=0" class="table table-striped table-hover">
+    <button class="btn btn-warning btn-sm" (click)="fetchFlights()" type="submit">Load Flights</button>
+    <thead>
+        <tr>
+            <th>Flight Details<th> 
+        </tr>
+    </thead>
+    <tbody >
+        <tr  *ngFor="let f of resultFlight">
+            <td>{{f.airline?.airlineName}}</td>
+            <td>{{f.noOfSeats}} seats</td> 
+            <td>₹{{f.price}}</td> 
+            <td>{{f.journey}}</td> 
+            <td>{{f.destination}}</td> 
+            <td>{{f.startDate| date:'fullDate'}}</td> 
+            <td>{{f.endDate| date:'fullDate'}}</td> 
+         <button class="btn btn-danger btn-sm" (click)="deleteFlight(f.flightId)" type="submit">Delete Flight</button>
+        </tr>   
+    </tbody>
+    
+</table>
+
+</form>
+
+</body>
+</html>
