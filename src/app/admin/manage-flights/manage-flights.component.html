@@ -12,19 +12,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let flight of flights">
+            <tr *ngFor="let stock of stocks">
                 <td>
                     <select>
-                        <option value="airlineNames">{{flight.airline}}</option>
+                        <option value="airlineNames">{{stock.company}}</option>
                     </select>
                 </td>
-                <td>{{flight.logo}}</td>
-                <td>{{flight.price}}</td> 
-                <td>{{flight.departure}}</td> 
-                <td>{{flight.schedule}}</td>
-                <td>{{flight.contactNumber}}</td>  
-                <td>{{flight.model}}</td>  
-                <td> <button (click)="deleteAirline(flights)">Delete Flight</button></td>       
+                <td>{{stock.logo}}</td>
+                <td>{{stock.price}}</td> 
+                <td>{{stock.departure}}</td> 
+                <td>{{stock.schedule}}</td>
+                <td>{{stock.contactNumber}}</td>  
+                <td>{{stock.model}}</td>  
+                <td> <button (click)="deletecompany(stocks)">Delete stock</button></td>       
             </tr> 
         </tbody>
     

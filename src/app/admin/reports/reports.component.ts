@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BookingService } from 'src/3-Services/booking.service';
-import { StockService } from 'src/3-Services/stock.service';
+import { StockService } from 'src/app/services/stock.service';
 
 @Component({
   selector: 'app-reports',

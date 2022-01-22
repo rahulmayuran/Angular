@@ -40,7 +40,7 @@ export class StockService {
     }
 
 //stock Operations
-    getStocks()
+    getstocks()
     { 
       console.log("getting all the stocks")
        return this.httpClient.get(this.companyUrl+'/getStocks')
@@ -52,13 +52,13 @@ export class StockService {
        return this.httpClient.get(this.companyUrl+'/stock/search/'+from+"/"+to);
     }
 
-    saveStock(stock:any){
+    savestock(stock:any){
       console.log("Saved the stock ->"+this.stock);
       return this.httpClient.post(this.companyUrl+"/stock/register",stock);
 
    }
   
-   deleteStock(id:number):any{
+   deletestock(id:number):any{
     this.httpClient.delete(this.companyUrl+'/stock/delete/'+id).
     subscribe(data => {
       console.log(data);

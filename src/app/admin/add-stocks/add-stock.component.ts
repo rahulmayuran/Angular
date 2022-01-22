@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StockService } from 'src/services/stock.service';
 
 @Component({
   selector: 'app-add-stock',
@@ -27,14 +28,16 @@ export class AddStockComponent implements OnInit{
   { 
     this.companyFrom = new FormGroup(
       {
-      companyId : new FormControl("", Validators.required),
+      companyCode : new FormControl("", Validators.required),
       companyName : new FormControl("",Validators.required),
-      companyModel : new FormControl("",Validators.required),
-      companyLogo : new FormControl("",Validators.required),
-      contactNumber : new FormControl("", Validators.required)
+      companyCEO : new FormControl("",Validators.required),
+      companyWebsite : new FormControl("",Validators.required),
+      companyTurnover : new FormControl("", Validators.required),
+      exchangeType : new FormControl("", Validators.required)
+
     })
 
-    this.flightForm = new FormGroup({
+    this.stockForm = new FormGroup({
       noOfSeats: new FormControl("",Validators.required),
       price: new FormControl("",Validators.required),
       journey: new FormControl("",Validators.required),
@@ -45,7 +48,7 @@ export class AddStockComponent implements OnInit{
   }
 
   back(){
-    this.flightRouter.navigateByUrl("/admin")
+    this.stockRouter.navigateByUrl("/admin")
   }
 
   //company Operations 
@@ -59,7 +62,7 @@ export class AddStockComponent implements OnInit{
     }
     else
     {
-      this.fservice.savecompany(company)
+      this.stockService.savecompany(company)
         .subscribe(  (data:any)=>
         {
           data = this.company;
@@ -70,7 +73,7 @@ export class AddStockComponent implements OnInit{
 
   fetchcompanies(){
     console.log("Fetching All companys")
-    this.fservice.getcompanies().subscribe(
+    this.stockService.getcompanies().subscribe(
       (data:any)=>{
         console.log("Fetched companies from MongoDB ->"+ JSON.stringify(data))
         this.resultcompany = data;
@@ -84,7 +87,7 @@ export class AddStockComponent implements OnInit{
   {
     console.log("delete the company with id "+companyId);
     confirm("Are you sure to delete this company?");
-    this.fservice.deletecompanyWithId(companyId);
+    this.stockService.deletecompanyWithId(companyId);
   }
 
     addcompany()
@@ -107,59 +110,59 @@ export class AddStockComponent implements OnInit{
     return false;
   }
 
-  //Flight Operations 
-  addFlight(company:any)
+  //stock Operations 
+  addstock(company:any)
   {
-    this.flight.push({noOfSeats:'',price:'',journey:'',destination:'',startDate:'',endDate:'',company:company});
+    this.stock.push({noOfSeats:'',price:'',journey:'',destination:'',startDate:'',endDate:'',company:company});
   }
 
-  popFlight(){
-    this.flight.pop({noOfSeats:'',price:'',journey:'',destination:'',startDate:'',endDate:'',company:""});
+  popstock(){
+    this.stock.pop({noOfSeats:'',price:'',journey:'',destination:'',startDate:'',endDate:'',company:""});
   }
 
-  PersistFlight(flight:any)
+  Persiststock(stock:any)
   {
-    console.log("Flight this.Object contains -> "+ JSON.stringify(this.flight))
-    console.log("Flight Object contains -> "+ JSON.stringify(flight))
+    console.log("stock this.Object contains -> "+ JSON.stringify(this.stock))
+    console.log("stock Object contains -> "+ JSON.stringify(stock))
 
-    if( this.checkFlight() ){
+    if( this.checkstock() ){
       return;
     }
     else
     {
-      alert('Flight Saved')
-      this.fservice.saveFlight(flight)
+      alert('stock Saved')
+      this.stockService.savestock(stock)
         .subscribe(  (data:any)=>
         {
-          data = this.flight;
-          console.log("Successfully saved flight with model ->"+ JSON.stringify(data))
+          data = this.stock;
+          console.log("Successfully saved stock with model ->"+ JSON.stringify(data))
         })
       }
     }
 
-    fetchFlights(){
-      console.log("Fetching All Flights")
-      this.fservice.getFlights().subscribe(
+    fetchstocks(){
+      console.log("Fetching All stocks")
+      this.stockService.getstocks().subscribe(
         (data:any)=>{
-          console.log("Fetched Flights from MySQL ->"+ JSON.stringify(data))
-          this.resultFlight = data;
+          console.log("Fetched stocks from MySQL ->"+ JSON.stringify(data))
+          this.resultstock = data;
         }, (err:any)=>{
           this.message = "Failed to Fetch data"
         }
       )
     }
 
-  deleteFlight(flightId:number)
+  deletestock(stockId:number)
     {
-      console.log("delete the company with id "+flightId);
-      confirm("Are you sure , you want to delete this Flight?");
-      this.fservice.deleteFlight(flightId);
+      console.log("delete the company with id "+stockId);
+      confirm("Are you sure , you want to delete this stock?");
+      this.stockService.deletestock(stockId);
     }
 
-    checkFlight():boolean
+    checkstock():boolean
   {
-    if(this.flight.price =='' || this.flight.noOfSeats==''
-        || this.flight.journey=='' || this.flight.destination)
+    if(this.stock.price =='' || this.stock.noOfSeats==''
+        || this.stock.journey=='' || this.stock.destination)
         {
      this.message = "Kindly fill all the details"
       return true;

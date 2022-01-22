@@ -1,8 +1,7 @@
-import { DecimalPipe } from '@angular/common';
-import { Component, PipeTransform} from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component} from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { StockService } from 'src/services/stock.service';
 
 @Component({
   selector: 'app-manage-flights',
@@ -21,23 +20,23 @@ export class ManageFlightsComponent {
     })
    }
 
-   getFlights()
-   {
-    this.service.getFlights().subscribe(data=>
-      {
-      this.flights=data;
-      console.log(this.flights);
-      });
-  }
+  //  getFlights()
+  //  {
+  //   this.service.getFlights().subscribe(data=>
+  //     {
+  //     this.flights=data;
+  //     console.log(this.flights);
+  //     });
+  // }
 
-  addAirline(){
-    this.flightRouter.navigateByUrl("/addAirline");
-  }
+  // addAirline(){
+  //   this.flightRouter.navigateByUrl("/addAirline");
+  // }
 
-  deleteAirline(flight:any){
-    console.log('deleting '+flight.id);
-     this.service.deleteFlight(flight.id);
-  }
+  // deleteAirline(flight:any){
+  //   console.log('deleting '+flight.id);
+  //    this.service.deleteFlight(flight.id);
+  // }
 
 
 // showBasicDialog2()
