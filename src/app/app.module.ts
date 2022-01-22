@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 
 
@@ -15,25 +13,23 @@ import { RegisterComponent } from '../6-Other-Components/register/register.compo
 import { AdminComponent } from 'src/2-Admin/admin.component';
 import { UserComponent } from 'src/1-User/user.component';
 import { HeaderComponent } from '../6-Other-Components/header/header.component';
-import { FooterComponent } from '../6-Other-Components/footer/footer.component';
 
 //Features of both admin and user
 import { FlightListComponent } from 'src/2-Admin/flight-list/flight-list.component';
 import { ScheduleFlightsComponent } from 'src/2-Admin/schedule-flights/schedule-flights.component';
 import { AddFlightComponent } from 'src/2-Admin/add-flight/add-flight.component';
 import { ManageBookingsComponent } from 'src/1-User/manage-bookings/manage-bookings.component';
-import { ManageDiscountsComponent } from 'src/2-Admin/manage-discounts/manage-discounts.component';
-import { HomeComponent } from '../6-Other-Components/home/home.component';
 
 
 //service layer to integrate with spring import HttpClientModule
 //other Extra modules
 import { UserService } from 'src/3-Services/user.service';
 import { HttpClientModule } from '@angular/common/http';
-import { FlightService } from 'src/3-Services/flight.service';
+import { StockService } from 'src/3-Services/stock.service';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ReportsComponent } from 'src/2-Admin/reports/reports.component';
 import { BookingService } from 'src/3-Services/booking.service';
+import { AppComponent } from './app.component';
 
 
 
@@ -50,14 +46,12 @@ const routes:Routes = [
   {path:"user", component:UserComponent},
   {path:"login", component:LoginComponent},
   {path:"register", component:RegisterComponent},
-  {path:"logout", component:HomeComponent},
 
   //Common features shared amongst both admin and user
   {path:"flightList",component:FlightListComponent},
   {path:"manage", component:ManageBookingsComponent},
 
   //Admin features
-  {path:"manageDiscounts", component:ManageDiscountsComponent},
   {path:"manageSchedule", component:ScheduleFlightsComponent},
   {path:"addAirline", component:AddFlightComponent},
   {path:"report", component:ReportsComponent}
@@ -67,18 +61,18 @@ const routes:Routes = [
 
   //All components must be included here
   declarations: [AppComponent,  LoginComponent, 
-    UserComponent, AdminComponent, HeaderComponent, FooterComponent, FlightListComponent,
+    UserComponent, AdminComponent, HeaderComponent, FlightListComponent,
   ManageBookingsComponent,
   RegisterComponent,
-  HomeComponent, AddFlightComponent, 
-  ManageDiscountsComponent, ScheduleFlightsComponent, ReportsComponent],
+  AddFlightComponent, 
+ ScheduleFlightsComponent, ReportsComponent],
 
   //All modules must be inclueded here
   imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule, 
     ReactiveFormsModule, NgbModule, HttpClientModule],
   
     //All services must be included here
-    providers: [UserService,FlightService, BookingService],
+    providers: [UserService,StockService, BookingService],
   
     //AppComponent is enough to be bootstrapped. 
     bootstrap: [AppComponent],

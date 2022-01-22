@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BookingService } from 'src/3-Services/booking.service';
-import { FlightService } from 'src/3-Services/flight.service';
+import { StockService } from 'src/3-Services/stock.service';
 import { textChangeRangeIsUnchanged } from 'typescript';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'], 
-  providers : [FlightService]
+  providers : [StockService]
 })
 export class UserComponent implements OnInit
 {
@@ -44,7 +44,7 @@ export class UserComponent implements OnInit
   PNRnumber:any;
   
 
-  constructor(private router:Router,private flightservice:FlightService, private bookingService:BookingService) {
+  constructor(private router:Router,private StockService:StockService, private bookingService:BookingService) {
     
     this.searchForm = new FormGroup({
       journey : new FormControl("" , Validators.required),
@@ -70,7 +70,7 @@ export class UserComponent implements OnInit
      console.log("Journey and Destination -> "+ journey + "|"+destination)
      console.log("Result Flight array contains "+ JSON.stringify(this.resultFlight))
      
-    this.flightservice.getFilteredFlights(journey,destination).subscribe(
+    this.StockService.getFilteredFlights(journey,destination).subscribe(
       (data:any) => {
 
         let flights = data;
@@ -81,8 +81,8 @@ export class UserComponent implements OnInit
             console.log(this.resultFlight.startDate)
           if(s.startDate == this.resultFlight.startDate)
             {
-              // s.startTime = this.flightservice.scheduledResultFlight.starttime
-              // s.endTime = this.flightservice.scheduledResultFlight.endTime
+              // s.startTime = this.StockService.scheduledResultFlight.starttime
+              // s.endTime = this.StockService.scheduledResultFlight.endTime
               this.resultFlightBasedOnSearch.push(s);
               console.log(JSON.stringify(this.searchFlights));
               }
@@ -100,7 +100,7 @@ export class UserComponent implements OnInit
    {
   
     console.log("Fetching All Flights")
-    this.flightservice.getFlights().subscribe(
+    this.StockService.getFlights().subscribe(
       (data:any)=>{
         console.log("Fetched Journey from MySQL ->"+ JSON.stringify(data.journey) +
         "Fetched Destination "+ JSON.stringify(data.destination));
@@ -168,7 +168,7 @@ renderBooking(f:any){
 
   //Discount and Pricing 
   fetchDiscounts(){
-    this.flightservice.getDiscounts().subscribe(
+    this.StockService.getDiscounts().subscribe(
       (data) =>{
         console.log("Fetching all Discounts from service" + JSON.stringify(data));
         this.resultDiscounts = data;

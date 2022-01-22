@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookingService } from 'src/3-Services/booking.service';
-import { FlightService } from 'src/3-Services/flight.service';
+import { StockService } from 'src/3-Services/stock.service';
 
 @Component({
   selector: 'app-reports',
@@ -11,7 +11,7 @@ export class ReportsComponent implements OnInit {
 
   message:any =[];
   PNR:any;
-  constructor(private reportService:FlightService) { }
+  constructor(private reportService:StockService) { }
 
   ngOnInit(): void {
     this.getTicketByid();

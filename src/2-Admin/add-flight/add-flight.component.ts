@@ -1,37 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FlightService } from 'src/3-Services/flight.service';
 
 @Component({
-  selector: 'app-add-flight',
-  templateUrl: './add-flight.component.html',
-  styleUrls:['./add-flight.component.css']
+  selector: 'app-add-stock',
+  templateUrl: './add-stock.component.html',
+  styleUrls:['./add-stock.component.css']
 })
 
-export class AddFlightComponent implements OnInit{
+export class AddStockComponent implements OnInit{
 
   ngOnInit(){
 
   }
   
-  airline:any = [];
+  company:any = [];
   message:string=''
-  airlineForm:FormGroup;
-  resultAirline:any = [];
+  companyFrom:FormGroup;
+  resultcompany:any = [];
 
-  flight:any=[];
-  resultFlight:any = [];
-  flightForm:FormGroup;
+  stock:any=[];
+  resultstock:any = [];
+  stockForm:FormGroup;
 
-  constructor(private flightRouter:Router, private fservice:FlightService) 
+  constructor(private stockRouter:Router, private stockService:StockService) 
   { 
-    this.airlineForm = new FormGroup(
+    this.companyFrom = new FormGroup(
       {
-      airlineId : new FormControl("", Validators.required),
-      airlineName : new FormControl("",Validators.required),
-      airlineModel : new FormControl("",Validators.required),
-      airlineLogo : new FormControl("",Validators.required),
+      companyId : new FormControl("", Validators.required),
+      companyName : new FormControl("",Validators.required),
+      companyModel : new FormControl("",Validators.required),
+      companyLogo : new FormControl("",Validators.required),
       contactNumber : new FormControl("", Validators.required)
     })
 
@@ -49,58 +48,58 @@ export class AddFlightComponent implements OnInit{
     this.flightRouter.navigateByUrl("/admin")
   }
 
-  //Airline Operations 
-  PersistAirline(airline:any)
+  //company Operations 
+  Persistcompany(company:any)
   {
-    console.log("Airline this.Object contains -> "+ JSON.stringify(this.airline))
-    console.log("Airline Object contains -> "+ JSON.stringify(airline))
+    console.log("company this.Object contains -> "+ JSON.stringify(this.company))
+    console.log("company Object contains -> "+ JSON.stringify(company))
 
-    if( this.checkAirline() ){
+    if( this.checkcompany() ){
       return;
     }
     else
     {
-      this.fservice.saveAirline(airline)
+      this.fservice.savecompany(company)
         .subscribe(  (data:any)=>
         {
-          data = this.airline;
-          console.log("Successfully saved Airline ->"+ JSON.stringify(data))
+          data = this.company;
+          console.log("Successfully saved company ->"+ JSON.stringify(data))
         })
       }
     }
 
-  fetchAirlines(){
-    console.log("Fetching All Airlines")
-    this.fservice.getAirlines().subscribe(
+  fetchcompanies(){
+    console.log("Fetching All companys")
+    this.fservice.getcompanies().subscribe(
       (data:any)=>{
-        console.log("Fetched Airlines from MySQL ->"+ JSON.stringify(data))
-        this.resultAirline = data;
+        console.log("Fetched companies from MongoDB ->"+ JSON.stringify(data))
+        this.resultcompany = data;
       }, (err:any)=>{
         this.message = "Failed to Fetch data"
       }
     )
   }
 
-  deleteAirline(airlineId:number)
+  deletecompany(companyId:number)
   {
-    console.log("delete the Airline with id "+airlineId);
-    confirm("Are you sure to delete this Airline?");
-    this.fservice.deleteAirlineWithId(airlineId);
+    console.log("delete the company with id "+companyId);
+    confirm("Are you sure to delete this company?");
+    this.fservice.deletecompanyWithId(companyId);
   }
 
-    addAirline()
+    addcompany()
     {
-      this.airline.push({airlineName:'',airlineModel:'',airlineLogo:'',contactNumber:''});
+      this.company.push({companyName:'',companyModel:'',companyLogo:'',contactNumber:''});
     }
 
-    popAirline(){
-      this.airline.pop({airlineName:'',airlineModel:'',airlineLogo:'',contactNumber:''});
+    popcompany(){
+      this.company.pop({companyName:'',companyModel:'',companyLogo:'',contactNumber:''});
     }
 
-  checkAirline():boolean
+  checkcompany():boolean
   {
-    if(this.airline.airlineName =='' || this.airline.airlineModel==''
-        || this.airline.contactNumber=='')
+    if(this.company.companyName =='' || this.company.companyModel==''
+        || this.company.contactNumber=='')
         {
      this.message = "Kindly fill all the details"
       return true;
@@ -109,13 +108,13 @@ export class AddFlightComponent implements OnInit{
   }
 
   //Flight Operations 
-  addFlight(airline:any)
+  addFlight(company:any)
   {
-    this.flight.push({noOfSeats:'',price:'',journey:'',destination:'',startDate:'',endDate:'',airline:airline});
+    this.flight.push({noOfSeats:'',price:'',journey:'',destination:'',startDate:'',endDate:'',company:company});
   }
 
   popFlight(){
-    this.flight.pop({noOfSeats:'',price:'',journey:'',destination:'',startDate:'',endDate:'',airline:""});
+    this.flight.pop({noOfSeats:'',price:'',journey:'',destination:'',startDate:'',endDate:'',company:""});
   }
 
   PersistFlight(flight:any)
@@ -152,7 +151,7 @@ export class AddFlightComponent implements OnInit{
 
   deleteFlight(flightId:number)
     {
-      console.log("delete the Airline with id "+flightId);
+      console.log("delete the company with id "+flightId);
       confirm("Are you sure , you want to delete this Flight?");
       this.fservice.deleteFlight(flightId);
     }

@@ -3,7 +3,6 @@ import { Component, PipeTransform} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { FlightService } from 'src/3-Services/flight.service';
 
 @Component({
   selector: 'app-manage-flights',
@@ -15,7 +14,7 @@ export class ManageFlightsComponent {
   flights:any=[];
   manageFlightsForm:FormGroup
 
-  constructor(private flightRouter :Router,public service : FlightService) {
+  constructor(private flightRouter :Router,public service : StockService) {
 
     this.manageFlightsForm = new FormGroup({
 
