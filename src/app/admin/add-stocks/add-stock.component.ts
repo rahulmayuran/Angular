@@ -166,7 +166,7 @@ export class AddStockComponent implements OnInit{
       console.log("Fetching All stocks")
       this.stockService.getstocks().subscribe(
         (data:any)=>{
-          console.log("Fetched stocks from MySQL ->"+ JSON.stringify(data))
+          console.log("Fetched stocks from DB ->"+ JSON.stringify(data))
           this.resultstock = data;
         }, (err:any)=>{
           this.message = "Failed to Fetch data"

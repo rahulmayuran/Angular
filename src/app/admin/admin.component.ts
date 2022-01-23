@@ -1,19 +1,38 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { StockService } from '../services/stock.service';
 
 @Component({
   // selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent
+export class AdminComponent implements OnInit
 {
   User:string='Admin';
   journey: NgbDateStruct|undefined;
   return: NgbDateStruct|undefined;
 
-  constructor(private adminRouter:Router) {
+  resultstock:any = [];
+  message:string='';
+  dateForm:FormGroup;
+
+  resultStock:any = {startDate:'',endDate:''};
+
+
+ngOnInit()
+{
+  this.fetchstocks()
+}
+
+  constructor(private adminRouter:Router, private stockService:StockService) 
+  {
+    this.dateForm = new FormGroup({
+      startDate : new FormControl("",Validators.required),
+      endDate : new FormControl("",Validators.required)
+    })
    }
 
 
@@ -25,9 +44,6 @@ export class AdminComponent
    }
    manageBookings(){
     this.adminRouter.navigateByUrl('manage');
-   }
-   manageDiscounts(){
-    this.adminRouter.navigateByUrl('manageDiscounts');
    }
    manageFlights(){
     this.adminRouter.navigateByUrl('manageFlights');
@@ -42,8 +58,21 @@ export class AdminComponent
       this.adminRouter.navigateByUrl('report');
     }
 
-    logout(){
-      this.adminRouter.navigateByUrl('');
+    fetchstocks(){
+      console.log("Fetching All stocks")
+      this.stockService.getstocks().subscribe(
+        (data:any)=>{
+          console.log("Fetched stocks from MongoDB ->"+ JSON.stringify(data))
+          this.resultstock = data;
+        }, (err:any)=>{
+          this.message = "Failed to Fetch data"
+        })
     }
 
+    filterStocks(startDate:string, endDate:string){
+      this.stockService.getFilteredstocks(startDate,endDate).subscribe(
+        (data:any) => {
+          JSON.stringify("Filtered Stocks- "+data);
+        })
+    }
 }

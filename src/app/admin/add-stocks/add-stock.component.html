@@ -9,7 +9,7 @@
 
 </head>
 
-<body>
+<body >
 
     <!-- company form -->
     <form [formGroup]=companyFrom>
@@ -51,6 +51,8 @@
                 </tbody>
             </table>
 
+                {{message}}
+
             <button class="btn btn-outline-primary" (click)="addcompany()" type="submit"><i class="fa fa-plus-circle">
                     Company</i></button>
             <button class="btn btn-outline-danger" (click)="popcompany()" type="submit"><i class="fa fa-minus-circle">
@@ -62,8 +64,7 @@
 
         <br />
 
-        <button class="btn btn-warning btn-sm" (click)="fetchcompanies()" type="submit"> <i class="fa fa-eye"> View
-                Companies</i> </button>
+        <button class="btn btn-warning btn-block" (click)="fetchcompanies()" type="submit"> <i class="fa fa-eye"> Fetch Companies</i> </button>
         <table class="table table-striped table-hover">
             <thead class="bg-dark text-light">
                 <tr>
@@ -92,7 +93,6 @@
         </table>
 
     </form>
-
     <!-- stock Form -->
     <form [formGroup]=stockForm>
 
@@ -127,9 +127,9 @@
                 </tbody>
             </table>
             <br />
-
-            <button class="btn btn-warning btn-sm" (click)="fetchstocks()" type="submit">Load stocks</button>
+            <button class="btn btn-warning btn-block" (click)="fetchstocks()" type="submit"><i class="fa fa-eye"></i> Fetch All Stocks</button>            
             <!-- Fetch stock Details -->
+        <div class="container-fluid">
             <table *ngIf="stock.length!=0" class="table table-striped table-hover">
                 <thead class="bg-dark text-light">
                     <tr>
@@ -137,6 +137,9 @@
                         <th>Average Price</th>
                         <th>Minimum Price</th>
                         <th>Maximum Price</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Current Time</th>
                     </tr>
                 </thead>
                 <tbody *ngFor="let displayStock of resultstock">
@@ -152,10 +155,9 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
             <button class="btn btn-danger" (click)="back()"> Back</button>
         </div>
     </form>
-
 </body>
-
 </html>
