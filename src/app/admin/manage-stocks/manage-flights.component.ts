@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { StockService } from 'src/services/stock.service';
+import { StockService } from 'src/app/services/stock.service';
 
 @Component({
   selector: 'app-manage-flights',

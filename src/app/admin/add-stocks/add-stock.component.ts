@@ -17,18 +17,17 @@ export class AddStockComponent implements OnInit{
   
   company:any = [];
   message:string=''
-  companyFrom:FormGroup;
   resultcompany:any = [];
-
   stock:any=[];
   resultstock:any = [];
+  
+  companyFrom:FormGroup;
   stockForm:FormGroup;
 
   constructor(private stockRouter:Router, private stockService:StockService) 
   { 
     this.companyFrom = new FormGroup(
       {
-      companyCode : new FormControl("", Validators.required),
       companyName : new FormControl("",Validators.required),
       companyCEO : new FormControl("",Validators.required),
       companyWebsite : new FormControl("",Validators.required),
@@ -92,11 +91,23 @@ export class AddStockComponent implements OnInit{
 
     addcompany()
     {
-      this.company.push({companyName:'',companyModel:'',companyLogo:'',contactNumber:''});
+      this.company.push({
+        companyName:'',
+        companyCEO:'',
+        companyWebsite:'',
+        companyTurnover:'',
+        exchangeType:''
+      });
     }
 
     popcompany(){
-      this.company.pop({companyName:'',companyModel:'',companyLogo:'',contactNumber:''});
+      this.company.pop({
+        companyName:'',
+        companyCEO:'',
+        companyWebsite:'',
+        companyTurnover:'',
+        exchangeType:''
+      });
     }
 
   checkcompany():boolean
