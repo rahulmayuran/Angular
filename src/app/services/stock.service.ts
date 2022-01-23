@@ -19,7 +19,7 @@ export class StockService {
     savecompany(company:any)
     {
       console.log("Saving the company to DB "+ JSON.stringify(company))
-      return this.httpClient.post(this.companyUrl+'/register',company);
+      return this.httpClient.post(this.companyUrl+'/company/register',company);
       
     }
 

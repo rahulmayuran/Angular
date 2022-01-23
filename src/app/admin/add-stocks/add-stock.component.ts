@@ -12,7 +12,6 @@ import { StockService } from 'src/app/services/stock.service';
 export class AddStockComponent implements OnInit{
 
   ngOnInit(){
-
   }
   
   company:any = [];
@@ -61,10 +60,21 @@ export class AddStockComponent implements OnInit{
     }
     else
     {
+       if(this.companyFrom.value.exchangeType == 'NSE')
+       {
+        company.isNSE = true; 
+        company.isBSE = false;
+       }
+       else{
+        company.isNSE = false; 
+        company.isBSE = true;
+       }
+
       this.stockService.savecompany(company)
         .subscribe(  (data:any)=>
         {
           data = this.company;
+          alert("Company "+company.companyName+" saved");
           console.log("Successfully saved company ->"+ JSON.stringify(data))
         })
       }
@@ -82,11 +92,13 @@ export class AddStockComponent implements OnInit{
     )
   }
 
+
   deletecompany(companyId:number)
   {
     console.log("delete the company with id "+companyId);
-    confirm("Are you sure to delete this company?");
+    confirm("Are you sure to delete this company with id "+companyId);
     this.stockService.deletecompanyWithId(companyId);
+   
   }
 
     addcompany()
