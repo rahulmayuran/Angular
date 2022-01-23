@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
 export class StockService {
 
   companyUrl:string = "http://localhost:9053/api";
+  stockUrl:string = "http://localhost:9051/api";
+
   
   stock:any = [];
   company:any = [];
@@ -43,7 +45,7 @@ export class StockService {
     getstocks()
     { 
       console.log("getting all the stocks")
-       return this.httpClient.get(this.companyUrl+'/getStocks')
+       return this.httpClient.get(this.stockUrl+'/getStocks')
     }
     
     getFilteredstocks(from:string, to:string)
@@ -54,12 +56,12 @@ export class StockService {
 
     savestock(stock:any){
       console.log("Saved the stock ->"+this.stock);
-      return this.httpClient.post(this.companyUrl+"/stock/register",stock);
+      return this.httpClient.post(this.stockUrl+"/stock/register",stock);
 
    }
   
    deletestock(id:number):any{
-    this.httpClient.delete(this.companyUrl+'/stock/delete/'+id).
+    this.httpClient.delete(this.stockUrl+'/stock/delete/'+id).
     subscribe(data => {
       console.log(data);
     });

@@ -36,10 +36,9 @@ export class AddStockComponent implements OnInit{
     })
 
     this.stockForm = new FormGroup({
-      noOfSeats: new FormControl("",Validators.required),
-      price: new FormControl("",Validators.required),
-      journey: new FormControl("",Validators.required),
-      destination : new FormControl("",Validators.required),
+      avgStockPrice: new FormControl("",Validators.required),
+      minStockPrice: new FormControl("",Validators.required),
+      maxStockPrice: new FormControl("",Validators.required),
       startDate : new FormControl("",Validators.required),
       endDate : new FormControl("",Validators.required)
     })
@@ -124,8 +123,8 @@ export class AddStockComponent implements OnInit{
 
   checkcompany():boolean
   {
-    if(this.company.companyName =='' || this.company.companyModel==''
-        || this.company.contactNumber=='')
+    if(this.company.companyName =='' || this.company.companyWebsite==''
+        || this.company.companyCEO=='' || this.company.exchangeType=='')
         {
      this.message = "Kindly fill all the details"
       return true;
@@ -136,11 +135,11 @@ export class AddStockComponent implements OnInit{
   //stock Operations 
   addstock(company:any)
   {
-    this.stock.push({noOfSeats:'',price:'',journey:'',destination:'',startDate:'',endDate:'',company:company});
+    this.stock.push({avgStockPrice:'',minStockPrice:'',maxStockPrice:'',startDate:'',endDate:'',company:company});
   }
 
   popstock(){
-    this.stock.pop({noOfSeats:'',price:'',journey:'',destination:'',startDate:'',endDate:'',company:""});
+    this.stock.pop({avgStockPrice:'',minStockPrice:'',maxStockPrice:'',startDate:'',endDate:'',company:""});
   }
 
   Persiststock(stock:any)

@@ -1,152 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Company</title>
-    
+
 </head>
+
 <body>
 
     <!-- company form -->
-   <form [formGroup] = companyFrom>
+    <form [formGroup]=companyFrom>
 
-    <div class="container-fluid">
-        
-        <h4 class="navbar bg-warning clearfix">Manage Company</h4>
-    
+        <div class="container-fluid">
+
+            <h4 class="navbar bg-warning clearfix">Manage Company</h4>
+
+            <table class="table table-striped table-hover">
+                <thead >
+                    <tr>
+                        <th>Company Name</th>
+                        <th>CEO</th>
+                        <th>Official Website</th>
+                        <th>Annual Turnover</th>
+                        <th>Stock Exchange</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let a of company">
+
+                        <td> <input type="text" [(ngModel)]="a.companyName" formControlName="companyName"></td>
+                        <td> <input type="text" [(ngModel)]="a.companyCEO" formControlName="companyCEO"></td>
+                        <td> <input type="text" [(ngModel)]="a.companyWebsite" formControlName="companyWebsite"></td>
+                        <td> <input type="number" [(ngModel)]="a.companyTurnover" formControlName="companyTurnover"
+                                placeholder="In lakhs"></td>
+                        <td>
+                            <select [(ngModel)]="a.exchangeType" formControlName="exchangeType">
+                                <option>NSE</option>
+                                <option>BSE</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-outline-success" (click)="Persistcompany(a)" type="submit"><i
+                                    class="fa fa-floppy-o"> Save</i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button class="btn btn-outline-primary" (click)="addcompany()" type="submit"><i class="fa fa-plus-circle">
+                    Company</i></button>
+            <button class="btn btn-outline-danger" (click)="popcompany()" type="submit"><i class="fa fa-minus-circle">
+                    Company</i></button>
+            <button class="btn btn-outline-danger" type="reset" value="reset"><i class="fa fa-eraser">
+                    Reset</i></button>
+
+        </div>
+
+        <br />
+
+        <button class="btn btn-warning btn-sm" (click)="fetchcompanies()" type="submit"> <i class="fa fa-eye"> View
+                Companies</i> </button>
         <table class="table table-striped table-hover">
-            <thead>
-                <tr >
-                  <th>Company Name</th>
-                  <th>CEO</th>
-                  <th>Official Website</th>
-                  <th>Annual Turnover</th>
-                  <th>Stock Exchange</th>
+            <thead class="bg-dark text-light">
+                <tr>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>CEO</th>
+                    <th>Website</th>
+                    <th>Annual Turnover(Lakhs)</th>
+                    <th>Exchange Type</th>
                 </tr>
             </thead>
-        
-            <tbody>
-                <tr *ngFor="let a of company">
-    
-                    <td> <input type="text" [(ngModel)]="a.companyName" formControlName ="companyName" ></td>
-                    <td> <input type="text" [(ngModel)]="a.companyCEO" formControlName ="companyCEO" ></td>
-                    <td> <input type="text" [(ngModel)]="a.companyWebsite" formControlName ="companyWebsite" ></td>
-                    <td> <input type="number" [(ngModel)]="a.companyTurnover" formControlName ="companyTurnover" placeholder="In lakhs"></td>
-                    <td> 
-                        <select [(ngModel)]="a.exchangeType" formControlName ="exchangeType">
-                            <option >NSE</option>
-                            <option >BSE</option>
-                        </select>   
-                    </td>
-                     <td> 
-                         <button class="btn btn-outline-success" (click)="Persistcompany(a)" type="submit"><i class="fa fa-floppy-o"> Save</i></button> 
-                    </td>
+            <tbody *ngFor="let company of resultcompany">
+                <tr>
+                    <td>{{company.companyCode}} </td>
+                    <td>{{company.companyName}} </td>
+                    <td>{{company.companyCEO}} </td>
+                    <td>{{company.companyWebsite}} </td>
+                    <td> {{company.companyTurnover}}</td>
+                    <td *ngIf=company.isNSE>NSE</td>
+                    <td *ngIf=company.isBSE>BSE</td>
                 </tr>
+                <button class="btn btn-danger btn-sm" (click)="deletecompany(company.companyId)" type="submit"><i class="fa fa-trash"> company</i></button>
+                <button class="btn btn-outline-success btn-sm" (click)="addstock(company)" type="submit"><i class="fa fa-plus-circle"> stock</i></button>
             </tbody>
+
         </table>
-    
-        <button class="btn btn-outline-primary" (click)="addcompany()" type="submit"><i class="fa fa-plus-circle"> Company</i></button> 
-        <button class="btn btn-outline-danger" (click)="popcompany()" type="submit"><i class="fa fa-minus-circle"> Company</i></button> 
-        <button class="btn btn-outline-danger" type="reset" value="reset" ><i class="fa fa-eraser"> Reset</i></button>
-    
-    </div>
 
-<br/>
+    </form>
 
-<button class="btn btn-warning btn-sm" (click)="fetchcompanies()" type="submit"> <i class="fa fa-eye"> View Companies</i> </button>
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>Company Details<th> 
-            </tr>
-        </thead>
-        <tbody *ngFor="let company of resultcompany">
-            <tr >
-                <td>{{company.companyCode}} </td>
-                <td>{{company.companyName}} </td>
-                <td>{{company.companyCEO}} </td>
-                <td>{{company.companyWebsite}} </td>
-                <td> {{company.companyTurnover}}</td> 
-                <td>{{company.exchangeType}}</td>
-            </tr>   
-            <button class="btn btn-danger btn-sm" (click)="deletecompany(company.companyId)" type="submit"><i class="fa fa-trash"> company</i></button>
-            <button class="btn btn-outline-success btn-sm" (click)="addstock(company)" type="submit"><i class="fa fa-plus-circle"> stock</i></button>
-        </tbody>
-        
-    </table>
-   
-   </form>
+    <!-- stock Form -->
+    <form [formGroup]=stockForm>
 
-   <!-- stock Form -->
-   <form [formGroup] = stockForm>
+        <div class="container-fluid" *ngIf="stock.length!=0" >
+            <h4 class="navbar bg-warning clearfix">Manage Stocks</h4>
 
-    <div class="container-fluid">
-    <h4 class="navbar bg-warning clearfix">Manage Stocks</h4>
-    
-    <table *ngIf="stock.length!=0" class="table table-success table-stripped">
-        <thead>
-            <tr>
-                <th>company Name</th>
-                <th>Available Seats</th>
-                <th>Price</th>
-                <th>From</th>
-                <th>To</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-            </tr>
-        </thead>
-    
-        <tbody>
-            <tr *ngFor="let f of stock">
-    
-                <td> {{f.company?.companyName}}</td>
-                <td> <input type="number" [(ngModel)]="f.noOfSeats" name=noOfSeats formControlName="noOfSeats"></td>
-                <td> <input type="number" [(ngModel)]="f.price" name=price placeholder="₹ Enter as Rupees"
-                        formControlName="price"></td>
-                <td> <input type="text" [(ngModel)]="f.journey" name=journey formControlName="journey"></td>
-                <td> <input type="text" [(ngModel)]="f.destination" name=destination formControlName="destination"></td>
-                <td> <input type="date" [(ngModel)]="f.startDate" name=startDate formControlName="startDate"></td>
-                <td> <input type="date" [(ngModel)]="f.endDate" name=endDate formControlName="endDate"></td>
-                <td>
-                    <button class="btn btn-outline-success btn-sm" (click)="Persiststock(f)" type="submit">Save
-                        stock</button>
-                    <button class="btn btn-outline-danger btn-sm" (click)="popstock()" type="submit">Remove stock</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <!-- <button class="btn btn-outline-danger" type="reset" value="reset" >Reset</button> -->
-    
-    <br />
-    
-    <!-- Fetch stock Details -->
-    <table *ngIf="stock.length!=0" class="table table-striped table-hover">
-        <button class="btn btn-warning btn-sm" (click)="fetchstocks()" type="submit">Load stocks</button>
-        <thead>
-            <tr>
-                <th>stock Details
-                <th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let f of resultstock">
-                <td>{{f.company?.companyName}}</td>
-                <td>{{f.noOfSeats}} seats</td>
-                <td>₹{{f.price}}</td>
-                <td>{{f.journey}}</td>
-                <td>{{f.destination}}</td>
-                <td>{{f.startDate| date:'fullDate'}}</td>
-                <td>{{f.endDate| date:'fullDate'}}</td>
-                <button class="btn btn-danger btn-sm" (click)="deletestock(f.stockId)" type="submit">Delete stock</button>
-            </tr>
-        </tbody>
-    </table>
-    <button class="btn btn-danger" (click)="back()"> Back</button>
-    </div>
-</form>
+            <table class="table table-striped table-hover">
+                <thead >
+                    <tr>
+                        <th>company Name</th>
+                        <th>Avg price</th>
+                        <th>Min price</th>
+                        <th>Max price</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+
+                <tbody *ngFor="let resultStock of stock">
+                    <tr>
+                        <td> {{resultStock.company?.companyName}}</td>
+                        <td> <input type="number" [(ngModel)]="resultStock.avgStockPrice" name=avgStockPrice formControlName="avgStockPrice"></td>
+                        <td> <input type="number" [(ngModel)]="resultStock.minStockPrice" name=minStockPrice  formControlName="minStockPrice"></td>
+                        <td> <input type="number" [(ngModel)]="resultStock.maxStockPrice" name=maxStockPrice formControlName="maxStockPrice"></td>
+                        <td> <input type="date"  [(ngModel)]="resultStock.startDate" name=startDate formControlName="startDate"></td>
+                        <td> <input type="date" [(ngModel)]="resultStock.endDate" name=endDate formControlName="endDate"></td>
+                    </tr>
+                    <div class="btn-group btn-block">                   
+                        <button class="btn btn-outline-success" (click)="Persiststock(resultStock)" type="submit"><i class="fa fa-floppy-o">Save Stock</i></button>
+                        <button class="btn btn-danger" (click)="popstock()" type="submit"><i class="fa fa-trash">Remove Stock</i></button>
+                    </div>
+                </tbody>
+            </table>
+            <br />
+
+            <button class="btn btn-warning btn-sm" (click)="fetchstocks()" type="submit">Load stocks</button>
+            <!-- Fetch stock Details -->
+            <table *ngIf="stock.length!=0" class="table table-striped table-hover">
+                <thead class="bg-dark text-light">
+                    <tr>
+                        <th>company</th>
+                        <th>Average Price</th>
+                        <th>Minimum Price</th>
+                        <th>Maximum Price</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let displayStock of resultstock">
+                    <tr>
+                        <td>{{displayStock.company?.companyName}}</td>
+                        <td>{{displayStock.avgStockPrice}}</td>
+                        <td>{{displayStock.minStockPrice}}</td>
+                        <td>{{displayStock.maxStockPrice}}</td>
+                        <td>{{displayStock.startDate| date:'fullDate'}}</td>
+                        <td>{{displayStock.endDate| date:'fullDate'}}</td>
+                        <td>{{displayStock.currentTime}}</td>
+                        <button class="btn btn-danger btn-sm" (click)="deletestock(displayStock.stockId)" type="submit"> <i class="fa fa-trash"> Delete</i> </button>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-danger" (click)="back()"> Back</button>
+        </div>
+    </form>
 
 </body>
+
 </html>

@@ -1,10 +1,3 @@
-
-
-
-
-//All routings to browser stems from Routes
-//In RouterModule, add this constant to make the routes work
-
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
