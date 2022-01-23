@@ -69,10 +69,10 @@ ngOnInit()
         })
     }
 
-    filterStocks(startDate:string, endDate:string){
+    filterStocks(startDate:Date, endDate:Date){
       this.stockService.getFilteredstocks(startDate,endDate).subscribe(
         (data:any) => {
-          JSON.stringify("Filtered Stocks- "+data);
+          console.log(JSON.stringify("Filtered Stocks- "+data));
         })
     }
 }
