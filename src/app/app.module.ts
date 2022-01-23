@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, Routes } from "@angular/router";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+
 import { AddStockComponent } from "./admin/add-stocks/add-stock.component";
 import { AdminComponent } from "./admin/admin.component";
 import { ReportsComponent } from "./admin/reports/reports.component";
@@ -18,6 +19,7 @@ import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./others/header/header.component";
 import { LoginComponent } from "./others/login/login.component";
 import { RegisterComponent } from "./others/register/register.component";
+
 import { BookingService } from "./services/booking.service";
 import { StockService } from "./services/stock.service";
 import { UserService } from "./services/user.service";
