@@ -21,12 +21,12 @@ export class AdminComponent implements OnInit
   dateForm:FormGroup;
 
   resultStock:any = {startDate:'',endDate:''};
+  filteredStocks:any = [];
 
 
 ngOnInit()
 {
-  this.fetchstocks()
-  this.reset()
+
 }
 
   constructor(private adminRouter:Router, private stockService:StockService) 
@@ -84,15 +84,20 @@ ngOnInit()
       this.stockService.getFilteredstocks(from,to)
         .subscribe( (data:any) => 
         {
+          this.filteredStocks = data;
           console.log("Filtered Stocks- "+data);
+          this.message = data.length+" Records Found";
         }, 
         (err:any)=>
         {
           this.message = "No Records Found";
+          this.reset();
         })
+
     }
 
-    reset(){
+    reset()
+    {
       this.message = "";
     }
 }
