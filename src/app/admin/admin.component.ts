@@ -26,6 +26,7 @@ export class AdminComponent implements OnInit
 ngOnInit()
 {
   this.fetchstocks()
+  this.reset()
 }
 
   constructor(private adminRouter:Router, private stockService:StockService) 
@@ -83,12 +84,15 @@ ngOnInit()
       this.stockService.getFilteredstocks(from,to)
         .subscribe( (data:any) => 
         {
-          console.log(JSON.stringify("Filtered Stocks- "+data));
-          this.message = JSON.stringify(data);
+          console.log("Filtered Stocks- "+data);
         }, 
         (err:any)=>
         {
           this.message = "No Records Found";
         })
+    }
+
+    reset(){
+      this.message = "";
     }
 }
