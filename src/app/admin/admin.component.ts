@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -60,19 +61,34 @@ ngOnInit()
 
     fetchstocks(){
       console.log("Fetching All stocks")
-      this.stockService.getstocks().subscribe(
-        (data:any)=>{
+      this.stockService.getstocks()
+      .subscribe( (data:any)=>
+        {
           console.log("Fetched stocks from MongoDB ->"+ JSON.stringify(data))
           this.resultstock = data;
-        }, (err:any)=>{
+        }, 
+        (err:any)=>
+        {
           this.message = "Failed to Fetch data"
         })
     }
 
-    filterStocks(startDate:Date, endDate:Date){
-      this.stockService.getFilteredstocks(startDate,endDate).subscribe(
-        (data:any) => {
+    filterStocks(from:Date, to:Date)
+    {
+      from = this.dateForm.value.startDate ;
+      to = this.dateForm.value.endDate ;
+
+      console.log("Start date is "+from+" End date is "+to);
+
+      this.stockService.getFilteredstocks(from,to)
+        .subscribe( (data:any) => 
+        {
           console.log(JSON.stringify("Filtered Stocks- "+data));
+          this.message = JSON.stringify(data);
+        }, 
+        (err:any)=>
+        {
+          this.message = "No Records Found";
         })
     }
 }

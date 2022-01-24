@@ -36,11 +36,7 @@ export class AddStockComponent implements OnInit{
     })
 
     this.stockForm = new FormGroup({
-      avgStockPrice: new FormControl("",Validators.required),
-      minStockPrice: new FormControl("",Validators.required),
-      maxStockPrice: new FormControl("",Validators.required),
-      startDate : new FormControl("",Validators.required),
-      endDate : new FormControl("",Validators.required)
+      stockPrice: new FormControl("",Validators.required),
     })
   }
 
@@ -135,11 +131,11 @@ export class AddStockComponent implements OnInit{
   //stock Operations 
   addstock(company:any)
   {
-    this.stock.push({avgStockPrice:'',minStockPrice:'',maxStockPrice:'',startDate:'',endDate:'',company:company});
+    this.stock.push({stockPrice:'',company:company});
   }
 
   popstock(){
-    this.stock.pop({avgStockPrice:'',minStockPrice:'',maxStockPrice:'',startDate:'',endDate:'',company:""});
+    this.stock.pop({stockPrice:'',company:''});
   }
 
   Persiststock(stock:any)
@@ -152,6 +148,9 @@ export class AddStockComponent implements OnInit{
     }
     else
     {
+      console.log("Form company name - "+ stock.company.companyName)
+      stock.companyName = stock.company.companyName;
+
       alert('stock Saved')
       this.stockService.savestock(stock)
         .subscribe(  (data:any)=>

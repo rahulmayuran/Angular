@@ -51,7 +51,7 @@ export class StockService {
     getFilteredstocks(from:Date, to:Date)
     { 
       console.log("getting stocks from "+from+" to" + to);
-       return this.httpClient.get(this.stockUrl+'/stock/search?'+from+"&"+to);
+       return this.httpClient.get(this.stockUrl+'/stock/search/'+from+"/"+to);
     }
 
     savestock(stock:any){

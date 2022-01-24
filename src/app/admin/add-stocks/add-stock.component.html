@@ -103,22 +103,14 @@
                 <thead >
                     <tr>
                         <th>company Name</th>
-                        <th>Avg price</th>
-                        <th>Min price</th>
-                        <th>Max price</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
+                        <th>Stock price</th>
                     </tr>
                 </thead>
 
                 <tbody *ngFor="let resultStock of stock">
                     <tr>
                         <td> {{resultStock.company?.companyName}}</td>
-                        <td> <input type="number" [(ngModel)]="resultStock.avgStockPrice" name=avgStockPrice formControlName="avgStockPrice"></td>
-                        <td> <input type="number" [(ngModel)]="resultStock.minStockPrice" name=minStockPrice  formControlName="minStockPrice"></td>
-                        <td> <input type="number" [(ngModel)]="resultStock.maxStockPrice" name=maxStockPrice formControlName="maxStockPrice"></td>
-                        <td> <input type="date"  [(ngModel)]="resultStock.startDate" name=startDate formControlName="startDate"></td>
-                        <td> <input type="date" [(ngModel)]="resultStock.endDate" name=endDate formControlName="endDate"></td>
+                        <td> <input type="number" [(ngModel)]="resultStock.stockPrice" name=stockPrice formControlName="stockPrice"></td>
                     </tr>
                     <div class="btn-group btn-block">                   
                         <button class="btn btn-outline-success" (click)="Persiststock(resultStock)" type="submit"><i class="fa fa-floppy-o">Save Stock</i></button>
@@ -128,29 +120,24 @@
             </table>
             <br />
             <button class="btn btn-warning btn-block" (click)="fetchstocks()" type="submit"><i class="fa fa-eye"></i> Fetch All Stocks</button>            
+            
             <!-- Fetch stock Details -->
         <div class="container-fluid">
             <table *ngIf="stock.length!=0" class="table table-striped table-hover">
                 <thead class="bg-dark text-light">
                     <tr>
                         <th>company</th>
-                        <th>Average Price</th>
-                        <th>Minimum Price</th>
-                        <th>Maximum Price</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Current Time</th>
+                        <th>Stock Id</th>
+                        <th>Stock Price</th>
+                        <th>Stock Date</th>
                     </tr>
                 </thead>
                 <tbody *ngFor="let displayStock of resultstock">
                     <tr>
-                        <td>{{displayStock.company?.companyName}}</td>
-                        <td>{{displayStock.avgStockPrice}}</td>
-                        <td>{{displayStock.minStockPrice}}</td>
-                        <td>{{displayStock.maxStockPrice}}</td>
-                        <td>{{displayStock.startDate| date:'fullDate'}}</td>
-                        <td>{{displayStock.endDate| date:'fullDate'}}</td>
-                        <td>{{displayStock.currentTime}}</td>
+                        <td>{{displayStock?.companyName}}</td>
+                        <td>{{displayStock.stockId}}</td>
+                        <td>{{displayStock.stockPrice}}</td>
+                        <td>{{displayStock.stockDate| date:'fullDate'}}</td>
                         <button class="btn btn-danger btn-sm" (click)="deletestock(displayStock.stockId)" type="submit"> <i class="fa fa-trash"> Delete</i> </button>
                     </tr>
                 </tbody>

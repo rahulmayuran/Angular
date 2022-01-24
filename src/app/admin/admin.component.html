@@ -29,7 +29,6 @@
         </form>
 
         <br/><br/>
-
             {{message}}
         <!-- Fetch stock Details -->
         <table class="table table-striped table-hover">
@@ -46,7 +45,7 @@
             </thead>
             <tbody *ngFor="let displayStock of resultstock">
                 <tr>
-                    <td>{{displayStock.company?.companyName}}</td>
+                    <td>{{displayStock?.companyName}}</td>
                     <td>{{displayStock.avgStockPrice}}</td>
                     <td>{{displayStock.minStockPrice}}</td>
                     <td>{{displayStock.maxStockPrice}}</td>
