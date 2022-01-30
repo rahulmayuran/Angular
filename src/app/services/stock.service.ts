@@ -47,6 +47,12 @@ export class StockService {
       console.log("getting all the stocks")
        return this.httpClient.get(this.stockUrl+'/getStocks')
     }
+
+    getStocksByPrice()
+    { 
+      console.log("getting all the stocks")
+       return this.httpClient.get(this.stockUrl+'/getStocks/price')
+    }
     
     getFilteredstocks(from:Date, to:Date)
     { 
@@ -67,9 +73,9 @@ export class StockService {
     });
   }
 
-    getStockByName(name:string){
+    getStockByCompanyName(name:string){
       console.log("got the stock name->"+name);
-      return this.httpClient.get(this.companyUrl+'/'+name);
+      return this.httpClient.get(this.stockUrl+"/getStock/"+name);
    }
 
   //Kafka operations

@@ -151,7 +151,7 @@ export class AddStockComponent implements OnInit{
       console.log("Form company name - "+ stock.company.companyName)
       stock.companyName = stock.company.companyName;
 
-      alert('stock Saved')
+      alert('stock Saved for '+stock.company.companyName)
       this.stockService.savestock(stock)
         .subscribe(  (data:any)=>
         {
@@ -175,8 +175,8 @@ export class AddStockComponent implements OnInit{
 
   deletestock(stockId:number)
     {
-      console.log("delete the company with id "+stockId);
-      confirm("Are you sure , you want to delete this stock?");
+      console.log("delete the stock with id "+stockId);
+      confirm("Delete this stock ?");
       this.stockService.deletestock(stockId);
     }
 

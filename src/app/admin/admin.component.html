@@ -27,7 +27,7 @@
             <input type="date" [(ngModel)]="resultStock.startDate" name=startDate formControlName="startDate">
             <input type="date" [(ngModel)]="resultStock.endDate" name=endDate formControlName="endDate">
             <button class="btn btn-outline-success btn-lg" (click)="filterStocks(resultStock.startDate, resultStock.endDate)" type="submit"><i class="fa fa-search"> Search </i></button>
-            <button class="btn btn-outline-danger btn-lg" (click)="reset()" type="reset"> <i class="fa fa-refresh" >Reset Filters</i></button>
+            <button class="btn btn-outline-danger btn-lg" (click)="reset()" type="reset()"> <i class="fa fa-refresh" >Reset Filters</i></button>
         </form>
 
         <br/>
@@ -45,9 +45,6 @@
             <thead *ngIf="filteredStocks.length!=0" class="thead-dark text-light">
                 <tr>
                     <th>company</th>
-                    <!-- <th>Average Price</th>
-                    <th>Minimum Price</th>
-                    <th>Maximum Price</th> -->
                     <th>Stock Id</th>
                     <th>Stock Price</th>
                     <th>Stock Date</th>
@@ -56,15 +53,37 @@
             <tbody *ngFor="let displayStock of filteredStocks">
                 <tr>
                     <td>{{displayStock?.companyName}}</td>
-                    <!-- <td>{{displayStock.avgStockPrice}}</td>
-                    <td>{{displayStock.minStockPrice}}</td>
-                    <td>{{displayStock.maxStockPrice}}</td> -->
                     <td>{{displayStock.stockId}}</td>
                     <td>{{displayStock.stockPrice}}</td>
                     <td>{{displayStock.stockDate| date:'dd/MM/yy h:mm:ss a'}}</td>
                 </tr>
             </tbody>
         </table>
+
+
+        <h5>Filter Stocks by Company</h5>
+        <button class="btn btn-outline-success btn-lg" (click)="fetchStocksBasedOnPrices()" type="submit"><i class="fa fa-search"> Filter by Company </i></button>
+        
+        <!-- Fetch stock Details by Prices-->
+         <table class="table table-striped table-hover">
+            <thead *ngIf="companyStocks.length!=0" class="thead-dark text-light">
+                <tr>
+                    <th>company</th>
+                    <th>Average Price</th>
+                    <th>Minimum Price</th>
+                    <th>Maximum Price</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let pricedStock of companyStocks">
+                <tr>
+                    <td>{{pricedStock.companyName}}</td>
+                    <td>{{pricedStock.avgStockPrice}}</td>
+                    <td>{{pricedStock.minStockPrice}}</td>
+                    <td>{{pricedStock.maxStockPrice}}</td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 
 

@@ -22,11 +22,12 @@ export class AdminComponent implements OnInit
 
   resultStock:any = {startDate:'',endDate:''};
   filteredStocks:any = [];
+  companyStocks:any = [];
 
 
 ngOnInit()
 {
-
+  // this.fetchstocks()
 }
 
   constructor(private adminRouter:Router, private stockService:StockService) 
@@ -65,7 +66,15 @@ ngOnInit()
       this.stockService.getstocks()
       .subscribe( (data:any)=>
         {
-          console.log("Fetched stocks from MongoDB ->"+ JSON.stringify(data))
+          const list = data.length;
+          console.log("List of stocks is "+list)
+
+          data.forEach((s:any) => 
+          {
+            console.log("Min stock price is "+Math.min(s.stockPrice)+" -Max price is- "+Math.max(s.stockPrice)+" with company "+s.companyName);
+          });
+
+          // console.log("Fetched stocks from MongoDB ->"+ JSON.stringify(data))
           this.resultstock = data;
         }, 
         (err:any)=>
@@ -74,10 +83,21 @@ ngOnInit()
         })
     }
 
+    fetchStocksBasedOnPrices(){
+      this.stockService.getStocksByPrice().subscribe(stocks=>{
+        this.companyStocks = stocks;
+        console.log("Stock details based on price "+JSON.stringify(stocks))
+      })
+    }
+
     filterStocks(from:Date, to:Date)
     {
       from = this.dateForm.value.startDate ;
       to = this.dateForm.value.endDate ;
+
+      if(to == null || to === null){
+        alert("Kindly provide both dates")
+      }
 
       console.log("Start date is "+from+" End date is "+to);
 
@@ -86,11 +106,11 @@ ngOnInit()
         {
           this.filteredStocks = data;
           console.log("Filtered Stocks- "+data);
-          this.message = data.length+" Records Found";
+          this.message = data.length+" stock(s) found";
         }, 
         (err:any)=>
         {
-          this.message = "No Records Found";
+          alert("Kindly provide both dates")
           this.reset();
         })
 
