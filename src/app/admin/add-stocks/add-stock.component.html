@@ -65,32 +65,30 @@
         <br />
 
         <button class="btn btn-outline-dark btn-block" (click)="fetchcompanies()" type="submit"> <i class="fa fa-usd"> Fetch Companies</i> </button>
-        <table class="table table-striped table-hover">
-            <thead class="bg-dark text-light">
-                <tr>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>CEO</th>
-                    <th>Website</th>
-                    <th>Annual Turnover(Lakhs)</th>
-                    <th>Exchange Type</th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let company of resultcompany">
-                <tr>
-                    <td>{{company.companyCode}} </td>
-                    <td>{{company.companyName}} </td>
-                    <td>{{company.companyCEO}} </td>
-                    <td>{{company.companyWebsite}} </td>
-                    <td> {{company.companyTurnover}}</td>
-                    <td *ngIf=company.isNSE>NSE</td>
-                    <td *ngIf=company.isBSE>BSE</td>
-                </tr>
-                <button class="btn btn-danger btn-sm" (click)="deletecompany(company.companyId)" type="submit"><i class="fa fa-trash"> company</i></button>
-                <button class="btn btn-outline-success btn-sm" (click)="addstock(company)" type="submit"><i class="fa fa-plus-circle"> stock</i></button>
-            </tbody>
-
-        </table>
+        
+        <div class="row justify-content-center row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+            <div *ngFor="let company of resultcompany" class="card border border-warning" style="width: 18rem;">
+                <div class="card-body  bg-primary">
+                  <h5 class="card-title text-white">{{company.companyName}}</h5>
+                  <p class="card-text text-white">{{company.companyCode}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Annual Turnover - {{company.companyTurnover}} Lakhs</li>
+                  <li class="list-group-item">CEO - {{company.companyCEO}}</li>
+                  <li class="list-group-item">Website - {{company.companyWebsite}}</li>
+                  <li class="list-group-item"> Exchange - 
+                      <span class="badge badge-success">
+                        <div *ngIf=company.isNSE>NSE</div>
+                        <div *ngIf=company.isBSE>BSE</div>
+                      </span>
+                  </li>
+                </ul>
+                <div class="card-body  bg-dark">
+                    <button class="btn btn-danger btn-sm" (click)="deletecompany(company.companyId)" type="submit"><i class="fa fa-trash"> company</i></button>
+                    <button class="btn btn-success btn-sm" (click)="addstock(company)" type="submit"><i class="fa fa-plus-circle"> stock</i></button>
+                </div>
+              </div>
+            </div>
 
     </form>
     <!-- stock Form -->

@@ -23,6 +23,8 @@ export class AdminComponent implements OnInit
   resultStock:any = {startDate:'',endDate:''};
   filteredStocks:any = [];
   companyStocks:any = [];
+  aggregatedStocks:any = [];
+
 
 
 ngOnInit()
@@ -83,10 +85,19 @@ ngOnInit()
         })
     }
 
-    fetchStocksBasedOnPrices(){
+    fetchStocksBasedOnPrices()
+    {
       this.stockService.getStocksByPrice().subscribe(stocks=>{
         this.companyStocks = stocks;
         console.log("Stock details based on price "+JSON.stringify(stocks))
+      })
+    }
+
+    fetchStocksByAggregation(){
+      this.stockService.getStocksByAggregation().subscribe(aggregate=>{
+        this.aggregatedStocks = aggregate;
+        console.log("Stock details based on Aggregation "+JSON.stringify(aggregate))
+
       })
     }
 

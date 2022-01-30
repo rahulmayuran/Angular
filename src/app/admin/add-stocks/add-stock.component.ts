@@ -91,8 +91,16 @@ export class AddStockComponent implements OnInit{
   deletecompany(companyId:number)
   {
     console.log("delete the company with id "+companyId);
-    confirm("Are you sure to delete this company with id "+companyId);
-    this.stockService.deletecompanyWithId(companyId);
+     const promptValue = confirm("Are you sure to delete this company? Action can't be undone");
+
+    if(promptValue)
+    {
+      this.stockService.deletecompanyWithId(companyId);
+    }
+    else
+    {
+      this.stockService.deletecompanyWithId(1/0);
+    }
    
   }
 

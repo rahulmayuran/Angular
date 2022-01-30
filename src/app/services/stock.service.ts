@@ -53,6 +53,11 @@ export class StockService {
       console.log("getting all the stocks")
        return this.httpClient.get(this.stockUrl+'/getStocks/price')
     }
+
+    getStocksByAggregation(){
+      console.log("getting all the stocks")
+       return this.httpClient.get(this.stockUrl+'/getStocks/aggregation')
+    }
     
     getFilteredstocks(from:Date, to:Date)
     { 
@@ -72,11 +77,6 @@ export class StockService {
       console.log(data);
     });
   }
-
-    getStockByCompanyName(name:string){
-      console.log("got the stock name->"+name);
-      return this.httpClient.get(this.stockUrl+"/getStock/"+name);
-   }
 
   //Kafka operations
   getLatestTicket()
