@@ -75,7 +75,7 @@
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Annual Turnover - {{company.companyTurnover}} Lakhs</li>
                   <li class="list-group-item">CEO - {{company.companyCEO}}</li>
-                  <li class="list-group-item">Website - {{company.companyWebsite}}</li>
+                  <li class="list-group-item">Website - <a href="{{company.companyWebsite}}">{{company.companyWebsite}}</a></li>
                   <li class="list-group-item"> Exchange - 
                       <span class="badge badge-success">
                         <div *ngIf=company.isNSE>NSE</div>
@@ -84,8 +84,8 @@
                   </li>
                 </ul>
                 <div class="card-body  bg-dark">
-                    <button class="btn btn-danger btn-sm" (click)="deletecompany(company.companyId)" type="submit"><i class="fa fa-trash"> company</i></button>
                     <button class="btn btn-success btn-sm" (click)="addstock(company)" type="submit"><i class="fa fa-plus-circle"> stock</i></button>
+                    <button class="btn btn-danger btn-sm" (click)="deletecompany(company.companyId)" type="submit"><i class="fa fa-trash"> company</i></button>
                 </div>
               </div>
             </div>
