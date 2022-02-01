@@ -12,3 +12,13 @@ label
 {
     font-weight: 500;
 }
+
+.fontChange{
+    font-family: cursive; 
+    font-weight: bold;
+}
+
+.scrollbar{
+    margin :1em 0em;
+    overflow-y: scroll;
+}
