@@ -19,3 +19,9 @@
      }
 } */
 
+
+.scrollbar{
+   margin :1em 0em;
+   overflow-y: scroll;
+}
+

@@ -46,6 +46,8 @@
         </div>
 
         <!-- Fetch stock Details -->
+    <div class="scrollbar"
+    [ngStyle]="{height: filteredStocks.length >= 4 ? '13em' : '30em'}">
         <table class="table table-striped table-hover">
             <thead *ngIf="filteredStocks.length!=0" class="thead-dark text-light">
                 <tr>
@@ -64,6 +66,7 @@
                 </tr>
             </tbody>
         </table>
+    </div>
 
 
         <button class="btn btn-outline-primary btn-block" (click)="fetchStocksBasedOnPrices()" type="submit"><i class="fa fa-filter"> Filter By Company </i></button>
