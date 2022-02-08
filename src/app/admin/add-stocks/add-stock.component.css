@@ -12,10 +12,21 @@ label
 {
     font-weight: 500;
 }
+.cardStructure{
+    margin: 0.5em 0.5em;
+    border: 1px solid rgb(213, 213, 235);
+    padding: 10px;
+    box-shadow: 5px 10px 8px rgb(164, 169, 168);
+  }
+  
+  .cardContents{
+    background-color: #f8af26;
+  }
+  
 
 .fontChange{
-    font-family: cursive; 
-    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif; 
+    font-weight: 500;
 }
 
 .scrollbar{

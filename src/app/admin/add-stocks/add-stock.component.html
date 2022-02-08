@@ -64,11 +64,11 @@
 
         <button class="btn btn-outline-primary btn-block" (click)="fetchcompanies()" type="submit"> <i class="fa fa-usd"> Fetch Companies</i> </button>
         
-        <div style="margin: 1em 1em;" class="row justify-content-center row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-            <div *ngFor="let company of resultcompany" class="card border border-dark" style="margin: 1em 1em;">
-                <div class="card-body  bg-info">
-                  <h4 class="card-title text-white fontChange">{{company.companyName}}</h4>
-                  <p class="card-text text-white">{{company.companyCode}}</p>
+        <div class="row justify-content-center row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 ">
+            <div *ngFor="let company of resultcompany" class="card cardStructure">
+                <div class="card-body cardContents">
+                  <h4 class="card-title fontChange">{{company.companyName}}</h4>
+                  <p class="card-text">{{company.companyCode}}</p>
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Annual Turnover - {{company.companyTurnover}} Lakhs</li>
