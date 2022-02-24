@@ -57,7 +57,7 @@ ngOnInit()
     this.adminRouter.navigateByUrl('manageSchedule');
    }
     addAirline(){
-      this.adminRouter.navigateByUrl('addAirline');
+      this.adminRouter.navigateByUrl('company_stock');
     }
     reports(){
       this.adminRouter.navigateByUrl('report');

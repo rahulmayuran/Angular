@@ -8,39 +8,30 @@
 </head>
 <body>
     <div class="jumbotron">
-        <form [formGroup] = "registerForm" >
+        <div class="alert alert-danger" *ngIf="flagErrors">{{message}}</div> 
+        <div class="alert alert-success" *ngIf="flagSuccess">{{successmessage}}</div> 
+        <form >
             
             <div class="form-group">
                 <label for="name">UserName : </label> 
-                <input [(ngModel)]="user.username" id="user" type="text" 
-                        formControlName ="username" name="name"/>
+                <input [(ngModel)]="user.username" id="user" type="text"  name="name"/>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Email : </label> 
+                <input [(ngModel)]="user.emailId" id="email" type="email"  name="email"/>
             </div>
 
             <div class="form-group">
                 <label for="password">Password :</label>
-                <input  [(ngModel)]="user.password" id="pass" type="password" 
-                        formControlName ="password" name="password"/>
-            </div>
-
-            <div class="form-group">
-                <label for="repassword">Retype Password :</label>
-                <input  [(ngModel)]="user.repassword" id="pass" type="password" 
-                        formControlName ="repassword" name="repassword"/>
+                <input  [(ngModel)]="user.password" id="pass" type="password"  name="password"/>
             </div>
             
             <br/>
         
-            <button (click) ="Register()"
-                 class="btn btn-outline-success btn-lg">Register</button>
+            <button (click) ="Register()" class="btn btn-outline-success btn-lg">Register</button>
 
             <br/>
-
-            <button *ngIf="checkUserForNull() && registerForm.controls['username'].touched
-            && registerForm.controls['repassword'].touched"
-             class="btn btn-danger">{{message}}</button>
-
-            <div style="color: green; font-size: bold;">{{successMsg}}</div> 
-            <!-- <div *ngFor="let u of user">{{u.UserName}}</div> -->
     </form>
 </div>
 </body>

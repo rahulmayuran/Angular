@@ -3,23 +3,28 @@
     <span class="badge badge-success">Powered by Kafka</span>
 </h3>
 
+<button class="btn btn-danger" (click)="back()"> Back</button>
 
 <div class="jumbotron">
 
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        
-        <div class="card border-primary mb-3" style="max-width: 18rem;">
-            <div class="card-header bg-transparent border-primary" >
-                Card-Header</div>
-            <div class="card-body text-success">
-              <h5 class="card-title">Card Title</h5>
-              <p class="card-text" >
-                Card Text
-                </p>
+    <div class="row justify-content-center row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 ">
+        <div *ngFor="let company of message" class="card cardStructure">
+            <div class="card-body cardContents">
+              <h4 class="card-title fontChange">{{company.companyName}}</h4>
             </div>
-            <div class="card-footer bg-transparent border-success">&copy; Reserved and verified by SEBI </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Min Price - 
+                  <span class="badge badge-warning">{{company.minStockPrice}}</span> 
+                </li>
+              <li class="list-group-item">Max Price - 
+                <span class="badge badge-warning">{{company.maxStockPrice}}</span>
+                </li>
+              <li class="list-group-item">Average price - 
+                <span class="badge badge-success">{{company.avgStockPrice}}</span>
+                </li>
+            </ul>
+          </div>
         </div>
-    </div>
 </div>
 
         

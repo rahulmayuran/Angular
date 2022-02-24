@@ -10,97 +10,51 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  user:any = [];
-  registerForm:FormGroup;
-  message:string = '';
-  successMsg:string = '';
+  user: any = {};
+  message: string = '';
+  successmessage:string= ''
+  flagErrors:boolean = false;
+  flagSuccess:boolean = false;
 
 
-  constructor(private userService:UserService, private route:Router) 
-  {
-    this.user= {role:''};
-
-    this.registerForm = new FormGroup({
-      username : new FormControl("", [
-            Validators.required,
-            Validators.pattern("[a-zA-Z]{1,}") 
-      ]),
-      password : new FormControl("", [
-            Validators.required,
-            Validators.minLength(8)
-      ]),
-      repassword : new FormControl("", [
-            Validators.required,
-            Validators.minLength(8)
-      ])
-    })
-   }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
 
-  Register()
-  {
-     if( this.checkUserForNull() )
-      return; 
+  Register() {
 
-    if(this.registerForm.value.username == 'admin'
-                && this.registerForm.value.password == 'admin'
-                   && this.registerForm.value.repassword == 'admin')
-      {
-        this.message = "Already registered as admin."
-      }
-    else if(this.userService.getUserByName(this.user.username)
-            .subscribe(  (data:any)=> 
-                {
-                  if(data.username  != this.registerForm.value.username
-                    && data.password != this.registerForm.value.password)
-                  {
-                    this.user.role = 'USER';
-                    console.log(JSON.stringify(data));
-                    console.log(JSON.stringify(this.user));
-                    this.userService.saveUser(this.user);
-                    this.successMsg = "New User SuccessFully Registered";
-                  }
-                  else if(data.username  == this.registerForm.value.username
-                    && data.password == this.registerForm.value.password)
-                  {
-                    this.successMsg = "Already Existing User";
-                  }
-                }) //End of Subscription
-                  )//End of ElseIf condition
-          {     
-            this.message = "Already Existing User"
-          }
-          else
-          {
-            this.message = "Try Registering after sometime"
-          }
+    this.userService.getUserByName(this.user.username).subscribe(
+      (userData) => {
+        if (userData && userData.username) {
+          this.flagErrors = true;
+          this.message = 'User '+userData.username+' already exists'
+          setTimeout(() => {
+            this.flagErrors = false
+          }, 2500);
+        }
+        else if(!this.user.password || !this.user.emailId){
+          this.flagErrors = true;
+          this.message = 'Please enter Password/E-mail'
+          setTimeout(() => {
+            this.flagErrors = false
+          }, 2500);
+        }
+        else {
+          console.log(JSON.stringify(this.user))
+          this.userService.saveUser(this.user).subscribe(
+            (data:any) => {
+              this.flagSuccess = true;
+              this.successmessage = JSON.stringify(data.username)+' successfully registered';
+              setTimeout(() => {
+                this.flagSuccess = false
+                this.router.navigateByUrl('login');
+              }, 2500);
+            });
+        }
+      })
   }
 
-  checkUserForNull():boolean
-  {
-    if(this.user.name=='')
-    {
-      this.message = "UserName not provided"
-      return true;
-    }
-    else if(this.user.password=='')
-    {
-     this.message = "Password not provided"
-     return true;
-    }
-    else if(this.user.password != this.user.repassword)
-    {
-      this.message = "Retype password again!"
-      return true;
-    }
-    else{
-      return false;
-    }
-    
-  }
- 
 
 }

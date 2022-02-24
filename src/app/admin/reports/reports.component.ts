@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StockService } from 'src/app/services/stock.service';
 
 @Component({
@@ -9,16 +10,21 @@ import { StockService } from 'src/app/services/stock.service';
 export class ReportsComponent implements OnInit {
 
   message:any =[];
+  resultcompany:any = [];
   PNR:any;
-  constructor(private reportService:StockService) { }
+  constructor(private reportService:StockService,private stockRouter:Router,) { }
 
   ngOnInit(): void {
     this.getTicketByid();
   }
 
+  back(){
+    this.stockRouter.navigateByUrl("/admin")
+  }
+
   getTicketByid()
   {
-    this.reportService.getLatestTicket().subscribe(
+    this.reportService.getStocksByAggregation().subscribe(
       (data:any) => {
         this.message = data;
 
