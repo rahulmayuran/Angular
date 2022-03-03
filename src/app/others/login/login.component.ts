@@ -14,8 +14,8 @@ export class LoginComponent {
 
   user: any = {};
   message: string = '';
-  navToRegister: string = 'Register';
-  flagErrors:boolean = false;
+  navToRegister: string = 'here';
+  flagErrors: boolean = false;
 
 
   constructor(private router: Router, private userService: UserService) { }
@@ -23,20 +23,18 @@ export class LoginComponent {
   validateCred() {
     this.userService.getUserByName(this.user.username).subscribe(
       (userData) => {
-        if(userData && userData.userId){
-          if(userData.password === this.user.password){
-            if(userData.role === 'USER')
-            {
-            sessionStorage.setItem('uName',userData.username);
-            this.router.navigateByUrl('user')
-            } 
-            else if(userData.role === 'ADMIN')
-            {
-            sessionStorage.setItem('uName',userData.username);
-            this.router.navigateByUrl('admin')
+        if (userData && userData.userId) {
+          if (userData.password === this.user.password) {
+            if (userData.role === 'USER') {
+              sessionStorage.setItem('uName', userData.username);
+              this.router.navigateByUrl('user')
+            }
+            else if (userData.role === 'ADMIN') {
+              sessionStorage.setItem('uName', userData.username);
+              this.router.navigateByUrl('admin')
             }
           }
-          else{
+          else {
             this.flagErrors = true;
             this.message = 'Wrong password, please retype'
             setTimeout(() => {
@@ -44,7 +42,7 @@ export class LoginComponent {
             }, 2500);
           }
         }
-        else{
+        else {
           this.flagErrors = true;
           this.message = 'User not found, please register'
           setTimeout(() => {

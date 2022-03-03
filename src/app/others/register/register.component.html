@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <div class="jumbotron">
-        <div class="alert alert-danger" *ngIf="flagErrors">{{message}}</div> 
-        <div class="alert alert-success" *ngIf="flagSuccess">{{successmessage}}</div> 
-        <form >
-            
+    <div class="jumbotron ">
+        <div class="alert alert-danger" *ngIf="flagErrors">{{message}}</div>
+        <div class="alert alert-success" *ngIf="flagSuccess">{{successmessage}}</div>
+
+        <img src="assets/stockbg.jfif" class="img-rounded" width="500px">
+
+        <form>
             <div class="form-group">
-                <label for="name">UserName : </label> 
-                <input [(ngModel)]="user.username" id="user" type="text"  name="name"/>
+                <label for="name">UserName</label>
+                <input class="input" [(ngModel)]="user.username" id="user" type="text" name="name" />
             </div>
 
             <div class="form-group">
-                <label for="name">Email : </label> 
-                <input [(ngModel)]="user.emailId" id="email" type="email"  name="email"/>
+                <label for="name">Email</label>
+                <input class="input-email" [(ngModel)]="user.emailId" id="email" type="email" name="email" />
             </div>
 
             <div class="form-group">
-                <label for="password">Password :</label>
-                <input  [(ngModel)]="user.password" id="pass" type="password"  name="password"/>
+                <label for="password">Password</label>
+                <input class="input" [(ngModel)]="user.password" id="pass" type="password" name="password" />
             </div>
-            
-            <br/>
-        
-            <button (click) ="Register()" class="btn btn-outline-success btn-lg">Register</button>
 
-            <br/>
-    </form>
-</div>
+            <br />
+
+            <button (click)="Register()" class="reg btn btn-success btn-lg">REGISTER</button>
+
+            <br />
+        </form>
+    </div>
 </body>
-</html>
 
+</html>
