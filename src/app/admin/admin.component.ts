@@ -12,9 +12,9 @@ import { StockService } from '../services/stock.service';
 })
 export class AdminComponent implements OnInit
 {
-  User:string='Admin';
   journey: NgbDateStruct|undefined;
   return: NgbDateStruct|undefined;
+  sName:any;
 
   resultstock:any = [];
   message:string='';
@@ -29,7 +29,8 @@ export class AdminComponent implements OnInit
 
 ngOnInit()
 {
-  // this.fetchstocks()
+  let sName = sessionStorage.getItem('uName')
+  this.sName = sName;
 }
 
   constructor(private adminRouter:Router, private stockService:StockService) 
@@ -38,23 +39,6 @@ ngOnInit()
       startDate : new FormControl("",Validators.required),
       endDate : new FormControl("",Validators.required)
     })
-   }
-
-
-   navigateToList(){
-    this.adminRouter.navigateByUrl('flightList');
-   }
-   searchFlights(){
-    this.adminRouter.navigateByUrl('search');
-   }
-   manageBookings(){
-    this.adminRouter.navigateByUrl('manage');
-   }
-   manageFlights(){
-    this.adminRouter.navigateByUrl('manageFlights');
-   }
-   manageSchedule(){
-    this.adminRouter.navigateByUrl('manageSchedule');
    }
     addAirline(){
       this.adminRouter.navigateByUrl('company_stock');

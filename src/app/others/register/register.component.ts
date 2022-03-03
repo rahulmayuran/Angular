@@ -34,9 +34,9 @@ export class RegisterComponent implements OnInit {
             this.flagErrors = false
           }, 2500);
         }
-        else if(!this.user.password || !this.user.emailId){
+        else if(!this.user.password || !this.user.emailId ||  !this.user.username){
           this.flagErrors = true;
-          this.message = 'Please enter Password/E-mail'
+          this.message = 'Please enter all details'
           setTimeout(() => {
             this.flagErrors = false
           }, 2500);

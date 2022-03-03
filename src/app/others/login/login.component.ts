@@ -27,13 +27,13 @@ export class LoginComponent {
           if(userData.password === this.user.password){
             if(userData.role === 'USER')
             {
+            sessionStorage.setItem('uName',userData.username);
             this.router.navigateByUrl('user')
-            console.log("user paya")
             } 
             else if(userData.role === 'ADMIN')
             {
+            sessionStorage.setItem('uName',userData.username);
             this.router.navigateByUrl('admin')
-            console.log("Admin paya")
             }
           }
           else{
