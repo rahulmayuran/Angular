@@ -1,3 +1,8 @@
+.heading{
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .transitioning {
     animation: moveleft 60s 10 normal forwards;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
