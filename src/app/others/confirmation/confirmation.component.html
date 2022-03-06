@@ -1,0 +1,23 @@
+<div class="popup-container">
+    <div class="popup">
+        <div class="popup-header">
+            <div class="popup-title">
+                {{ popupTitle }}
+            </div>
+        </div>
+        <div class="popup-content">
+            <img src="assets/confirmation-close.svg" alt="" (click)="onClick(false)" id="closeCOnfirm" />
+            <div class="popup-question">
+                {{ popupQuestion }}
+            </div>
+            <div class="actions">
+                <button type="button" (click)="onClick(true)" id="yesConfirm" class="yes">
+                    {{ yesText }}
+                </button>
+                <button type="button" (click)="onClick(false)" id="noConfirm" class="no">
+                    {{ noText }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

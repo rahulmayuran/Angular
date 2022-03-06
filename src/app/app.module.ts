@@ -12,27 +12,37 @@ import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./others/header/header.component";
 import { LoginComponent } from "./others/login/login.component";
 import { RegisterComponent } from "./others/register/register.component";
+import { UserComponent } from "./user/user.component";
+import { ConfirmationComponent } from './others/confirmation/confirmation.component';
 
-import { BookingService } from "./services/booking.service";
 import { StockService } from "./services/stock.service";
 import { UserService } from "./services/user.service";
-import { UserComponent } from "./user/user.component";
 
-const routes:Routes = [
-  {path:"", component:LoginComponent},
-  {path:"admin", component:AdminComponent},
-  {path: "user", component:UserComponent},
-  {path:"login", component:LoginComponent},
-  {path:"register", component:RegisterComponent},
-  {path:"company_stock", component:AddStockComponent},
-  {path:"report", component:ReportsComponent}
+
+const routes: Routes = [
+  { path: "", component: LoginComponent },
+  { path: "admin", component: AdminComponent },
+  { path: "user", component: UserComponent },
+  { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
+  { path: "company_stock", component: AddStockComponent },
+  { path: "report", component: ReportsComponent }
 ]
 
 @NgModule({
-  declarations: [AppComponent,  LoginComponent, AdminComponent, HeaderComponent,RegisterComponent,AddStockComponent,ReportsComponent, UserComponent],
-  imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule,ReactiveFormsModule, NgbModule, HttpClientModule],
-  providers: [UserService,StockService, BookingService],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    AdminComponent,
+    HeaderComponent,
+    RegisterComponent,
+    AddStockComponent,
+    ReportsComponent,
+    UserComponent,
+    ConfirmationComponent],
+  imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule, ReactiveFormsModule, NgbModule, HttpClientModule],
+  providers: [UserService, StockService],
   bootstrap: [AppComponent],
-  exports :[]
+  exports: []
 })
 export class AppModule { }

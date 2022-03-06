@@ -1,0 +1,17 @@
+{
+  "hosting": [
+    {
+      "app": {
+        "project": "Integration",
+        "target": "build",
+        "configuration": "production",
+        "path": "dist/Integration"
+      },
+      "azureHosting": {
+        "subscription": "7c4314ab-1d35-4058-b4d2-23581d98ee8a",
+        "resourceGroupName": "Integration-static-deploy",
+        "account": "integrationstatic"
+      }
+    }
+  ]
+}

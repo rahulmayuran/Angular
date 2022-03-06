@@ -1,7 +1,7 @@
 label{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: large;
-    font-weight: 700;
+    font-size: medium;
+    font-weight: 300;
 }
 
 input{
@@ -9,8 +9,14 @@ input{
     border-radius: 2em;
 }
 
+input:hover{
+    border: rgb(212, 255, 212) 0.2px solid;
+    box-shadow: 15px 20px 18px rgb(87, 87, 87);
+
+}
+
 .input{
-    border: blue 0.2px solid;
+    border: rgb(187, 187, 255) 0.2px solid;
     outline: none;
     padding-left: 1em;
     margin-left: 1em;
@@ -18,14 +24,12 @@ input{
 
 .log{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: 800;
+    font-weight: 400;
     box-shadow: 15px 20px 18px rgb(102, 102, 101);
     padding: 0.3em 7em;
     border : 1px solid rgb(182, 182, 180)
 }
 
 .img-rounded{
-
     box-shadow: 15px 20px 18px rgb(83, 85, 83);
-
 }

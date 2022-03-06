@@ -13,7 +13,6 @@ export class UserService {
   userUrl: string = "http://localhost:9052/api/v1.0/user";
   //userUrl:string = "http://ec2-3-22-99-145.us-east-2.compute.amazonaws.com:9051/user/api/v1.0/user";
   //userUrl:string = "http://localhost:9052/user/api/v1.0/user";
-  serviceuname: any;
 
   constructor(private httpConnect: HttpClient) {
   }

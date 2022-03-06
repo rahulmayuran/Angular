@@ -6,197 +6,197 @@ import { StockService } from 'src/app/services/stock.service';
 @Component({
   selector: 'app-add-stock',
   templateUrl: './add-stock.component.html',
-  styleUrls:['./add-stock.component.css']
+  styleUrls: ['./add-stock.component.css']
 })
 
-export class AddStockComponent implements OnInit{
+export class AddStockComponent implements OnInit {
 
-  ngOnInit(){
+  ngOnInit() {
   }
-  
-  company:any = [];
-  message:string=''
-  resultcompany:any = [];
-  stock:any=[];
-  resultstock:any = [];
-  
-  companyFrom:FormGroup;
-  stockForm:FormGroup;
 
-  constructor(private stockRouter:Router, private stockService:StockService) 
-  { 
+  company: any = [];
+  message: string = ''
+  resultcompany: any = [];
+  stock: any = [];
+  resultstock: any = [];
+
+  companyFrom: FormGroup;
+  stockForm: FormGroup;
+
+  yesText: string = 'Delete';
+  noText: string = 'No';
+  popupTitle: string = 'Warning';
+  popupQuestion: string = "Are you sure to delete this stock?"
+  confirmationPopup: boolean = false;
+  deleteFlag: boolean = false;
+
+  constructor(private stockRouter: Router, private stockService: StockService) {
     this.companyFrom = new FormGroup(
       {
-      companyName : new FormControl("",Validators.required),
-      companyCEO : new FormControl("",Validators.required),
-      companyWebsite : new FormControl("",Validators.required),
-      companyTurnover : new FormControl("", Validators.required),
-      exchangeType : new FormControl("", Validators.required)
+        companyName: new FormControl("", Validators.required),
+        companyCEO: new FormControl("", Validators.required),
+        companyWebsite: new FormControl("", Validators.required),
+        companyTurnover: new FormControl("", Validators.required),
+        exchangeType: new FormControl("", Validators.required)
 
-    })
+      })
 
     this.stockForm = new FormGroup({
-      stockPrice: new FormControl("",Validators.required),
+      stockPrice: new FormControl("", Validators.required),
     })
   }
 
-  back(){
+  back() {
     this.stockRouter.navigateByUrl("/admin")
   }
 
   //company Operations 
-  Persistcompany(company:any)
-  {
-    console.log("company this.Object contains -> "+ JSON.stringify(this.company))
-    console.log("company Object contains -> "+ JSON.stringify(company))
+  Persistcompany(company: any) {
+    console.log("company this.Object contains -> " + JSON.stringify(this.company))
+    console.log("company Object contains -> " + JSON.stringify(company))
 
-    if( this.checkcompany() ){
+    if (this.checkcompany()) {
       return;
     }
-    else
-    {
-       if(this.companyFrom.value.exchangeType == 'NSE')
-       {
-        company.isNSE = true; 
+    else {
+      if (this.companyFrom.value.exchangeType == 'NSE') {
+        company.isNSE = true;
         company.isBSE = false;
-       }
-       else{
-        company.isNSE = false; 
+      }
+      else {
+        company.isNSE = false;
         company.isBSE = true;
-       }
+      }
 
       this.stockService.savecompany(company)
-        .subscribe(  (data:any)=>
-        {
+        .subscribe((data: any) => {
           data = this.company;
-          alert("Company "+company.companyName+" saved");
-          console.log("Successfully saved company ->"+ JSON.stringify(data))
+          alert("Company " + company.companyName + " saved");
+          console.log("Successfully saved company ->" + JSON.stringify(data))
         })
-      }
     }
+  }
 
-  fetchcompanies(){
+  fetchcompanies() {
     console.log("Fetching All companys")
     this.stockService.getcompanies().subscribe(
-      (data:any)=>{
-        console.log("Fetched companies from MongoDB ->"+ JSON.stringify(data))
+      (data: any) => {
+        console.log("Fetched companies from MongoDB ->" + JSON.stringify(data))
         this.resultcompany = data;
-      }, (err:any)=>{
+      }, (err: any) => {
         this.message = "Failed to Fetch data"
       }
     )
   }
 
 
-  deletecompany(companyId:number)
-  {
-    console.log("delete the company with id "+companyId);
-     const promptValue = confirm("Are you sure to delete this company? Action can't be undone");
+  deletecompany(companyId: number) {
+    console.log("delete the company with id " + companyId);
+    const promptValue = confirm("Are you sure to delete this company? Action can't be undone");
 
-    if(promptValue)
-    {
+    if (promptValue) {
       this.stockService.deletecompanyWithId(companyId);
     }
-    else
-    {
-      this.stockService.deletecompanyWithId(1/0);
+    else {
+      this.stockService.deletecompanyWithId(1 / 0);
     }
-   
+
   }
 
-    addcompany()
-    {
-      this.company.push({
-        companyName:'',
-        companyCEO:'',
-        companyWebsite:'',
-        companyTurnover:'',
-        exchangeType:''
-      });
-    }
+  addcompany() {
+    this.company.push({
+      companyName: '',
+      companyCEO: '',
+      companyWebsite: '',
+      companyTurnover: '',
+      exchangeType: ''
+    });
+  }
 
-    popcompany(){
-      this.company.pop({
-        companyName:'',
-        companyCEO:'',
-        companyWebsite:'',
-        companyTurnover:'',
-        exchangeType:''
-      });
-    }
+  popcompany() {
+    this.company.pop({
+      companyName: '',
+      companyCEO: '',
+      companyWebsite: '',
+      companyTurnover: '',
+      exchangeType: ''
+    });
+  }
 
-  checkcompany():boolean
-  {
-    if(this.company.companyName =='' || this.company.companyWebsite==''
-        || this.company.companyCEO=='' || this.company.exchangeType=='')
-        {
-     this.message = "Kindly fill all the details"
+  checkcompany(): boolean {
+    if (this.company.companyName == '' || this.company.companyWebsite == ''
+      || this.company.companyCEO == '' || this.company.exchangeType == '') {
+      this.message = "Kindly fill all the details"
       return true;
     }
     return false;
   }
 
   //stock Operations 
-  addstock(company:any)
-  {
-    this.stock.push({stockPrice:'',company:company});
+  addstock(company: any) {
+    this.stock.push({ stockPrice: '', company: company });
   }
 
-  popstock(){
-    this.stock.pop({stockPrice:'',company:''});
+  popstock() {
+    this.stock.pop({ stockPrice: '', company: '' });
   }
 
-  Persiststock(stock:any)
-  {
-    console.log("stock this.Object contains -> "+ JSON.stringify(this.stock))
-    console.log("stock Object contains -> "+ JSON.stringify(stock))
+  Persiststock(stock: any) {
+    console.log("stock this.Object contains -> " + JSON.stringify(this.stock))
+    console.log("stock Object contains -> " + JSON.stringify(stock))
 
-    if( this.checkstock() ){
+    if (this.checkstock()) {
       return;
     }
-    else
-    {
-      console.log("Form company name - "+ stock.company.companyName)
+    else {
+      console.log("Form company name - " + stock.company.companyName)
       stock.companyName = stock.company.companyName;
 
-      alert('stock Saved for '+stock.company.companyName)
+      alert('stock Saved for ' + stock.company.companyName)
       this.stockService.savestock(stock)
-        .subscribe(  (data:any)=>
-        {
+        .subscribe((data: any) => {
           data = this.stock;
-          console.log("Successfully saved stock with model ->"+ JSON.stringify(data))
+          console.log("Successfully saved stock with model ->" + JSON.stringify(data))
         })
+    }
+  }
+
+  fetchstocks() {
+    console.log("Fetching All stocks")
+    this.stockService.getstocks().subscribe(
+      (data: any) => {
+        console.log("Fetched stocks from DB ->" + JSON.stringify(data))
+        this.resultstock = data;
+      }, (err: any) => {
+        this.message = "Failed to Fetch data"
       }
-    }
+    )
+  }
 
-    fetchstocks(){
-      console.log("Fetching All stocks")
-      this.stockService.getstocks().subscribe(
-        (data:any)=>{
-          console.log("Fetched stocks from DB ->"+ JSON.stringify(data))
-          this.resultstock = data;
-        }, (err:any)=>{
-          this.message = "Failed to Fetch data"
-        }
-      )
-    }
-
-  deletestock(stockId:number)
-    {
-      console.log("delete the stock with id "+stockId);
-      confirm("Delete this stock ?");
+  deletestock(stockId: number) {
+    this.confirmationPopup = !this.confirmationPopup;
+    if (this.deleteFlag) {
       this.stockService.deletestock(stockId);
     }
+    else {
+      this.confirmationPopup = !this.confirmationPopup;
+    }
+  }
 
-    checkstock():boolean
-  {
-    if(this.stock.price =='' || this.stock.noOfSeats==''
-        || this.stock.journey=='' || this.stock.destination)
-        {
-     this.message = "Kindly fill all the details"
+
+  actionConfirmed(action: boolean) {
+    if (action) {
+      this.deleteFlag = !this.deleteFlag;
+    }
+  }
+
+  checkstock(): boolean {
+    if (this.stock.price == '' || this.stock.noOfSeats == ''
+      || this.stock.journey == '' || this.stock.destination) {
+      this.message = "Kindly fill all the details"
       return true;
     }
     return false;
   }
 }
-  
+
