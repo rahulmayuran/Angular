@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,18 +7,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  
-  constructor(private userRoute:Router) {
-     
-   }
-   loginUser(){
+
+  constructor(private userRoute: Router) {
+
+  }
+  loginUser() {
     this.userRoute.navigateByUrl('/login');
-   }
-   registerUser(){
+  }
+  registerUser() {
     this.userRoute.navigateByUrl('/register');
-   }
-   logout(){
-     this.userRoute.navigateByUrl('/logout');
-   }
+  }
+  logout() {
+    this.userRoute.navigateByUrl('/login');
+  }
 }
 

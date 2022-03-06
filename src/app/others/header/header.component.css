@@ -1,5 +1,5 @@
 .transitioning {
-    animation: moveleft 100s 10 normal forwards;
+    animation: moveleft 60s 10 normal forwards;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 16px;
     font-weight: bold;
@@ -11,4 +11,13 @@
    from { transform: translateX(0); }
    to   { transform: translateX(70%); }
 
+}
+
+.logout{
+    float: right;
+    width: 15%;
+}
+
+.logout:hover{
+    box-shadow: 4px 4px 4px rgb(242, 99, 99);
 }
