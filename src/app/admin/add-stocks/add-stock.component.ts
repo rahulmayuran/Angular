@@ -20,18 +20,18 @@ export class AddStockComponent implements OnInit {
   stock: any = [];
   resultstock: any = [];
 
-  companyFrom: FormGroup;
+  companyForm: FormGroup;
   stockForm: FormGroup;
 
   yesText: string = 'Delete';
   noText: string = 'No';
   popupTitle: string = 'Warning';
-  popupQuestion: string = "Are you sure to delete this stock?"
+  popupQuestion: string = "Are you sure to delete?"
   confirmationPopup: boolean = false;
   deleteFlag: boolean = false;
 
   constructor(private stockRouter: Router, private stockService: StockService) {
-    this.companyFrom = new FormGroup(
+    this.companyForm = new FormGroup(
       {
         companyName: new FormControl("", Validators.required),
         companyCEO: new FormControl("", Validators.required),
@@ -59,7 +59,7 @@ export class AddStockComponent implements OnInit {
       return;
     }
     else {
-      if (this.companyFrom.value.exchangeType == 'NSE') {
+      if (this.companyForm.value.exchangeType == 'NSE') {
         company.isNSE = true;
         company.isBSE = false;
       }
@@ -73,7 +73,10 @@ export class AddStockComponent implements OnInit {
           data = this.company;
           alert("Company " + company.companyName + " saved");
           console.log("Successfully saved company ->" + JSON.stringify(data))
-        })
+        }, (err) => {
+          alert(err);
+        }
+        )
     }
   }
 
@@ -91,16 +94,8 @@ export class AddStockComponent implements OnInit {
 
 
   deletecompany(companyId: number) {
-    console.log("delete the company with id " + companyId);
-    const promptValue = confirm("Are you sure to delete this company? Action can't be undone");
-
-    if (promptValue) {
-      this.stockService.deletecompanyWithId(companyId);
-    }
-    else {
-      this.stockService.deletecompanyWithId(1 / 0);
-    }
-
+    this.confirmationPopup = !this.confirmationPopup
+    this.stockService.deletecompanyWithId(companyId);
   }
 
   addcompany() {
@@ -124,9 +119,11 @@ export class AddStockComponent implements OnInit {
   }
 
   checkcompany(): boolean {
-    if (this.company.companyName == '' || this.company.companyWebsite == ''
-      || this.company.companyCEO == '' || this.company.exchangeType == '') {
-      this.message = "Kindly fill all the details"
+    if (this.companyForm.value.companyName == ''
+      || this.companyForm.value.companyCEO == ''
+      || this.companyForm.value.companyTurnover == ''
+      || this.companyForm.value.companyWebsite == ''
+    ) {
       return true;
     }
     return false;
@@ -137,14 +134,7 @@ export class AddStockComponent implements OnInit {
     this.stock.push({ stockPrice: '', company: company });
   }
 
-  popstock() {
-    this.stock.pop({ stockPrice: '', company: '' });
-  }
-
   Persiststock(stock: any) {
-    console.log("stock this.Object contains -> " + JSON.stringify(this.stock))
-    console.log("stock Object contains -> " + JSON.stringify(stock))
-
     if (this.checkstock()) {
       return;
     }
@@ -175,25 +165,21 @@ export class AddStockComponent implements OnInit {
 
   deletestock(stockId: number) {
     this.confirmationPopup = !this.confirmationPopup;
-    if (this.deleteFlag) {
-      this.stockService.deletestock(stockId);
+    this.stockService.deletestock(stockId);
+  }
+
+
+  actionConfirmed(action: boolean) {
+    if (action) {
+      this.confirmationPopup = !this.confirmationPopup;
     }
     else {
       this.confirmationPopup = !this.confirmationPopup;
     }
   }
 
-
-  actionConfirmed(action: boolean) {
-    if (action) {
-      this.deleteFlag = !this.deleteFlag;
-    }
-  }
-
   checkstock(): boolean {
-    if (this.stock.price == '' || this.stock.noOfSeats == ''
-      || this.stock.journey == '' || this.stock.destination) {
-      this.message = "Kindly fill all the details"
+    if (this.stockForm.value.stockPrice == '') {
       return true;
     }
     return false;

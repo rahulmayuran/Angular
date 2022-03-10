@@ -13,11 +13,11 @@
     <button class="btn btn-danger" (click)="back()"> Back</button>
 
     <!-- company form -->
-    <form [formGroup]=companyFrom>
+    <form [formGroup]=companyForm>
 
         <div class="container-fluid">
 
-            <h4 class="navbar bg-warning clearfix fontChange">Manage Company</h4>
+            <h4 class="navbar bg-warning clearfix fontChange">COMPANY</h4>
 
             <table class="table table-striped table-hover">
                 <thead>
@@ -35,7 +35,8 @@
 
                         <td> <input type="text" [(ngModel)]="a.companyName" formControlName="companyName"></td>
                         <td> <input type="text" [(ngModel)]="a.companyCEO" formControlName="companyCEO"></td>
-                        <td> <input type="text" [(ngModel)]="a.companyWebsite" formControlName="companyWebsite"></td>
+                        <td> <input type="text" style="width: 400px;" [(ngModel)]="a.companyWebsite"
+                                placeholder="https://" formControlName="companyWebsite"></td>
                         <td> <input type="number" [(ngModel)]="a.companyTurnover" formControlName="companyTurnover"
                                 placeholder="In lakhs"></td>
                         <td>
@@ -45,8 +46,10 @@
                             </select>
                         </td>
                         <td>
-                            <button class="btn btn-outline-success" (click)="Persistcompany(a)" type="submit"><i
-                                    class="fa fa-floppy-o"> Save</i></button>
+                            <button class="btn btn-outline-success" (click)="Persistcompany(a)"
+                                [disabled]="checkcompany()"
+                                [ngStyle]="checkcompany() ? {'color' : 'gray'} : {'color' : 'green'}" type="submit">
+                                <i class="fa fa-floppy-o"> Save</i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -97,7 +100,7 @@
     <form [formGroup]=stockForm>
 
         <div class="container-fluid" *ngIf="stock.length!=0">
-            <h4 class="navbar bg-warning clearfix fontChange">Manage Stocks</h4>
+            <h4 class="navbar bg-warning clearfix fontChange">STOCK</h4>
             <div class="container-fluid">
 
                 <table class="table table-striped table-hover">
@@ -115,10 +118,10 @@
                                     formControlName="stockPrice"></td>
                         </tr>
                         <div class="btn-group btn-block">
-                            <button class="btn btn-outline-success" (click)="Persiststock(resultStock)" type="submit"><i
-                                    class="fa fa-floppy-o">Save Stock</i></button>
-                            <button class="btn btn-danger" (click)="popstock()" type="submit"><i
-                                    class="fa fa-trash">Remove Stock</i></button>
+                            <button class="btn btn-outline-success" (click)="Persiststock(resultStock)" type="submit"
+                                [disabled]="checkstock()"
+                                [ngStyle]="checkstock() ? {'color' : 'gray'} : {'color' : 'green'}"><i
+                                    class="fa fa-floppy-o"> Save Stock </i></button>
                         </div>
                     </tbody>
                 </table>

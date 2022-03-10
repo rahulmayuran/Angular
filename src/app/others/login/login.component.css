@@ -25,9 +25,15 @@ input:hover{
 .log{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 400;
-    box-shadow: 15px 20px 18px rgb(102, 102, 101);
     padding: 0.3em 7em;
-    border : 1px solid rgb(182, 182, 180)
+    border : 1px solid rgb(167, 167, 165)
+}
+
+.log:hover{
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-shadow: 15px 20px 18px rgb(87, 87, 87);
+    padding: 0.3em 7em;
+    border : 1px solid rgb(180, 255, 164);
 }
 
 .img-rounded{

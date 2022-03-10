@@ -9,14 +9,12 @@
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 
-<body bgcolor="assets/stockbg.jfif">
+<body>
 
     <div class="container-fluid">
         <h3 class="navbar text-light bg-primary">Welcome {{sName}}
             <div class="btn btn-group">
-                <!-- <button  class="btn btn-dark"  (click) = "manageDiscounts()">Search companies</button>
-                <button  class="btn btn-dark"  (click) = "manageSchedule()">List All Companies</button> -->
-                <button class="btn btn-dark" (click)="addAirline()" >Add Company/Stock</button>
+                <button class="btn btn-dark" (click)="companyStock()">Add Company/Stock</button>
                 <button class="btn btn-light text-dark" (click)="reports()">Reports</button>
             </div>
         </h3>
@@ -29,12 +27,11 @@
             <input type="date" [(ngModel)]="resultStock.startDate" name=startDate formControlName="startDate">
             <input type="date" [(ngModel)]="resultStock.endDate" name=endDate formControlName="endDate">
             <button class="btn btn-outline-success btn-md"
-                (click)="filterStocks(resultStock.startDate, resultStock.endDate)" type="submit"><i
+                (click)="filterStocks(resultStock.startDate, resultStock.endDate)" type="submit"
+                [disabled]="checkDates()" [ngStyle]="checkDates() ? {'color' : 'gray'} : {'color' : 'green'}"><i
                     class="fa fa-search"> Search </i></button>
-            <button class="btn btn-outline-danger btn-md" (click)="reset()" type="reset()"> <i
-                    class="fa fa-refresh">Reset Filters</i></button>
-            <button class="btn btn-outline-primary btn-md" (click)="fetchStocksBasedOnPrices()" type="submit"><i 
-                class="fa fa-filter"> Filter By Company </i></button>
+            <button class="btn btn-outline-primary btn-md" (click)="fetchStocksBasedOnPrices()" type="submit"><i
+                    class="fa fa-filter"> Filter By Company </i></button>
         </form>
 
         <br />
@@ -48,26 +45,26 @@
         </div>
 
         <!-- Fetch stock Details -->
-    <div class="scrollbar">
-        <table class="table table-striped table-hover">
-            <thead *ngIf="filteredStocks.length!=0" class="thead-dark text-light">
-                <tr>
-                    <th>company</th>
-                    <th>Stock Id</th>
-                    <th>Stock Price</th>
-                    <th>Stock Date</th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let displayStock of filteredStocks">
-                <tr>
-                    <td>{{displayStock?.companyName}}</td>
-                    <td>{{displayStock.stockId}}</td>
-                    <td>{{displayStock.stockPrice}}</td>
-                    <td>{{displayStock.stockDate| date:'dd/MM/yy h:mm:ss a'}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="scrollbar">
+            <table class="table table-striped table-hover">
+                <thead *ngIf="filteredStocks.length!=0" class="thead-dark text-light">
+                    <tr>
+                        <th>company</th>
+                        <th>Stock Id</th>
+                        <th>Stock Price</th>
+                        <th>Stock Date</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let displayStock of filteredStocks">
+                    <tr>
+                        <td>{{displayStock?.companyName}}</td>
+                        <td>{{displayStock.stockId}}</td>
+                        <td>{{displayStock.stockPrice}}</td>
+                        <td>{{displayStock.stockDate| date:'dd/MM/yy h:mm:ss a'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <!-- Fetch stock Details by Prices-->
         <table class="table table-striped table-hover">
@@ -81,7 +78,7 @@
             </thead>
             <tbody *ngFor="let pricedStock of companyStocks">
                 <tr>
-                    <td>{{pricedStock.companyName}}  </td>
+                    <td>{{pricedStock.companyName}} </td>
                     <td>{{pricedStock.avgStockPrice}}</td>
                     <td>{{pricedStock.minStockPrice}}</td>
                     <td>{{pricedStock.maxStockPrice}}</td>

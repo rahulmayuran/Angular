@@ -10,109 +10,99 @@ import { StockService } from '../services/stock.service';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent implements OnInit
-{
-  journey: NgbDateStruct|undefined;
-  return: NgbDateStruct|undefined;
-  sName:any;
+export class AdminComponent implements OnInit {
+  journey: NgbDateStruct | undefined;
+  return: NgbDateStruct | undefined;
+  sName: any;
 
-  resultstock:any = [];
-  message:string='';
-  dateForm:FormGroup;
+  resultstock: any = [];
+  message: string = '';
+  dateForm: FormGroup;
 
-  resultStock:any = {startDate:'',endDate:''};
-  filteredStocks:any = [];
-  companyStocks:any = [];
-  aggregatedStocks:any = [];
-
+  resultStock: any = { startDate: '', endDate: '' };
+  filteredStocks: any = [];
+  companyStocks: any = [];
+  aggregatedStocks: any = [];
 
 
-ngOnInit()
-{
-  let sName = sessionStorage.getItem('uName')
-  this.sName = sName;
-}
 
-  constructor(private adminRouter:Router, private stockService:StockService) 
-  {
+  ngOnInit() {
+    let sName = sessionStorage.getItem('uName')
+    this.sName = sName;
+  }
+
+  constructor(private adminRouter: Router, private stockService: StockService) {
     this.dateForm = new FormGroup({
-      startDate : new FormControl("",Validators.required),
-      endDate : new FormControl("",Validators.required)
+      startDate: new FormControl("", Validators.required),
+      endDate: new FormControl("", Validators.required)
     })
-   }
-    addAirline(){
-      this.adminRouter.navigateByUrl('company_stock');
-    }
-    reports(){
-      this.adminRouter.navigateByUrl('report');
-    }
+  }
+  companyStock() {
+    this.adminRouter.navigateByUrl('company_stock');
+  }
+  reports() {
+    this.adminRouter.navigateByUrl('report');
+  }
 
-    fetchstocks(){
-      console.log("Fetching All stocks")
-      this.stockService.getstocks()
-      .subscribe( (data:any)=>
-        {
-          const list = data.length;
-          console.log("List of stocks is "+list)
+  fetchstocks() {
+    console.log("Fetching All stocks")
+    this.stockService.getstocks()
+      .subscribe((data: any) => {
+        const list = data.length;
+        console.log("List of stocks is " + list)
 
-          data.forEach((s:any) => 
-          {
-            console.log("Min stock price is "+Math.min(s.stockPrice)+" -Max price is- "+Math.max(s.stockPrice)+" with company "+s.companyName);
-          });
+        data.forEach((s: any) => {
+          console.log("Min stock price is " + Math.min(s.stockPrice) + " -Max price is- " + Math.max(s.stockPrice) + " with company " + s.companyName);
+        });
 
-          // console.log("Fetched stocks from MongoDB ->"+ JSON.stringify(data))
-          this.resultstock = data;
-        }, 
-        (err:any)=>
-        {
+        // console.log("Fetched stocks from MongoDB ->"+ JSON.stringify(data))
+        this.resultstock = data;
+      },
+        (err: any) => {
           this.message = "Failed to Fetch data"
         })
+  }
+
+  fetchStocksBasedOnPrices() {
+    this.stockService.getStocksByPrice().subscribe(stocks => {
+      this.companyStocks = stocks;
+      console.log("Stock details based on price " + JSON.stringify(stocks))
+    })
+  }
+
+  fetchStocksByAggregation() {
+    this.stockService.getStocksByAggregation().subscribe(aggregate => {
+      this.aggregatedStocks = aggregate;
+      console.log("Stock details based on Aggregation " + JSON.stringify(aggregate))
+
+    })
+  }
+
+  filterStocks(from: Date, to: Date) {
+    from = this.dateForm.value.startDate;
+    to = this.dateForm.value.endDate;
+
+    if (this.checkDates()) {
+      alert("Kindly provide both dates")
     }
 
-    fetchStocksBasedOnPrices()
-    {
-      this.stockService.getStocksByPrice().subscribe(stocks=>{
-        this.companyStocks = stocks;
-        console.log("Stock details based on price "+JSON.stringify(stocks))
-      })
-    }
-
-    fetchStocksByAggregation(){
-      this.stockService.getStocksByAggregation().subscribe(aggregate=>{
-        this.aggregatedStocks = aggregate;
-        console.log("Stock details based on Aggregation "+JSON.stringify(aggregate))
-
-      })
-    }
-
-    filterStocks(from:Date, to:Date)
-    {
-      from = this.dateForm.value.startDate ;
-      to = this.dateForm.value.endDate ;
-
-      if(to == null || to === null){
-        alert("Kindly provide both dates")
-      }
-
-      console.log("Start date is "+from+" End date is "+to);
-
-      this.stockService.getFilteredstocks(from,to)
-        .subscribe( (data:any) => 
-        {
+    else {
+      this.stockService.getFilteredstocks(from, to)
+        .subscribe((data: any) => {
           this.filteredStocks = data;
-          console.log("Filtered Stocks- "+data);
-          this.message = data.length+" stock(s) found";
-        }, 
-        (err:any)=>
-        {
-          alert("Kindly provide both dates")
-          this.reset();
-        })
-
+          console.log("Filtered Stocks- " + data);
+          this.message = data.length + " stock(s) found";
+        },
+          (err: any) => {
+            alert("Kindly provide both dates")
+          })
     }
+  }
 
-    reset()
-    {
-      this.message = "";
+  checkDates(): boolean {
+    if (this.dateForm.value.startDate == '' || this.dateForm.value.endDate == '') {
+      return true
     }
+    return false;
+  }
 }

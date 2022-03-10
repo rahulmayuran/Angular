@@ -12,6 +12,18 @@ label
 {
     font-weight: 500;
 }
+
+input, select{
+ padding: 0.5em;
+    border-radius: 2em;
+    border: rgb(196, 196, 252) 0.2px solid;
+}
+
+input:hover, select:hover{
+ border: rgb(186, 255, 186) 0.2px solid;
+    box-shadow: 15px 20px 18px rgb(87, 87, 87);
+}
+
 .cardStructure{
     margin: 0.5em 0.5em;
     border: 1px solid rgb(213, 213, 235);
