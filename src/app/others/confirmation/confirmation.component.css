@@ -12,6 +12,7 @@
   width: 800px;
   height: 250px;
   background-color: white;
+  box-shadow: 50px 10px 50px 2px rgb(87, 87, 87);
 }
 
 .popup-container .popup img {

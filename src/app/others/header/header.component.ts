@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { MsalService } from '@azure/msal-angular';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +10,9 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
 
-  constructor(private userRoute: Router) {
+  constructor(
+    private userRoute: Router,
+    private msalService: MsalService) {
 
   }
   loginUser() {
@@ -18,7 +22,8 @@ export class HeaderComponent {
     this.userRoute.navigateByUrl('/register');
   }
   logout() {
-    this.userRoute.navigateByUrl('/login');
+    // this.userRoute.navigateByUrl('/login');
+    this.msalService.logoutRedirect({ postLogoutRedirectUri: environment.logoutUrl })
   }
 }
 

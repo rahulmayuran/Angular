@@ -1,4 +1,4 @@
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
@@ -17,16 +17,44 @@ import { ConfirmationComponent } from './others/confirmation/confirmation.compon
 
 import { StockService } from "./services/stock.service";
 import { UserService } from "./services/user.service";
+import { MsalGuard, MsalInterceptor, MsalModule, MsalRedirectComponent } from "@azure/msal-angular";
+import { InteractionType, PublicClientApplication } from "@azure/msal-browser";
+import { environment } from "src/environments/environment";
 
 
 const routes: Routes = [
-  { path: "", component: LoginComponent },
-  { path: "admin", component: AdminComponent },
-  { path: "user", component: UserComponent },
-  { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
-  { path: "company_stock", component: AddStockComponent },
-  { path: "report", component: ReportsComponent }
+  {
+    path: "",
+    component: LoginComponent,
+  },
+  {
+    path: "admin",
+    component: AdminComponent,
+  },
+  {
+    path: "user",
+    component: UserComponent,
+
+  },
+  {
+    path: "login",
+    component: LoginComponent,
+
+  },
+  {
+    path: "register",
+    component: RegisterComponent
+  },
+  {
+    path: "company_stock",
+    component: AddStockComponent,
+    canActivate: [MsalGuard]
+  },
+  {
+    path: "report",
+    component: ReportsComponent,
+    canActivate: [MsalGuard]
+  }
 ]
 
 @NgModule({
@@ -40,9 +68,51 @@ const routes: Routes = [
     ReportsComponent,
     UserComponent,
     ConfirmationComponent],
-  imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule, ReactiveFormsModule, NgbModule, HttpClientModule],
-  providers: [UserService, StockService],
-  bootstrap: [AppComponent],
+  imports: [BrowserModule,
+    RouterModule.forRoot(routes),
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    HttpClientModule,
+    MsalModule.forRoot(new PublicClientApplication(
+      {
+        auth: {
+          clientId: "c51ef931-6bc6-403c-b7f1-6b0d35d9f9d9",
+          redirectUri: environment.logoutUrl,
+          authority: 'https://login.microsoftonline.com/8aac3eeb-5127-45ea-b1ef-454856977e68'
+        },
+        cache: {
+          cacheLocation: 'localStorage',
+          storeAuthStateInCookie: false
+        }
+      }
+    ),
+      {
+        interactionType: InteractionType.Redirect,
+        authRequest: {
+          scopes: ['user.read']
+        }
+      },
+      {
+        interactionType: InteractionType.Redirect,
+        protectedResourceMap: new Map(
+          [
+            ["https://graph.microsoft.com/v1.0/me",
+              ['user.read']
+            ]
+          ]
+        )
+      })
+  ],
+  providers: [UserService,
+    StockService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MsalInterceptor,
+      multi: true
+    },
+    MsalGuard],
+  bootstrap: [AppComponent, MsalRedirectComponent],
   exports: []
 })
 export class AppModule { }
