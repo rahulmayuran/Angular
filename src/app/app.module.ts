@@ -30,14 +30,11 @@ const routes: Routes = [
   {
     path: "admin",
     component: AdminComponent,
-    canActivate: [MsalGuard]
 
   },
   {
     path: "user",
     component: UserComponent,
-    canActivate: [MsalGuard]
-
   },
   {
     path: "login",
