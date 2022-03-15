@@ -9,28 +9,16 @@ import { StockService } from 'src/app/services/stock.service';
 })
 export class ReportsComponent implements OnInit {
 
-  message:any =[];
-  resultcompany:any = [];
-  PNR:any;
-  constructor(private reportService:StockService,private stockRouter:Router,) { }
+  message: any = [];
+  resultcompany: any = [];
+  PNR: any;
+  constructor(private reportService: StockService, private stockRouter: Router,) { }
 
-  ngOnInit(): void {
-    this.getTicketByid();
+  ngOnInit() {
   }
 
-  back(){
+  back() {
     this.stockRouter.navigateByUrl("/admin")
   }
 
-  getTicketByid()
-  {
-    this.reportService.getStocksByAggregation().subscribe(
-      (data:any) => {
-        this.message = data;
-
-        console.log("Kafka Reports "+ data);
-        console.log("PNR number "+ data[0] + data[0].journey + data[0].startDate);
-      }
-    )
-  }
 }
