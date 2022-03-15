@@ -30,10 +30,13 @@ const routes: Routes = [
   {
     path: "admin",
     component: AdminComponent,
+    canActivate: [MsalGuard]
+
   },
   {
     path: "user",
     component: UserComponent,
+    canActivate: [MsalGuard]
 
   },
   {
@@ -48,7 +51,7 @@ const routes: Routes = [
   {
     path: "company_stock",
     component: AddStockComponent,
-    canActivate: [MsalGuard]
+
   },
   {
     path: "report",
