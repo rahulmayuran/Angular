@@ -48,12 +48,12 @@ const routes: Routes = [
   {
     path: "company_stock",
     component: AddStockComponent,
-
+    // canActivate: [MsalGuard]
   },
   {
     path: "report",
     component: ReportsComponent,
-    canActivate: [MsalGuard]
+    // canActivate: [MsalGuard]
   }
 ]
 
