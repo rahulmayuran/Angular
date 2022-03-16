@@ -112,7 +112,9 @@ const routes: Routes = [
       multi: true
     },
     MsalGuard],
-  bootstrap: [AppComponent, MsalRedirectComponent],
+  bootstrap: [AppComponent
+    // , MsalRedirectComponent
+  ],
   exports: []
 })
 export class AppModule { }

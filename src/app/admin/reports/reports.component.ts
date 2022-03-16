@@ -10,15 +10,22 @@ import { StockService } from 'src/app/services/stock.service';
 export class ReportsComponent implements OnInit {
 
   message: any = [];
-  resultcompany: any = [];
-  PNR: any;
+
   constructor(private reportService: StockService, private stockRouter: Router,) { }
 
   ngOnInit() {
+    this.getStocksFromAggregation()
   }
 
   back() {
     this.stockRouter.navigateByUrl("/admin")
   }
 
+  getStocksFromAggregation() {
+    this.reportService.getStocksByAggregation().subscribe(
+      (data: any) => {
+        this.message = data;
+      }
+    )
+  }
 }
