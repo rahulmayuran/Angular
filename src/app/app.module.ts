@@ -48,12 +48,12 @@ const routes: Routes = [
   {
     path: "company_stock",
     component: AddStockComponent,
-    // canActivate: [MsalGuard]
+    canActivate: [MsalGuard]
   },
   {
     path: "report",
     component: ReportsComponent,
-    // canActivate: [MsalGuard]
+    canActivate: [MsalGuard]
   }
 ]
 
@@ -113,7 +113,7 @@ const routes: Routes = [
     },
     MsalGuard],
   bootstrap: [AppComponent
-    // , MsalRedirectComponent
+    , MsalRedirectComponent
   ],
   exports: []
 })
