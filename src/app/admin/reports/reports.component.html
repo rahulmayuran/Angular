@@ -1,32 +1,25 @@
-
-<h3 class="navbar bg-warning">Reports 
-    <span class="badge badge-success">Powered by Kafka</span>
+<h3 class="navbar bg-warning">Reports
+  <span class="badge badge-success">Powered by Kafka</span>
 </h3>
-
-<button class="btn btn-danger" (click)="back()"> Back</button>
 
 <div class="jumbotron">
 
-    <div class="row justify-content-center row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 ">
-        <div *ngFor="let company of message" class="card cardStructure">
-            <div class="card-body cardContents">
-              <h4 class="card-title fontChange">{{company.companyName}}</h4>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Min Price - 
-                  <span class="badge badge-warning">{{company.minStockPrice}}</span> 
-                </li>
-              <li class="list-group-item">Max Price - 
-                <span class="badge badge-warning">{{company.maxStockPrice}}</span>
-                </li>
-              <li class="list-group-item">Average price - 
-                <span class="badge badge-success">{{company.avgStockPrice}}</span>
-                </li>
-            </ul>
-          </div>
-        </div>
+  <div class="row justify-content-center row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 ">
+    <div *ngFor="let company of message" class="card cardStructure">
+      <div class="card-body cardContents">
+        <h4 class="card-title fontChange">{{company.companyName}}</h4>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Min Price -
+          <span class="badge badge-warning">{{company.minStockPrice}}</span>
+        </li>
+        <li class="list-group-item">Max Price -
+          <span class="badge badge-warning">{{company.maxStockPrice}}</span>
+        </li>
+        <li class="list-group-item">Average price -
+          <span class="badge badge-success">{{company.avgStockPrice}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
-
-        
-        
-  

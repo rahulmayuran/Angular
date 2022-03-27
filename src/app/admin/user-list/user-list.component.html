@@ -1,1 +1,36 @@
-<p>user-list works!</p>
+<h3 class="navbar bg-warning">Registered Users
+    <button class="btn btn-primary" (click)="getUsersList()"> Refresh <i class="fa fa-refresh"></i> </button>
+    <span class="badge badge-success"></span>
+</h3>
+
+<button class="btn btn-danger" (click)="back()"> Back</button>
+
+<div class="jumbotron">
+
+    <div class="row justify-content-center">
+        <div class="card cardStructure" *ngFor="let user of userList">
+            <div class="card-body cardContents">
+                <h4 class="card-title fontChange">{{user.username}}</h4>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Email -
+                    <span class="badge badge-warning">{{user.emailId}}</span>
+                </li>
+                <li class="list-group-item">Role -
+                    <span class="badge badge-warning">{{user.role}}</span>
+                </li>
+                <li class="list-group-item">
+                    <button class="btn btn-primary" (click)="makeAdmin()" *ngIf="user.role === 'USER'">Make
+                        Admin</button>
+                    <button class="btn btn-primary" (click)="makeUser()" *ngIf="user.role === 'ADMIN'">Make
+                        User</button>
+                    <button class="btn btn-danger" (click)="deleteUser(user.userId)"> <i class="fa fa-trash">Delete</i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <app-confirmation *ngIf="confirmationPopup" [yesText]="yesText" [noText]="noText" [popupTitle]="popupTitle"
+            [popupQuestion]="popupQuestion" (action)="actionConfirmed($event)" class="popup">
+        </app-confirmation>
+    </div>
+</div>

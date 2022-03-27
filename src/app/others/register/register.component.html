@@ -34,7 +34,11 @@
             <br />
 
             <button (click)="Register()" class="reg btn btn-outline-success btn-lg">REGISTER</button>
-
+            <div>
+                Back to <a [routerLink]="[ '/login' ]" routerLinkActive="active">
+                    Login
+                </a>
+            </div>
             <br />
         </form>
     </div>

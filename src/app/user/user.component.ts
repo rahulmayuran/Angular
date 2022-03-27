@@ -14,7 +14,7 @@ export class UserComponent implements OnInit {
 
   resultstock: any = [];
   message: string = '';
-  dateForm:FormGroup;
+  dateForm: FormGroup;
 
   resultStock: any = { startDate: '', endDate: '' };
   filteredStocks: any = [];
@@ -31,6 +31,23 @@ export class UserComponent implements OnInit {
       startDate: new FormControl("", Validators.required),
       endDate: new FormControl("", Validators.required)
     })
+  }
+
+  Users() {
+    this.adminRouter.navigateByUrl('user-list')
+  }
+  companyStock() {
+    this.adminRouter.navigateByUrl('company_stock');
+  }
+  reports() {
+    this.adminRouter.navigateByUrl('report');
+  }
+
+  checkDates(): boolean {
+    if (this.dateForm.value.startDate == '' || this.dateForm.value.endDate == '') {
+      return true
+    }
+    return false;
   }
 
   fetchstocks() {
@@ -71,7 +88,7 @@ export class UserComponent implements OnInit {
     from = this.dateForm.value.startDate;
     to = this.dateForm.value.endDate;
 
-    if (to == null || to === null) {
+    if (this.checkDates()) {
       alert("Kindly provide both dates")
     }
 

@@ -15,9 +15,6 @@
 
         <div class="alert alert-danger" *ngIf="flagErrors">
             {{message}}
-            <a [routerLink]="[ '/register' ]" routerLinkActive="active">
-                {{navToRegister}}
-            </a>
         </div>
 
         <img src="assets/stockmarket" class="img-rounded" width="500px">
@@ -36,9 +33,12 @@
             </div>
 
             <button class="log btn btn-outline-success btn-lg" (click)="validateCred()">LOGIN</button>
-
-
-
+            <div>
+                New User? Register
+                <a [routerLink]="[ '/register' ]" routerLinkActive="active">
+                    {{navToRegister}}
+                </a>
+            </div>
         </form>
     </div>
 </body>

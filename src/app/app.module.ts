@@ -14,6 +14,7 @@ import { LoginComponent } from "./others/login/login.component";
 import { RegisterComponent } from "./others/register/register.component";
 import { UserComponent } from "./user/user.component";
 import { ConfirmationComponent } from './others/confirmation/confirmation.component';
+import { UserListComponent } from "./admin/user-list/user-list.component";
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
   {
     path: "report",
     component: ReportsComponent,
+  },
+  {
+    path: "user-list",
+    component: UserListComponent
   }
 ]
 
@@ -58,7 +63,8 @@ const routes: Routes = [
     AddStockComponent,
     ReportsComponent,
     UserComponent,
-    ConfirmationComponent],
+    ConfirmationComponent,
+    UserListComponent],
   imports: [BrowserModule,
     RouterModule.forRoot(routes),
     FormsModule,

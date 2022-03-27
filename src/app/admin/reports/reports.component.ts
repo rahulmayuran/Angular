@@ -17,10 +17,6 @@ export class ReportsComponent implements OnInit {
     this.getStocksFromAggregation()
   }
 
-  back() {
-    this.stockRouter.navigateByUrl("/admin")
-  }
-
   getStocksFromAggregation() {
     this.reportService.getStocksByAggregation().subscribe(
       (data: any) => {
