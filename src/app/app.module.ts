@@ -15,6 +15,11 @@ import { RegisterComponent } from "./others/register/register.component";
 import { UserComponent } from "./user/user.component";
 import { ConfirmationComponent } from './others/confirmation/confirmation.component';
 import { UserListComponent } from "./admin/user-list/user-list.component";
+import { MsalGuard, MsalInterceptor, MsalModule, MsalRedirectComponent } from "@azure/msal-angular";
+import { InteractionType, PublicClientApplication } from "@azure/msal-browser";
+import { UserService } from "./services/user.service";
+import { StockService } from "./services/stock.service";
+import { environment } from "src/environments/environment";
 
 const routes: Routes = [
   {
@@ -51,7 +56,7 @@ const routes: Routes = [
   },
   {
     path: "user-list",
-    component: UserListComponent
+    component: UserListComponent,
     canActivate: [MsalGuard]
 
   }
@@ -74,7 +79,6 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    HttpClientModule
     HttpClientModule,
     MsalModule.forRoot(new PublicClientApplication(
       {
@@ -117,7 +121,6 @@ const routes: Routes = [
   bootstrap: [AppComponent
     , MsalRedirectComponent
   ],
-  bootstrap: [AppComponent],
   exports: []
 })
 export class AppModule { }
