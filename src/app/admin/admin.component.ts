@@ -37,6 +37,9 @@ export class AdminComponent implements OnInit {
       endDate: new FormControl("", Validators.required)
     })
   }
+  Users() {
+    this.adminRouter.navigateByUrl('user-list')
+  }
   companyStock() {
     this.adminRouter.navigateByUrl('company_stock');
   }

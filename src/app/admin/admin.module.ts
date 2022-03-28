@@ -9,13 +9,14 @@ import { NgbDate, NgbDatepicker, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReportsComponent } from './reports/reports.component';
 import { AddStockComponent } from './add-stocks/add-stock.component';
 import { ConfirmationComponent } from '../others/confirmation/confirmation.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 const adminRoutes: Routes = [
   // {path: "/admin/:name", loadChildren ()=>{} canActivate:[LoginGuard] }
 ]
 
 @NgModule({
-  declarations: [AdminComponent, AddStockComponent, ReportsComponent, ConfirmationComponent],
+  declarations: [AdminComponent, AddStockComponent, ReportsComponent, ConfirmationComponent, UserListComponent],
   imports: [CommonModule, BrowserModule, AdminModule, RouterModule.forChild(adminRoutes),
     FormsModule, ReactiveFormsModule, NgbModule, NgbDate, NgbDatepicker],
   providers: [],

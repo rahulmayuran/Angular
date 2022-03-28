@@ -1,0 +1,21 @@
+.cardStructure{
+    border: 1px solid rgb(213, 213, 235);
+    padding: 10px;
+    box-shadow: 5px 10px 8px rgb(164, 169, 168);
+  }
+  
+  .cardContents{
+    background-color: #f8af26;
+  }
+  
+
+.fontChange{
+    font-family: Arial, Helvetica, sans-serif; 
+    font-weight: 500;
+}
+
+.popup{
+  margin-top: 5em;
+  position: sticky;
+
+}

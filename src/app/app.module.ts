@@ -14,13 +14,7 @@ import { LoginComponent } from "./others/login/login.component";
 import { RegisterComponent } from "./others/register/register.component";
 import { UserComponent } from "./user/user.component";
 import { ConfirmationComponent } from './others/confirmation/confirmation.component';
-
-import { StockService } from "./services/stock.service";
-import { UserService } from "./services/user.service";
-import { MsalGuard, MsalInterceptor, MsalModule, MsalRedirectComponent } from "@azure/msal-angular";
-import { InteractionType, PublicClientApplication } from "@azure/msal-browser";
-import { environment } from "src/environments/environment";
-
+import { UserListComponent } from "./admin/user-list/user-list.component";
 
 const routes: Routes = [
   {
@@ -49,11 +43,17 @@ const routes: Routes = [
     path: "company_stock",
     component: AddStockComponent,
     canActivate: [MsalGuard]
+
   },
   {
     path: "report",
     component: ReportsComponent,
+  },
+  {
+    path: "user-list",
+    component: UserListComponent
     canActivate: [MsalGuard]
+
   }
 ]
 
@@ -67,12 +67,14 @@ const routes: Routes = [
     AddStockComponent,
     ReportsComponent,
     UserComponent,
-    ConfirmationComponent],
+    ConfirmationComponent,
+    UserListComponent],
   imports: [BrowserModule,
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    HttpClientModule
     HttpClientModule,
     MsalModule.forRoot(new PublicClientApplication(
       {
@@ -115,6 +117,7 @@ const routes: Routes = [
   bootstrap: [AppComponent
     , MsalRedirectComponent
   ],
+  bootstrap: [AppComponent],
   exports: []
 })
 export class AppModule { }
