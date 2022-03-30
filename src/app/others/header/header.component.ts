@@ -11,11 +11,16 @@ import { environment } from 'src/environments/environment';
 export class HeaderComponent {
 
   constructor(
-    private userRoute: Router) {
+    private userRoute: Router, private msalService: MsalService) {
 
   }
-  logout() {
+  loginUser() {
     this.userRoute.navigateByUrl('/login');
   }
+  registerUser() {
+    this.userRoute.navigateByUrl('/register');
+  }
+  logout() {
+    this.msalService.logoutRedirect({ postLogoutRedirectUri: environment.logoutUrl })
+  }
 }
-
